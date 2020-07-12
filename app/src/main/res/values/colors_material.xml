@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <!-- google's material design colours from
+  http://www.google.com/design/spec/style/color.html#color-ui-color-palette -->
+
+  <!--
+      Transparency table:
+       00% = 00 H
+      025% = 06 H
+       05% = 0C H
+       10% = 1A H
+       15% = 26 H
+       20% = 33 H
+       25% = 40 H
+       30% = 4C H
+       40% = 66 H
+       50% = 80 H
+       60% = 99 H
+      75% ~= C4 H     This is reverse of 4C == 25%
+       80% = CC H
+       90% = E6 H
+      100% = FF H
+  -->
+
+    <color name="black_opacity_75">#C4000000</color>
+
+    <!--reds-->
+
+    <!-- pinks -->
+
+    <!-- purples -->
+
+    <!-- deep purples -->
+
+    <!-- indigo -->
+
+    <!--blue-->
+
+    <!-- light blue-->
+
+    <!-- cyan -->
+
+    <!-- teal -->
+
+    <!--<color name="teal_A400">#1abb9c</color>-->
+
+    <!-- green -->
+
+    <!--light green-->
+
+    <!-- lime-->
+
+    <!--yellow -->
+
+    <!--amber-->
+
+    <!--orange-->
+
+    <!--deep orange-->
+
+    <!--brown -->
+
+    <!--gray-->
+
+    <!--blue gray-->
+
+</resources>
