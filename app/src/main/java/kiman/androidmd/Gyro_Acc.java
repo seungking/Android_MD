@@ -54,9 +54,8 @@ public class Gyro_Acc extends AppCompatActivity {
     //조건들
     private  int Arrsize = 5;
     private  int threshold = 2;
-    private  int Arrsize_catch = 20;
-    private  int matcing_rate = 100;
-
+    private  int Arrsize_catch = 10;
+  
     //셀프 매칭률
     private int self_matching_rate = 35;
 
