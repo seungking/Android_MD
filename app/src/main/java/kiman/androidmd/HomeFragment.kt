@@ -73,10 +73,6 @@ class HomeFragment : Fragment(), MainActivity.IOnBackPressed {
     }
 
     override fun onBackPressed(): Boolean {
-        Log.d("Log1","999999");
-//        if (emailPageLayout?.isExpandedOrExpanding!!) {
-//           if(recyclerView?.expandablePage?.isExpandedOrExpanding!!){
-        Log.d("Log1","1111");
         recyclerView?.collapse()
 
 //        }
