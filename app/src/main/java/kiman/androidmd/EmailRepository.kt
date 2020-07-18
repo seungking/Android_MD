@@ -4,6 +4,7 @@ object EmailRepository {
 
   fun threads(): List<Email.EmailThread> {
 
+
     return listOf(
 //            Email.EmailThread(
 //                    id = 0,
@@ -92,5 +93,7 @@ object EmailRepository {
 
   fun thread(id: EmailThreadId): Email.EmailThread {
     return threads().first { it.id == id }
+//    val getlist : GetList =  GetList()
+//    return getlist.getlist().first { it.id == id }
   }
 }
