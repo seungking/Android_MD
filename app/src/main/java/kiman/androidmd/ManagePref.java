@@ -8,6 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
 import android.util.Base64;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,48 +17,11 @@ import org.json.JSONException;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 //로커 DB 접근 클래스
 public class ManagePref extends AppCompatActivity {
-
-//    static private ArrayList<String> appname = new ArrayList<String>();
-//    static private ArrayList<String> packagename = new ArrayList<String>();
-//    static private ArrayList<String> appicon = new ArrayList<String>();
-//    static private ArrayList<String> date = new ArrayList<String>();
-//
-//    public ManagePref(){
-//        appname = getStringArrayPref(this,"appname");
-//        packagename = getStringArrayPref(this,"packagename");
-//        appicon = getStringArrayPref(this,"appicon");
-//        date = getStringArrayPref(this,"date");
-//    }
-//
-//    public void setPref(String name, String packagen, String icon, String date_){
-//
-//        appname.add(name);
-//        packagename.add(packagen);
-//        appicon.add(icon);
-//        date.add(date_);
-//
-//        setStringArrayPref(this,"appname",appname);
-//        setStringArrayPref(this,"packagename",packagename);
-//        setStringArrayPref(this,"appicon",appicon);
-//        setStringArrayPref(this,"date",date);
-//    }
-
-
-//    public ArrayList<String> getAppname(){
-//        return appname;
-//    }
-//    public ArrayList<String> getPackagename(){
-//        return packagename;
-//    }
-//    public ArrayList<String> getAppicon(){
-//        return appicon;
-//    }
-//    public ArrayList<String> getDate(){
-//        return date;
-//    }
 
     public ArrayList<String> getStringArrayPref(Context context, String str) {
         String string = PreferenceManager.getDefaultSharedPreferences(context).getString(str, null);

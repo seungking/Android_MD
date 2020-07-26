@@ -36,8 +36,8 @@ data class Email(
 
     //EmailThreadClicked
     data class EmailThreadClicked(
-        val thread: Email.EmailThread,
-        val itemId: Long
+        val thread: EmailThread,
+        val itemId: Int
     )
 
 }
