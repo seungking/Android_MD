@@ -74,10 +74,12 @@ class HomeFragment : Fragment(), MainActivity.IOnBackPressed {
         var packagename = ArrayList<String>()
         var appicon = ArrayList<String>()
         var date = ArrayList<String>()
+        var switch = ArrayList<String>()
         appname = managepref.getStringArrayPref(activity!!.applicationContext, "appname")
         packagename = managepref.getStringArrayPref(activity!!.applicationContext, "packagename")
         appicon = managepref.getStringArrayPref(activity!!.applicationContext, "appicon")
         date = managepref.getStringArrayPref(activity!!.applicationContext, "date")
+        switch = managepref.getStringArrayPref(activity!!.applicationContext, "switch")
         val list = mutableListOf<Email.EmailThread>();
 
         Log.d("Log1","insert start")

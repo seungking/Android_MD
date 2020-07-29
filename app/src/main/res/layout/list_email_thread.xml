@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="110dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginStart="4dp"
     android:layout_marginTop="@dimen/emailthread_item_vertical_margin"
     android:layout_marginEnd="4dp"
@@ -16,53 +17,88 @@
     android:stateListAnimator="@animator/thread_elevation_stateanimator"
     tools:ignore="UselessParent">
 
-  <RelativeLayout
+  <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:orientation="vertical"
+      android:weightSum="3"
       android:background="#FFFFFF">
 
     <TextView
         android:id="@+id/emailthread_item_byline"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toStartOf="@+id/emailthread_item_avatar"
+        android:layout_height="0dp"
         android:textColor="#3C4D54"
         android:textSize="13sp"
+        android:layout_weight="0.6"
         tools:text="line1" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+       android:id="@+id/app_name_layout"
+        android:layout_weight="1.8"
+        android:gravity="center"
+        android:layout_below="@+id/emailthread_item_byline"
+        android:layout_alignStart="@+id/emailthread_item_byline"
+        android:layout_alignEnd="@+id/emailthread_item_byline">
+
+      <de.hdodenhof.circleimageview.CircleImageView
+          android:id="@+id/emailthread_item_avatar"
+          style="@style/Expand.SenderAvatar"
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:layout_alignParentStart="true"
+          tools:ignore="ContentDescription"
+          android:foregroundGravity="center"
+          tools:src="@drawable/avatar_googleexpress" />
 
     <TextView
         android:id="@+id/emailthread_item_subject"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/emailthread_item_byline"
-        android:layout_alignStart="@+id/emailthread_item_byline"
-        android:layout_alignEnd="@+id/emailthread_item_byline"
-        android:layout_marginTop="4dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentStart="true"
         android:fontFamily="@font/worksans_bold"
         android:textColor="#1D2C2F"
         android:textSize="@dimen/emailthread_subject_textize_without_photo_attachments"
         tools:text="APP NAME" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/emailthread_item_avatar"
-        style="@style/Expand.SenderAvatar"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="2dp"
-        tools:ignore="ContentDescription"
-        tools:src="@drawable/avatar_googleexpress" />
+      <com.suke.widget.SwitchButton
+          android:id="@+id/switch_motion"
+          android:layout_weight="1.5"
+          android:scrollbarSize="15dp"
+          android:layout_alignParentEnd="true"
+          app:sb_background="#ffffff"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"/>
+
+
+    </RelativeLayout>
+
+<!--    <de.hdodenhof.circleimageview.CircleImageView-->
+<!--        android:id="@+id/emailthread_check_box"-->
+<!--        style="@style/Expand.SenderAvatar"-->
+<!--        android:layout_width="40dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginEnd="2dp"-->
+<!--        tools:ignore="ContentDescription"-->
+<!--        tools:src="@drawable/avatar_googleexpress" />-->
+
+
 
     <TextView
         android:id="@+id/emailthread_item_body"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/emailthread_item_subject"
-        android:layout_marginTop="7dp"
+        android:layout_height="0dp"
+        android:layout_below="@+id/app_name_layout"
         android:layout_marginEnd="24dp"
         android:drawableStart="@drawable/ic_attachment_24dp"
         android:drawablePadding="16dp"
+        android:layout_weight="0.6"
         android:drawableTint="#45676E"
         android:ellipsize="end"
         android:gravity="center_vertical"
@@ -70,6 +106,6 @@
         android:textColor="#3A4A51"
         tools:text="BODY" />
 
-  </RelativeLayout>
+  </LinearLayout>
 
 </RelativeLayout>
