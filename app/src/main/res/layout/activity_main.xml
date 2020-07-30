@@ -20,13 +20,26 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:labelVisibilityMode="unlabeled"
-        app:menu="@menu/menu_main"/>
+        app:menu="@menu/menu_main"
+        />
+
+    <LinearLayout
+        android:id="@+id/layout_bottom_2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:id="@+id/addmotion"
-        android:layout_gravity="center|bottom"
-        android:layout_marginBottom="50dp" />
+        android:layout_marginBottom="30dp"
+        android:elevation="3dp"
+        android:translationZ="2dp"
+        />
 
+    </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

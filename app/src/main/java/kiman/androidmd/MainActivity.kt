@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_inbox.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.bottom_nav
+import kotlinx.android.synthetic.main.activity_main.main_pager
+import kotlinx.android.synthetic.main.activity_main_2.*
 import java.util.*
 
 class MainActivity : AppCompatActivity(),
@@ -34,7 +37,7 @@ class MainActivity : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main_2)
 
         // setup main view pager
         main_pager.addOnPageChangeListener(this)
@@ -46,13 +49,14 @@ class MainActivity : AppCompatActivity(),
         bottom_nav.setOnNavigationItemSelectedListener(this)
         bottom_nav.setOnNavigationItemReselectedListener(this)
 
-        addmotion.setOnClickListener {
+        fab.setOnClickListener {
             val nextIntent = Intent(this, AppInfoActivity::class.java)
             startActivity(nextIntent)
         }
 
         // initialize backStack with elements
         if (backStack.empty()) backStack.push(0)
+
     }
 
     /// BottomNavigationView ItemSelected Implementation
