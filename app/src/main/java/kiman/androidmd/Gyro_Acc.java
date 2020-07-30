@@ -198,7 +198,7 @@ public class Gyro_Acc extends AppCompatActivity {
                                 Log.d("LOG1", "저장 패턴 : " + checksave);
 //                                Log.d("LOG1", "패키지 이름 : " + packageName1);
 
-                                ManagePref managePref = new ManagePref();
+                                ManagePref managePref = ManagePref.getInstance();
                                 ArrayList<String> appname = new ArrayList<String>();
                                 ArrayList<String> packagename = new ArrayList<String>();
                                 ArrayList<String> appicon = new ArrayList<String>();

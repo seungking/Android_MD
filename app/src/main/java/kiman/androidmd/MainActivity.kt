@@ -105,4 +105,7 @@ class MainActivity : AppCompatActivity(),
         override fun getCount(): Int = fragments.size
 
     }
+
+
+
 }

@@ -68,7 +68,7 @@ class HomeFragment : Fragment(), MainActivity.IOnBackPressed {
         recyclerView!!.tintPainter = TintPainter.uncoveredArea(color = Color.WHITE, opacity = 0.65F)
 
         Log.d("Log1","setupthreadlist");
-        val managepref : ManagePref =  ManagePref()
+        val managepref = ManagePref.getInstance()
 
         var appname = ArrayList<String>()
         var packagename = ArrayList<String>()

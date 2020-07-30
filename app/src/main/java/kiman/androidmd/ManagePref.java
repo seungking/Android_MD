@@ -73,4 +73,9 @@ public class ManagePref extends AppCompatActivity {
         Drawable drawable = new BitmapDrawable(bitmap);
         return drawable;
     }
+
+    private static ManagePref managePref = new ManagePref();
+    public static ManagePref getInstance() {
+        return managePref;
+    }
 }
