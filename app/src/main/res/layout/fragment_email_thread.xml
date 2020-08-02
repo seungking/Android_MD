@@ -97,7 +97,7 @@
 
 
       <com.suke.widget.SwitchButton
-          android:id="@+id/switch_motion"
+          android:id="@+id/switch_motion_fg"
           android:layout_weight="1.5"
           android:scrollbarSize="15dp"
           android:layout_marginEnd="10dp"

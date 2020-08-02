@@ -69,6 +69,7 @@
           android:id="@+id/switch_motion"
           android:layout_weight="1.5"
           android:scrollbarSize="15dp"
+          app:sb_shadow_effect="false"
           android:layout_alignParentEnd="true"
           app:sb_background="#ffffff"
           android:layout_width="wrap_content"

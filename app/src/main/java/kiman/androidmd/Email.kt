@@ -24,7 +24,8 @@ data class Email(
         val id: EmailThreadId,
         val sender: Email.Person,
         val subject: String,
-        val emails: List<Email>
+        val emails: List<Email>,
+        var active : String
     ) {
 
         //ItemDiffer

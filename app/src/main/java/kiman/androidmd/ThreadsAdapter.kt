@@ -14,13 +14,14 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxrelay2.PublishRelay
+import com.suke.widget.SwitchButton
 
 
 class ThreadsAdapter : ListAdapter<Email.EmailThread, EmailViewHolder>(Email.EmailThread.ItemDiffer()) {
 
 
   var ctx: Context? = null
-
+  var myholder : EmailViewHolder? = null
   fun ThreadsAdapter(ctx: Context?) {
     this.ctx = ctx
   }
@@ -50,12 +51,28 @@ class ThreadsAdapter : ListAdapter<Email.EmailThread, EmailViewHolder>(Email.Ema
       editor.commit()
       itemClicks.accept(Email.EmailThreadClicked(getItem(position), position))
     }
+    holder.switch_motion_item.setOnCheckedChangeListener { CompoundButton, onSwitch ->
+
+      val managepref : ManagePref = ManagePref()
+      val switch : ArrayList<String> = managepref.getStringArrayPref(ctx,"switch");
+
+      if (onSwitch) switch.set(position,"on");
+      else switch.set(position,"off");
+
+      managepref.setStringArrayPref(ctx, "switch", switch);
+    }
     holder.render()
   }
 
   override fun getItemId(position: Int): Long {
     return position.toLong()
   }
+
+  fun changeswitch (position: Int, state:String) {
+    getItem(position).active = state
+    notifyDataSetChanged()
+  }
+
 }
 
 open class EmailViewHolder(
@@ -67,15 +84,9 @@ open class EmailViewHolder(
   private val subjectTextView = itemView.findViewById<TextView>(R.id.emailthread_item_subject)
   private val bodyTextView = itemView.findViewById<TextView>(R.id.emailthread_item_body)
   private val avatarImageView = itemView.findViewById<ImageView>(R.id.emailthread_item_avatar)
+  val switch_motion_item = itemView.findViewById<SwitchButton>(R.id.switch_motion)
 
   lateinit var emailThread: Email.EmailThread
-
-//  init {
-//    itemView.setOnClickListener {
-//      Log.d("Log1","1111");
-//      itemClicks.accept(Email.EmailThreadClicked(emailThread, itemId))
-//    }
-//  }
 
   @SuppressLint("SetTextI18n")
   open fun render() {
@@ -88,6 +99,9 @@ open class EmailViewHolder(
       text = latestEmail.excerpt.replace("\n", " ")
       visibility = if (latestEmail.showBodyInThreads) View.VISIBLE else View.GONE
     }
+
+    if(emailThread.active=="on")switch_motion_item.setChecked(true);
+    else switch_motion_item.setChecked(false);
 
     avatarImageView.setImageBitmap(emailThread.sender.profileImageRes!!)
   }

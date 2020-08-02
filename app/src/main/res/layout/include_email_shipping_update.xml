@@ -27,22 +27,24 @@
     android:gravity="center">
 
   <ImageView
+      android:id="@+id/detail_button1"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:padding="24dp"
       android:layout_weight="0.5"
-    android:src="@drawable/ic_keyboard_arrow_down_24dp"
+    android:src="@drawable/ic_baseline_edit_24"
     android:tint="#172629"
     tools:ignore="ContentDescription" />
 
     <ImageView
+        android:id="@+id/detail_button2"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:background="#ffffff"
         android:padding="24dp"
         android:layout_weight="0.5"
-        android:src="@drawable/ic_keyboard_arrow_down_24dp"
+        android:src="@drawable/ic_baseline_delete_24"
         android:tint="#172629"
         tools:ignore="ContentDescription" />
 

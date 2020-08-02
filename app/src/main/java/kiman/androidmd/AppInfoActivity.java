@@ -86,10 +86,6 @@ public class AppInfoActivity extends AppCompatActivity {
                 ImageView imageView = (ImageView)view.findViewById(R.id.app_icon);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
-//                float scale = (float) (1024/(float)bitmap.getWidth());
-//                int image_w = (int) (bitmap.getWidth() * scale);
-//                int image_h = (int) (bitmap.getHeight() * scale);
-//                Bitmap resize = Bitmap.createScaledBitmap(bitmap, image_w, image_h, true);
 
                 Toast.makeText(AppInfoActivity.this, package_name, Toast.LENGTH_SHORT).show();
 
@@ -103,6 +99,7 @@ public class AppInfoActivity extends AppCompatActivity {
                 intent.putExtra("appicon",managePref.BitmapToString(bitmap));
 
                 startActivity(intent);
+                finish();
             }
         });
     }

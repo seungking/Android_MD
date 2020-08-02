@@ -15,11 +15,13 @@ import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.PublishRelay
+import com.suke.widget.SwitchButton
+import kotlinx.android.synthetic.main.include_email_shipping_update.view.*
 import me.saket.inboxrecyclerview.globalVisibleRect
 import me.saket.inboxrecyclerview.page.ExpandablePageLayout
 import me.saket.inboxrecyclerview.page.InterceptResult
 import me.saket.inboxrecyclerview.page.SimplePageStateChangeCallbacks
-import java.util.ArrayList
+import java.util.*
 
 class EmailThreadFragment : Fragment() {
 
@@ -31,43 +33,32 @@ class EmailThreadFragment : Fragment() {
   private val bodyTextView by lazy { view!!.findViewById<TextView>(R.id.emailthread_body) }
   private val collapseButton by lazy { view!!.findViewById<ImageButton>(R.id.emailthread_collapse) }
   private val attachmentContainer by lazy { view!!.findViewById<ViewGroup>(R.id.emailthread_attachment_container) }
+  private val switch_motion_fg by lazy { view!!.findViewById<SwitchButton>(R.id.switch_motion_fg) }
+  private val remove_button by lazy { view!!.findViewById<ImageView>(R.id.detail_button2) }
 
   private val threadIds = BehaviorRelay.create<EmailThreadId>()
   private val onDestroys = PublishRelay.create<Any>()
 
+  var appname = ArrayList<String>()
+  var packagename = ArrayList<String>()
+  var appicon = ArrayList<String>()
+  var date = ArrayList<String>()
+  var switch = ArrayList<String>()
+
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedState: Bundle?): View? {
-//    return inflater.inflate(R.layout.fragment_email_thread, container, false)
-
-
-    Log.d("Log1","44441");
     val view: View = inflater.inflate(R.layout.fragment_email_thread, container,
             false)
-
     return view
   }
 
   override fun onViewCreated(view: View, savedState: Bundle?) {
     super.onViewCreated(view, savedState)
-    Log.d("Log1","3333");
+
     if (savedState != null) {
       onRestoreInstanceState(savedState)
     }
 
-//    threadIds
-//        .map { EmailRepository.thread(id = it) }
-//        .takeUntil(onDestroys)
-//        .subscribe { render(it,view) }
-
-//    render(view)
     collapseButton.setOnClickListener {
-      val display = activity!!.windowManager.defaultDisplay
-      var stageWidth = display.width
-      var stageHeight = display.height
-
-//      var emailitem : InboxRecyclerView.ExpandedItem = InboxRecyclerView.ExpandedItem.EMPTY.copy(locationOnScreen = Rect(0, 0, 0, 500))
-//      emailThreadPage.animatePageExpandCollapse(false, stageWidth, stageHeight, emailitem)
-//      emailThreadPage.collapse(emailitem)
-
       requireActivity().onBackPressed()
     }
 
@@ -88,7 +79,7 @@ class EmailThreadFragment : Fragment() {
 
     emailThreadPage.addStateChangeCallbacks(object : SimplePageStateChangeCallbacks() {
       override fun onPageCollapsed() {
-        Log.d("Log1","emailthread3");
+        Log.d("Log1","emailthread3 " + (activity as MainActivity).list.size.toString());
         scrollableContainer.scrollTo(0, 0)
       }
     })
@@ -101,7 +92,6 @@ class EmailThreadFragment : Fragment() {
   }
 
   override fun onSaveInstanceState(outState: Bundle) {
-    Log.d("Log1","44442");
     if (threadIds.hasValue()) {
       outState.putLong("thread_id", threadIds.value)
     }
@@ -109,7 +99,6 @@ class EmailThreadFragment : Fragment() {
   }
 
   private fun onRestoreInstanceState(savedState: Bundle) {
-    Log.d("Log1","44443");
     val retainedThreadId: Long? = savedState.getLong("thread_id")
     if (retainedThreadId != null) {
       threadIds.accept(retainedThreadId)
@@ -117,36 +106,24 @@ class EmailThreadFragment : Fragment() {
   }
 
   fun populate(threadId: EmailThreadId) {
-    Log.d("Log1","44444");
     val pref: SharedPreferences = PreferenceManager
       .getDefaultSharedPreferences(view?.context)
     val userObject = pref.getInt("select", 0)
-    Log.d("Log1","Position : " + userObject.toString())
     threadIds.accept(threadId)
     view?.let { render(it, userObject) }
   }
 
   @SuppressLint("SetTextI18n")
-//  private fun render(emailThread: Email.EmailThread, view: View) {
   private fun render(view: View, position : Int) {
-//    val latestEmail = emailThread.emails.last()
-//    Log.d("Log1","44445");
-//    val pref: SharedPreferences = PreferenceManager
-//      .getDefaultSharedPreferences(view.context)
-//    val userObject = pref.getInt("select", 0)
-//    Log.d("Log1","Position : " + userObject.toString())
 
-    Log.d("Log1","setupthreadlist");
+    Log.d("Log1","render in fragment");
     val managepref : ManagePref =  ManagePref()
 
-    var appname = ArrayList<String>()
-    var packagename = ArrayList<String>()
-    var appicon = ArrayList<String>()
-    var date = ArrayList<String>()
     appname = managepref.getStringArrayPref(activity!!.applicationContext, "appname")
     packagename = managepref.getStringArrayPref(activity!!.applicationContext, "packagename")
     appicon = managepref.getStringArrayPref(activity!!.applicationContext, "appicon")
     date = managepref.getStringArrayPref(activity!!.applicationContext, "date")
+    switch = managepref.getStringArrayPref(activity!!.applicationContext, "switch")
     val list = mutableListOf<Email.EmailThread>();
 
     subjectTextView.text = appname.get(position)
@@ -157,12 +134,49 @@ class EmailThreadFragment : Fragment() {
 
     attachmentContainer.removeAllViews()
 
-    View.inflate(context, R.layout.include_email_shipping_update, attachmentContainer)
-  }
+    if(switch.get(position)=="on") {
+      switch_motion_fg.setChecked(true)
+    };
+    else {
+      switch_motion_fg.setChecked(false)
+    };
 
-  private fun renderAttachments(thread: Email.EmailThread) {
-    attachmentContainer.removeAllViews()
+    switch_motion_fg.setOnCheckedChangeListener { CompoundButton, onSwitch ->
+      if (onSwitch) {
+        switch.set(position,"on")
+        (activity as MainActivity).threadsAdapter.changeswitch(position,"on")
+      };
+      else {
+        switch.set(position,"off")
+        (activity as MainActivity).threadsAdapter.changeswitch(position,"off")
+      };
 
-    View.inflate(context, R.layout.include_email_shipping_update, attachmentContainer)
+      managepref.setStringArrayPref(activity!!.applicationContext, "switch", switch)
+    }
+
+
+    var view : View = View.inflate(context, R.layout.include_email_shipping_update, attachmentContainer)
+    view.detail_button2.setOnClickListener {
+
+      requireActivity().onBackPressed()
+
+      appname.removeAt(position)
+      packagename.removeAt(position)
+      appicon.removeAt(position)
+      date.removeAt(position)
+      switch.removeAt(position)
+
+      managepref.setStringArrayPref(activity!!.applicationContext,"appname",appname)
+      managepref.setStringArrayPref(activity!!.applicationContext,"packagename",packagename)
+      managepref.setStringArrayPref(activity!!.applicationContext,"appicon",appicon)
+      managepref.setStringArrayPref(activity!!.applicationContext,"date",date)
+      managepref.setStringArrayPref(activity!!.applicationContext,"switch",switch)
+
+      (activity as MainActivity).list.removeAt(position)
+      (activity as MainActivity).threadsAdapter.submitList((activity as MainActivity).list)
+      (activity as MainActivity).threadsAdapter.notifyItemRemoved(position)
+      (activity as MainActivity).threadsAdapter.notifyItemRangeChanged(0,(activity as MainActivity).list.size)
+
+    }
   }
 }

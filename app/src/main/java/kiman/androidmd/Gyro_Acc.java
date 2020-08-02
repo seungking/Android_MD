@@ -203,21 +203,25 @@ public class Gyro_Acc extends AppCompatActivity {
                                 ArrayList<String> packagename = new ArrayList<String>();
                                 ArrayList<String> appicon = new ArrayList<String>();
                                 ArrayList<String> date = new ArrayList<String>();
+                                ArrayList<String> switch_motion = new ArrayList<String>();
 
                                 appname = managePref.getStringArrayPref(Gyro_Acc.this,"appname");
                                 packagename = managePref.getStringArrayPref(Gyro_Acc.this,"packagename");
                                 appicon = managePref.getStringArrayPref(Gyro_Acc.this,"appicon");
                                 date = managePref.getStringArrayPref(Gyro_Acc.this,"date");
+                                switch_motion = managePref.getStringArrayPref(Gyro_Acc.this,"switch");
 
                                 appname.add(appName);
                                 packagename.add(packageName);
                                 appicon.add(appIcon);
                                 date.add(formatDate);
+                                switch_motion.add("off");
 
                                 managePref.setStringArrayPref(Gyro_Acc.this,"appname",appname);
                                 managePref.setStringArrayPref(Gyro_Acc.this,"packagename",packagename);
                                 managePref.setStringArrayPref(Gyro_Acc.this,"appicon",appicon);
                                 managePref.setStringArrayPref(Gyro_Acc.this,"date",date);
+                                managePref.setStringArrayPref(Gyro_Acc.this,"switch",switch_motion);
 
                                 startActivity(new Intent(Gyro_Acc.this, MainActivity.class));
                                 finish();
@@ -398,7 +402,6 @@ public class Gyro_Acc extends AppCompatActivity {
                         accRunning = true;
 
                     break;
-
             }
 
             /**두 센서 새로운 값을 받으면 상보필터 적용*/
@@ -407,7 +410,6 @@ public class Gyro_Acc extends AppCompatActivity {
             }
 
         }
-
         @Override
         public void onAccuracyChanged(Sensor sensor, int accuracy) {
         }
