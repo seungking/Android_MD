@@ -2,6 +2,7 @@ package kiman.androidmd
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
@@ -33,6 +34,8 @@ class MainActivity : AppCompatActivity(),
     private val indexToPage = mapOf(0 to R.id.home, 1 to R.id.settings)
     var list = mutableListOf<Email.EmailThread>();
     val threadsAdapter = ThreadsAdapter()
+    var patterns = ArrayList<String>()
+    val managePref = ManagePref()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -107,4 +110,22 @@ class MainActivity : AppCompatActivity(),
         override fun getCount(): Int = fragments.size
 
     }
+<<<<<<< Updated upstream
+=======
+
+    fun updatepattern(){
+        managePref.setStringArrayPref(applicationContext, "pattern", patterns);
+    }
+
+    fun startMotionCatch(){
+        Log.d("log1","Start Motion Catch")
+        startService(Intent(applicationContext,MyService::class.java))
+    }
+
+    fun stopMotionCatch(){
+        Log.d("log1","Stop Motion Catch")
+        stopService(Intent(applicationContext,MyService::class.java))
+    }
+
+>>>>>>> Stashed changes
 }
