@@ -31,6 +31,8 @@ class MainActivity : AppCompatActivity(),
     // map of navigation_id to container index
 //    private val indexToPage = mapOf(0 to R.id.home, 1 to R.id.library, 2 to R.id.settings)
     private val indexToPage = mapOf(0 to R.id.home, 1 to R.id.settings)
+    var list = mutableListOf<Email.EmailThread>();
+    val threadsAdapter = ThreadsAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

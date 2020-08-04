@@ -1,10 +1,7 @@
 package kiman.androidmd
 
-import android.R.attr.bitmap
 import android.annotation.SuppressLint
 import android.graphics.Color
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,6 +11,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jakewharton.rxrelay2.PublishRelay
+import com.suke.widget.SwitchButton
 import me.saket.inboxrecyclerview.InboxRecyclerView
 import me.saket.inboxrecyclerview.dimming.TintPainter
 import me.saket.inboxrecyclerview.page.ExpandablePageLayout
@@ -21,7 +19,6 @@ import java.util.*
 
 
 class HomeFragment : Fragment(), MainActivity.IOnBackPressed {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +34,7 @@ class HomeFragment : Fragment(), MainActivity.IOnBackPressed {
     var emailPageLayout : ExpandablePageLayout? = null
 
     val onDestroy = PublishRelay.create<Any>()
-    val threadsAdapter = ThreadsAdapter()
+
     ////////////////////////////////////////
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -74,13 +71,13 @@ class HomeFragment : Fragment(), MainActivity.IOnBackPressed {
         var packagename = ArrayList<String>()
         var appicon = ArrayList<String>()
         var date = ArrayList<String>()
+        var switch = ArrayList<String>()
         appname = managepref.getStringArrayPref(activity!!.applicationContext, "appname")
         packagename = managepref.getStringArrayPref(activity!!.applicationContext, "packagename")
         appicon = managepref.getStringArrayPref(activity!!.applicationContext, "appicon")
         date = managepref.getStringArrayPref(activity!!.applicationContext, "date")
-        val list = mutableListOf<Email.EmailThread>();
+        switch = managepref.getStringArrayPref(activity!!.applicationContext, "switch")
 
-        Log.d("Log1","insert start")
         for( i in 0 until (appname.size) ){
             var temp : Email.EmailThread = Email.EmailThread(
                 id = 0,
@@ -90,15 +87,16 @@ class HomeFragment : Fragment(), MainActivity.IOnBackPressed {
                     Email(
                         excerpt = date.get(i),
                         body = "MOTION 1",
-                        timestamp = packagename.get(i))))
-            list.add(temp)
+                        timestamp = packagename.get(i))),
+                active = switch.get(i))
+            (activity as MainActivity).list.add(temp)
         }
-        Log.d("Log1","list size : " + list.size)
+        Log.d("Log1","list size : " + (activity as MainActivity).list.size)
 
-        threadsAdapter.submitList(list)
-        recyclerView!!.adapter = threadsAdapter
+        (activity as MainActivity).threadsAdapter.submitList((activity as MainActivity).list)
+        recyclerView!!.adapter = (activity as MainActivity).threadsAdapter
 
-        threadsAdapter.itemClicks
+        (activity as MainActivity).threadsAdapter.itemClicks
             .takeUntil(onDestroy)
             .subscribe {
                 recyclerView!!.expandItem(0)
@@ -116,10 +114,9 @@ class HomeFragment : Fragment(), MainActivity.IOnBackPressed {
         activity?.supportFragmentManager
             ?.beginTransaction()
             ?.replace(emailPageLayout!!.id, threadFragment)
-//                ?.commitNowAllowingStateLoss()
             ?.commit()
 
-        threadsAdapter.itemClicks
+        (activity as MainActivity).threadsAdapter.itemClicks
             .map { it.thread.id }
             .takeUntil(onDestroy)
             .subscribe {
