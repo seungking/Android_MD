@@ -20,12 +20,18 @@ class SettingsFragment : PreferenceFragmentCompat() {
             if (key == "switch_background") {
                 Log.d("PrefLog", "switch_background is changed")
                 Log.d("PrefLog", sharedPreferences.getBoolean("switch_background", true).toString())
-
+                if (sharedPreferences.getBoolean("switch_background", true)) {
+                    showAlertPopup()
+                }
             }
 
             else if (key == "switch_limit") {
                 Log.d("PrefLog", "switch_limit is changed")
             }
         }
+    }
+
+    private fun showAlertPopup() {
+        TODO("Not yet implemented")
     }
 }
