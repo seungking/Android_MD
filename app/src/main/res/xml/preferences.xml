@@ -42,6 +42,6 @@
 
         <intent
             android:action="android.intent.action.VIEW"
-            android:data="http://github.com" />
+            android:data="https://github.com/seungking/Android_MD" />
     </Preference>
 </PreferenceScreen>
