@@ -5,18 +5,18 @@
     <SwitchPreference
         android:defaultValue="true"
         android:key="switch_limit"
-        android:summary="실행 가능한 동작의 갯수를 5개로 제한합니다."
+        android:summary="실행 가능한 동작의 갯수를 제한합니다."
         android:title="동작 갯수 제한"
-        app:iconSpaceReserved="false" />
+        app:icon="@drawable/ic_lock_black_24dp" />
     <SwitchPreference
         android:defaultValue="true"
         android:key="switch_background"
-        android:summary="백그라운드에서 실행을 허용합니다. 앱이 꺼지지 않고 백그라운드에 남아 동작을 통해 액티비티를 실행할 수 있습니다."
+        android:summary="백그라운드에서 실행을 허용합니다."
         android:title="백그라운드 실행"
-        app:iconSpaceReserved="false" />
+        app:icon="@drawable/ic_verified_user_black_24dp"/>
     <Preference
         android:title="사용 설명 다시보기!"
-        app:iconSpaceReserved="false"
+        app:icon="@drawable/ic_help_center_black_24dp"
         >
 
         <intent
@@ -38,7 +38,7 @@
 <!--    </Preference>-->
     <Preference
         android:title="GitHub"
-        app:icon="@drawable/github_mark">
+        app:icon="@drawable/ic_github_mark">
 
         <intent
             android:action="android.intent.action.VIEW"

@@ -19,6 +19,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
             if (key == "switch_background") {
                 Log.d("PrefLog", "switch_background is changed")
+                Log.d("PrefLog", sharedPreferences.getBoolean("switch_background", true).toString())
+
             }
 
             else if (key == "switch_limit") {
