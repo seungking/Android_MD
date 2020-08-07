@@ -44,10 +44,11 @@ class EmailThreadFragment : Fragment() {
   var appicon = ArrayList<String>()
   var date = ArrayList<String>()
   var switch = ArrayList<String>()
+  var patterns = ArrayList<String>()
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedState: Bundle?): View? {
     val view: View = inflater.inflate(R.layout.fragment_email_thread, container,
-            false)
+      false)
     return view
   }
 
@@ -124,6 +125,7 @@ class EmailThreadFragment : Fragment() {
     appicon = managepref.getStringArrayPref(activity!!.applicationContext, "appicon")
     date = managepref.getStringArrayPref(activity!!.applicationContext, "date")
     switch = managepref.getStringArrayPref(activity!!.applicationContext, "switch")
+    patterns = managepref.getStringArrayPref(activity!!.applicationContext, "patterns")
     val list = mutableListOf<Email.EmailThread>();
 
     subjectTextView.text = appname.get(position)
@@ -165,13 +167,17 @@ class EmailThreadFragment : Fragment() {
       appicon.removeAt(position)
       date.removeAt(position)
       switch.removeAt(position)
+      patterns.removeAt(position)
 
       managepref.setStringArrayPref(activity!!.applicationContext,"appname",appname)
       managepref.setStringArrayPref(activity!!.applicationContext,"packagename",packagename)
       managepref.setStringArrayPref(activity!!.applicationContext,"appicon",appicon)
       managepref.setStringArrayPref(activity!!.applicationContext,"date",date)
       managepref.setStringArrayPref(activity!!.applicationContext,"switch",switch)
+      managepref.setStringArrayPref(activity!!.applicationContext,"patterns",patterns)
 
+
+      (activity as MainActivity).updatepattern()
       (activity as MainActivity).list.removeAt(position)
       (activity as MainActivity).threadsAdapter.submitList((activity as MainActivity).list)
       (activity as MainActivity).threadsAdapter.notifyItemRemoved(position)

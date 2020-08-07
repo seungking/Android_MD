@@ -8,24 +8,30 @@ import android.util.Log
 import android.widget.Toast
 import androidx.preference.PreferenceFragmentCompat
 
-
-
 class SettingsFragment : PreferenceFragmentCompat() {
+
+    var run : Boolean = false;
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.preferences)
         preferenceManager.sharedPreferences.registerOnSharedPreferenceChangeListener(prefListener)
     }
 
-    var prefListener:SharedPreferences.OnSharedPreferenceChangeListener =
+    var prefListener: SharedPreferences.OnSharedPreferenceChangeListener =
         object : SharedPreferences.OnSharedPreferenceChangeListener {
 
         override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
             if (key == "switch_background") {
                 Log.d("PrefLog", "switch_background is changed")
                 Log.d("PrefLog", sharedPreferences.getBoolean("switch_background", true).toString())
-                if (sharedPreferences.getBoolean("switch_background", true)) {
-                    val string_back:String = "백그라운드에서의 실행을 허용합니다."
-                    showAlertPopup(string_back)
+                run = sharedPreferences.getBoolean("switch_background",false); // key에 저장된 값을 가져옴
+
+                if(run) {
+                  (activity as MainActivity).startMotionCatch()
+                  val string_back:String = "백그라운드에서의 실행을 허용합니다."
+                  showAlertPopup(string_back)
+                }
+                else {
+                  (activity as MainActivity).stopMotionCatch()
                 }
             }
 
@@ -47,4 +53,3 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         alertDialog.show()
     }
-}

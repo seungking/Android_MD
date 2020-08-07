@@ -9,7 +9,7 @@
         android:title="동작 갯수 제한"
         app:icon="@drawable/ic_lock_black_24dp" />
     <SwitchPreference
-        android:defaultValue="true"
+        android:defaultValue="false"
         android:key="switch_background"
         android:summary="백그라운드에서 실행을 허용합니다."
         android:title="백그라운드 실행"
