@@ -72,11 +72,13 @@ class HomeFragment : Fragment(), MainActivity.IOnBackPressed {
         var appicon = ArrayList<String>()
         var date = ArrayList<String>()
         var switch = ArrayList<String>()
+        var patterns = ArrayList<String>()
         appname = managepref.getStringArrayPref(activity!!.applicationContext, "appname")
         packagename = managepref.getStringArrayPref(activity!!.applicationContext, "packagename")
         appicon = managepref.getStringArrayPref(activity!!.applicationContext, "appicon")
         date = managepref.getStringArrayPref(activity!!.applicationContext, "date")
         switch = managepref.getStringArrayPref(activity!!.applicationContext, "switch")
+        patterns = managepref.getStringArrayPref(activity!!.applicationContext, "patterns")
 
         for( i in 0 until (appname.size) ){
             var temp : Email.EmailThread = Email.EmailThread(
