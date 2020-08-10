@@ -7,7 +7,9 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.ByteArrayOutputStream;
@@ -204,7 +207,7 @@ public class AppInfoActivity extends AppCompatActivity {
             AppInfo data = mListData.get(position);
 
             if (data.mIcon != null) {
-                holder.mIcon.setImageDrawable(data.mIcon);
+                holder.mIcon.setImageBitmap(data.mIcon);
             }
 
             holder.mName.setText(data.mAppNaem);
@@ -257,7 +260,8 @@ public class AppInfoActivity extends AppCompatActivity {
 
                     addInfo = new AppInfo();
                     // App Icon
-                    addInfo.mIcon = app.loadIcon(pm);
+//                    addInfo.mIcon = app.loadIcon(pm);
+                    addInfo.mIcon = getBitmapFromDrawable(app.loadIcon(pm));
                     // App Name
                     addInfo.mAppNaem = app.loadLabel(pm).toString();
                     // App Package Name
@@ -271,6 +275,14 @@ public class AppInfoActivity extends AppCompatActivity {
         }
     }
 
+    @NonNull
+    static private Bitmap getBitmapFromDrawable(@NonNull Drawable drawable) {
+        final Bitmap bmp = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        final Canvas canvas = new Canvas(bmp);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bmp;
+    }
     /**
      * 작업 태스크
      * @author nohhs

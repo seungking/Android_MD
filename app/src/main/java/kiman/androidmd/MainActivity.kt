@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity(),
     val indexToPage = mapOf(0 to R.id.home, 1 to R.id.settings)
     var list = mutableListOf<Email.EmailThread>();
     val threadsAdapter = ThreadsAdapter()
+          
     var packagename = ArrayList<String>()
     var patterns = ArrayList<String>()
     var patterns_list = ArrayList<ArrayList<ArrayList<String>>>()
@@ -195,7 +196,7 @@ class MainActivity : AppCompatActivity(),
 
     }
 
-    fun updatepattern(){
+        fun updatepattern(){
         Log.d("log1","updatepattern")
         packagename = managePref.getStringArrayPref(this, "packagename")
         patterns = managePref.getStringArrayPref(this, "patterns")
@@ -220,7 +221,9 @@ class MainActivity : AppCompatActivity(),
     }
 
     fun startMotionCatch(){
-        Log.d("log1","Start Motion Catch")
+        Log.d("log1","Start Motion Catch");
+        startService(Intent(applicationContext,MyService::class.java))
+      
         updatepattern()
         if(!runningservice) {
             startService(Intent(applicationContext, MyService::class.java))
@@ -245,6 +248,7 @@ class MainActivity : AppCompatActivity(),
 
     fun stopMotionCatch(){
         Log.d("log1","Stop Motion Catch")
+      
         if(runningservice) {
             stopService(Intent(applicationContext, MyService::class.java))
             //센서끄고 패턴에 저장

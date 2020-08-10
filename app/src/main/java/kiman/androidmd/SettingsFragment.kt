@@ -11,6 +11,7 @@ import androidx.preference.PreferenceFragmentCompat
 class SettingsFragment : PreferenceFragmentCompat() {
 
     var run : Boolean = false;
+  
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.preferences)
         preferenceManager.sharedPreferences.registerOnSharedPreferenceChangeListener(prefListener)
