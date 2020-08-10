@@ -21,8 +21,8 @@
 
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="com.package.name"
-            android:targetClass="com.package.name.ActivityName"
+            android:targetPackage="kiman.androidmd"
+            android:targetClass="kiman.androidmd.OnBoardActivity"
             />
     </Preference>
 <!--    <Preference-->
