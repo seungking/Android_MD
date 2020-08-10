@@ -1,6 +1,7 @@
 package kiman.androidmd;
 
 import android.content.pm.ApplicationInfo;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 
 import java.text.Collator;
@@ -17,7 +18,7 @@ public class AppInfo {
     }
     
     // 아이콘
-	public Drawable mIcon = null;
+	public Bitmap mIcon = null;
 	// 어플리케이션 이름
 	public String mAppNaem = null;
 	// 패키지 명

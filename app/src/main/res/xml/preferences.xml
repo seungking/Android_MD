@@ -16,8 +16,12 @@
         app:iconSpaceReserved="false" />
     <Preference
         android:title="사용 설명 다시보기!"
+<<<<<<< Updated upstream
         app:iconSpaceReserved="false"
         >
+=======
+        app:icon="@drawable/ic_help_center_black_24dp">
+>>>>>>> Stashed changes
 
         <intent
             android:action="android.intent.action.VIEW"
@@ -44,4 +48,4 @@
             android:action="android.intent.action.VIEW"
             android:data="http://github.com" />
     </Preference>
-</PreferenceScreen>
+    </PreferenceScreen>
