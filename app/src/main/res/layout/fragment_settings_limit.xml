@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView_limit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="7"
+                android:fontFamily="@font/worksans_bold"
+                android:text="실행 동작 갯수 제한"
+                android:textSize="8pt" />
+
+            <com.suke.widget.SwitchButton
+                android:id="@+id/switch_limit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="0.3"
+                android:scrollbarSize="15dp"
+                app:sb_background="#ffffff" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView_limit_infor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="설정 가능한 동작의 갯수를 5개로 제한합니다."
+            android:fontFamily="@font/worksans_light"
+            android:textColor="@color/colorGrey"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView_background"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="7"
+                android:fontFamily="@font/worksans_bold"
+                android:text="백그라운드 실행"
+                android:textSize="8pt" />
+
+            <com.suke.widget.SwitchButton
+                android:id="@+id/switch_background"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="0.3"
+                android:scrollbarSize="15dp"
+                app:sb_background="#ffffff" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView_background_infor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="백그라운드에서 android_md가 동작합니다."
+            android:fontFamily="@font/worksans_light"
+            android:textColor="@color/colorGrey"/>
+    </LinearLayout>
+
+</LinearLayout>

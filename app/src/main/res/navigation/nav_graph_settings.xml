@@ -5,21 +5,21 @@
 
     <fragment
         android:id="@+id/settings_dest"
-        android:name="kiman.androidmd.SettingsFragment"
+        android:name="kiman.androidmd.SettingsFragment2"
         android:label="Settings">
         <action
             android:id="@+id/action_profile_settings"
-            app:destination="@id/profile_settings_dest" />
+            app:destination="@id/appInfor_settings_dest" />
         <action
-            android:id="@+id/action_privacy_settings"
-            app:destination="@id/privacy_settings_dest" />
+            android:id="@+id/action_limit_settings"
+            app:destination="@id/limit_settings_dest" />
     </fragment>
     <fragment
-        android:id="@+id/privacy_settings_dest"
-        android:name="com.example.viewpagernavigation.modules.settings.PrivacySettingsFragment"
-        android:label="Privacy Settings" />
+        android:id="@+id/limit_settings_dest"
+        android:name="kiman.androidmd.SettingsFragmentLimit"
+        android:label="Limit Settings" />
     <fragment
-        android:id="@+id/profile_settings_dest"
-        android:name="com.example.viewpagernavigation.modules.settings.ProfileSettingsFragment"
-        android:label="Profile Settings" />
+        android:id="@+id/appInfor_settings_dest"
+        android:name="kiman.androidmd.SettingsFragmentInfor"
+        android:label="App Information" />
 </navigation>

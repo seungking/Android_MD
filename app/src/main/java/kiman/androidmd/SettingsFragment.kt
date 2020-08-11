@@ -1,13 +1,13 @@
 package kiman.androidmd
 
-import android.app.ActionBar
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import android.view.Window
-import android.widget.Toast
+import android.view.LayoutInflater
+import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 
 class SettingsFragment : PreferenceFragmentCompat() {
@@ -18,6 +18,26 @@ class SettingsFragment : PreferenceFragmentCompat() {
         preferenceManager.sharedPreferences.registerOnSharedPreferenceChangeListener(prefListener)
     }
 
+
+    override fun onPreferenceTreeClick(preference: Preference?): Boolean {
+        val key: String? = preference?.key
+        when(key) {
+            "cat_motion_limit" -> {
+//                val mFragment: SettingsFragmentLimit = SettingsFragmentLimit()
+//                openFragment(mFragment)
+
+            }
+        }
+
+        return super.onPreferenceTreeClick(preference)
+    }
+
+    private fun openFragment(fragment: Fragment) {
+        val transaction = activity?.supportFragmentManager?.beginTransaction()
+        transaction?.replace(R.id.nav_host_settings, fragment)
+        transaction?.addToBackStack(null)
+        transaction?.commit()
+    }
     var prefListener: SharedPreferences.OnSharedPreferenceChangeListener =
         object : SharedPreferences.OnSharedPreferenceChangeListener {
 
