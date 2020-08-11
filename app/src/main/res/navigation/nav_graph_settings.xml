@@ -8,11 +8,19 @@
         android:name="kiman.androidmd.SettingsFragment2"
         android:label="Settings">
         <action
-            android:id="@+id/action_profile_settings"
-            app:destination="@id/appInfor_settings_dest" />
+            android:id="@+id/action_appInfor_settings"
+            app:destination="@id/appInfor_settings_dest"
+            app:enterAnim="@animator/slide_from_right"
+            app:exitAnim="@animator/slide_to_left"
+            app:popEnterAnim="@animator/slide_from_left"
+            app:popExitAnim="@animator/slide_to_right" />
         <action
             android:id="@+id/action_limit_settings"
-            app:destination="@id/limit_settings_dest" />
+            app:destination="@id/limit_settings_dest"
+            app:enterAnim="@animator/slide_from_right"
+            app:exitAnim="@animator/slide_to_left"
+            app:popEnterAnim="@animator/slide_from_left"
+            app:popExitAnim="@animator/slide_to_right" />
     </fragment>
     <fragment
         android:id="@+id/limit_settings_dest"
