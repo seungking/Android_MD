@@ -22,7 +22,7 @@ class SettingsFragment2: Fragment() {
         }
         cat_appInfor?.setOnClickListener {view->
             Log.d("cat_appInfor", "Activating")
-            view.findNavController().navigate(R.id.appInfor_settings_dest)
+            view.findNavController().navigate(R.id.action_appInfor_settings)
         }
         return view
     }
