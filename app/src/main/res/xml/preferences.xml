@@ -20,9 +20,9 @@
 
     <Preference
         android:title="사용 설명 다시보기!"
-        app:icon="@drawable/ic_help_center_black_24dp"
-        >
-
+        app:iconSpaceReserved="false"
+        app:icon="@drawable/ic_help_center_black_24dp">
+      
         <intent
             android:action="android.intent.action.VIEW"
             android:targetPackage="kiman.androidmd"
@@ -48,6 +48,4 @@
             android:action="android.intent.action.VIEW"
             android:data="https://github.com/seungking/Android_MD" />
     </Preference>
-
 </PreferenceScreen>
-
