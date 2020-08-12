@@ -116,7 +116,6 @@ class MainActivity : AppCompatActivity(),
             stopMotionCatch()
             val nextIntent = Intent(this, AppInfoActivity::class.java)
             startActivity(nextIntent)
-            finish()
         }
 
         // initialize backStack with elements
