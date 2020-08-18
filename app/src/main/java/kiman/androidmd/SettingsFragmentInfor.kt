@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 
 
 class SettingsFragmentInfor : Fragment() {
@@ -26,6 +27,10 @@ class SettingsFragmentInfor : Fragment() {
             val uri: Uri = Uri.parse("https://github.com/seungking/Android_MD")
             val intent = Intent(Intent.ACTION_VIEW, uri)
             startActivity(intent)
+        }
+        val exampleButton = view.findViewById<LinearLayout>(R.id.example_button)
+        exampleButton.setOnClickListener { view->
+            view.findNavController().navigate(R.id.action_example)
         }
 
         return view
