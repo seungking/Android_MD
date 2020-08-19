@@ -24,9 +24,9 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity(),
-        ViewPager.OnPageChangeListener,
-        BottomNavigationView.OnNavigationItemReselectedListener,
-        BottomNavigationView.OnNavigationItemSelectedListener {
+    ViewPager.OnPageChangeListener,
+    BottomNavigationView.OnNavigationItemReselectedListener,
+    BottomNavigationView.OnNavigationItemSelectedListener {
 
 
     // overall back stack of containers
@@ -34,9 +34,9 @@ class MainActivity : AppCompatActivity(),
 
     // list of base destination containers
     val fragments = listOf(
-            BaseFragment.newInstance(R.layout.content_home_base, R.id.toolbar_home, R.id.nav_host_home),
-            BaseFragment.newInstance(R.layout.content_settings_base, R.id.toolbar_settings, R.id.nav_host_settings))
-            //BaseFragment.newInstance(R.layout.content_library_base, R.id.toolbar_library, R.id.nav_host_library))
+        BaseFragment.newInstance(R.layout.content_home_base, R.id.toolbar_home, R.id.nav_host_home),
+        BaseFragment.newInstance(R.layout.content_settings_base, R.id.toolbar_settings, R.id.nav_host_settings))
+    //BaseFragment.newInstance(R.layout.content_library_base, R.id.toolbar_library, R.id.nav_host_library))
 
 
     // map of navigation_id to container index
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(),
     val indexToPage = mapOf(0 to R.id.home, 1 to R.id.settings)
     var list = mutableListOf<Email.EmailThread>();
     val threadsAdapter = ThreadsAdapter()
-          
+
     var packagename = ArrayList<String>()
     var patterns = ArrayList<String>()
     var patterns_list = ArrayList<ArrayList<ArrayList<String>>>()
@@ -90,13 +90,15 @@ class MainActivity : AppCompatActivity(),
     var Arrsize = 5
     var threshold = 2
     var Arrsize_catch = 10
-    var matcing_rate = 65
+    var matcing_rate = 60
     var temp_a: String? = null
 
     //모션 저장할 공간
     var Store_a = java.util.ArrayList<String>()
     //LCS 계산 배열
     var NIL: Array<IntArray>? = null
+
+    private var backPressCloseHandler: BackPressCloseHandler? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -116,11 +118,15 @@ class MainActivity : AppCompatActivity(),
             stopMotionCatch()
             val nextIntent = Intent(this, AppInfoActivity::class.java)
             startActivity(nextIntent)
+//            finish()
         }
+
+        backPressCloseHandler = BackPressCloseHandler(this);
 
         // initialize backStack with elements
         if (backStack.empty()) backStack.push(0)
 
+        backPressCloseHandler = BackPressCloseHandler(this);
 
         //센서 켬 (여긴 왜켯지)
         mSensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -148,6 +154,13 @@ class MainActivity : AppCompatActivity(),
     override fun onResume() {
         super.onResume()
         Log.d("log1","main resume!!")
+
+        // setup main view pager
+        main_pager.addOnPageChangeListener(this)
+        main_pager.adapter = ViewPagerAdapter()
+        main_pager.post(this::checkDeepLink)
+        main_pager.offscreenPageLimit = fragments.size
+
         val pref: SharedPreferences = PreferenceManager
             .getDefaultSharedPreferences(this)
         val switch_backbround : Boolean = pref.getBoolean("switch_background",false)
@@ -158,7 +171,8 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onBackPressed() {
-            inbox_recyclerview.collapse()
+        if(inbox_recyclerview.expandedItem.viewIndex==0) inbox_recyclerview.collapse()
+        else backPressCloseHandler!!.onBackPressed();
     }
 
     interface IOnBackPressed {
@@ -195,34 +209,44 @@ class MainActivity : AppCompatActivity(),
 
     }
 
-        fun updatepattern(){
+    fun updatepattern(){
         Log.d("log1","updatepattern")
-        packagename = managePref.getStringArrayPref(this, "packagename")
+        var mpackage = managePref.getStringArrayPref(this, "packagename")
         patterns = managePref.getStringArrayPref(this, "patterns")
 
+        var switch = managePref.getStringArrayPref(this, "switch")
+//            for (i in 0..switch.size()-1) {
+        Log.d("log1",packagename.toString())
+        Log.d("log1",switch.toString())
+
         if(patterns.size>0) {
+            patterns_list.clear()
             for (i in 0..patterns.size-1) {
-                var cur_pattern = ArrayList<ArrayList<String>>()
-                val tokens = patterns[i].split("]");
+                if(switch.get(i)=="on") {
+                    var cur_pattern = ArrayList<ArrayList<String>>()
+                    val tokens = patterns[i].split("]");
 
-                for(j in 0..tokens.size-2){
-                    val temp = tokens[j].subSequence(1,tokens[j].length).trim().split(",");
-                    val temp2 = ArrayList<String>()
-                    for(k in 0..temp.size-1) temp2.add(temp[k])
+                    for (j in 0..tokens.size - 2) {
+                        val temp = tokens[j].subSequence(1, tokens[j].length).trim().split(",");
+                        val temp2 = ArrayList<String>()
+                        for (k in 0..temp.size - 1) temp2.add(temp[k])
 
-                    cur_pattern.add(temp2)
+                        cur_pattern.add(temp2)
+                    }
+                    Log.d("log1","pattenrs list pacakge name : "+ i + "   " + mpackage.get(i))
+                    packagename.add(mpackage.get(i))
+                    patterns_list.add(cur_pattern)
                 }
-                patterns_list.add(cur_pattern)
             }
+            Log.d("log1","pattern list size : " + patterns_list.size)
             for(j in 0..patterns_list.size-1) Log.d("log1", "patterns "+j+" : "+patterns_list.get(j))
         }
-
     }
 
     fun startMotionCatch(){
         Log.d("log1","Start Motion Catch");
         startService(Intent(applicationContext,MyService::class.java))
-      
+
         updatepattern()
         if(!runningservice) {
             startService(Intent(applicationContext, MyService::class.java))
@@ -247,7 +271,7 @@ class MainActivity : AppCompatActivity(),
 
     fun stopMotionCatch(){
         Log.d("log1","Stop Motion Catch")
-      
+
         if(runningservice) {
             stopService(Intent(applicationContext, MyService::class.java))
             //센서끄고 패턴에 저장
@@ -356,7 +380,9 @@ class MainActivity : AppCompatActivity(),
                         Log.d("log1", "app run!!!!!!!!!!!!!!!!!           ")
                         val intent = packageManager.getLaunchIntentForPackage(packagename.get(j))
                         startActivity(intent)
-                        return
+//                        startActivity(Intent(applicationContext, MainActivity::class.java))
+//                        finish()
+//                        return
                     }
                 }
 
@@ -400,7 +426,7 @@ class MainActivity : AppCompatActivity(),
                 }
             }
         }
-        Log.d("log1","NIL : " + NIL[m][n])
+//        Log.d("log1","NIL : " + NIL[m][n])
         return NIL[m][n] // return last value
     }
 

@@ -154,6 +154,8 @@ class EmailThreadFragment : Fragment() {
       };
 
       managepref.setStringArrayPref(activity!!.applicationContext, "switch", switch)
+
+      (activity as MainActivity).updatepattern()
     }
 
 

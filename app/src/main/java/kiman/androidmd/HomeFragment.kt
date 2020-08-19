@@ -60,6 +60,9 @@ class HomeFragment : Fragment(), MainActivity.IOnBackPressed {
 
     @SuppressLint("CheckResult")
     private fun setupThreadList() {
+
+        (activity as MainActivity).list.clear()
+
         recyclerView!!.layoutManager = LinearLayoutManager(activity)
         recyclerView!!.expandablePage = emailPageLayout
         recyclerView!!.tintPainter = TintPainter.uncoveredArea(color = Color.WHITE, opacity = 0.65F)

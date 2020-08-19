@@ -1,6 +1,5 @@
 package kiman.androidmd
 
-import android.R.attr.key
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
@@ -60,6 +59,9 @@ class ThreadsAdapter : ListAdapter<Email.EmailThread, EmailViewHolder>(Email.Ema
       else switch.set(position,"off");
 
       managepref.setStringArrayPref(ctx, "switch", switch);
+      if (ctx is MainActivity) {
+        (ctx as MainActivity).updatepattern()
+      }
     }
     holder.render()
   }
@@ -76,8 +78,8 @@ class ThreadsAdapter : ListAdapter<Email.EmailThread, EmailViewHolder>(Email.Ema
 }
 
 open class EmailViewHolder(
-    itemView: View,
-    itemClicks: PublishRelay<Email.EmailThreadClicked>
+  itemView: View,
+  itemClicks: PublishRelay<Email.EmailThreadClicked>
 ) : RecyclerView.ViewHolder(itemView) {
 
   private val bylineTextView = itemView.findViewById<TextView>(R.id.emailthread_item_byline)

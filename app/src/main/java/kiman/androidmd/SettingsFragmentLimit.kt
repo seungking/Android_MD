@@ -14,12 +14,20 @@ import com.suke.widget.SwitchButton
 
 class SettingsFragmentLimit : Fragment() {
 
+    lateinit var pref: SharedPreferences
 
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_settings_limit, container, false)
 
         val switch_background : SwitchButton = view.findViewById(R.id.switch_background)
 
+        pref = PreferenceManager
+            .getDefaultSharedPreferences(view.context)
+        val switch : Boolean = pref.getBoolean("switch_background",false)
+
+        Log.d("log1","switch background : " + switch.toString())
+
+        switch_background.setChecked(switch)
 //        val sharedPreferences: SharedPreferences = view.context.getSharedPreferences(
 //            "switch_start_check",
 //            Context.MODE_PRIVATE
@@ -34,8 +42,7 @@ class SettingsFragmentLimit : Fragment() {
 
         switch_background.setOnCheckedChangeListener { CompoundButton, onSwitch ->
             if(onSwitch){
-                val pref: SharedPreferences = PreferenceManager
-                    .getDefaultSharedPreferences(view.context)
+
                 var editor  = pref.edit()
                 editor.putBoolean("switch_background",true)
                 editor.commit()
@@ -44,8 +51,7 @@ class SettingsFragmentLimit : Fragment() {
                 showAlertPopup(string_back)
             }
             else{
-                val pref: SharedPreferences = PreferenceManager
-                    .getDefaultSharedPreferences(view.context)
+
                 var editor  = pref.edit()
                 editor.putBoolean("switch_background",false)
                 editor.commit()
@@ -58,8 +64,7 @@ class SettingsFragmentLimit : Fragment() {
 
     private fun showAlertPopup(string: String) {
         val alertDialog = AlertDialog.Builder(this.activity)
-            .setTitle("경고!")
-            .setMessage(string)
+            .setTitle(string)
             .setPositiveButton("OK", null)
             .create()
 

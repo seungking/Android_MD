@@ -246,7 +246,6 @@ public class Gyro_Acc extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        startActivity(new Intent(Gyro_Acc.this, MainActivity.class));
     }
 
     private class AccelerometerListener implements SensorEventListener {
