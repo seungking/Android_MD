@@ -42,8 +42,8 @@ class SettingsFragment2: Fragment() {
         }
         val cat_review = view.findViewById<LinearLayout>(R.id.cat_review)
         cat_review?.setOnClickListener { view ->
-            val manager = context?.let { ReviewManagerFactory.create(it) }
-            //val manager = FakeReviewManager(context)
+            //val manager = context?.let { ReviewManagerFactory.create(it) }
+            val manager = FakeReviewManager(context)
             val request = manager?.requestReviewFlow()
             request?.addOnCompleteListener { request ->
                 if (request.isSuccessful) {

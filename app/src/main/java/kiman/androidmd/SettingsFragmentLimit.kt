@@ -58,7 +58,8 @@ class SettingsFragmentLimit : Fragment() {
 
     private fun showAlertPopup(string: String) {
         val alertDialog = AlertDialog.Builder(this.activity)
-            .setTitle(string)
+            .setTitle("경고!")
+            .setMessage(string)
             .setPositiveButton("OK", null)
             .create()
 
