@@ -49,9 +49,11 @@ class SettingsFragmentExamples : Fragment() {
             val camID = camManager.cameraIdList[0]
             if (isFlashOn) {
                 camManager.setTorchMode(camID, false)
+                isFlashOn = false
             }
             else {
                 camManager.setTorchMode(camID, true)
+                isFlashOn = true
             }
         }
         val killButton : Button = view.findViewById(R.id.killSwitchButton)
