@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <Button
+            android:id="@+id/btButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bluetooth On/Off" />
+
+        <Button
+            android:id="@+id/wifiButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="WiFi On/Off" />
+        <Button
+            android:id="@+id/flashButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="FlashLight On/Off" />
+        <Button
+            android:id="@+id/killSwitchButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kill Switch Button" />
+        <Button
+            android:id="@+id/silentButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Silent MODE On/OFF" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

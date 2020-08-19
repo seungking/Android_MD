@@ -29,5 +29,17 @@
     <fragment
         android:id="@+id/appInfor_settings_dest"
         android:name="kiman.androidmd.SettingsFragmentInfor"
-        android:label="App Information" />
+        android:label="App Information">
+        <action
+            android:id="@+id/action_example"
+            app:destination="@id/example_dest"
+            app:enterAnim="@animator/slide_from_right"
+            app:exitAnim="@animator/slide_to_left"
+            app:popEnterAnim="@animator/slide_from_left"
+            app:popExitAnim="@animator/slide_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/example_dest"
+        android:name="kiman.androidmd.SettingsFragmentExamples"
+        android:label="Examples" />
 </navigation>
