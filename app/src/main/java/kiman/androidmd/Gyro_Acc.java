@@ -120,7 +120,7 @@ public class Gyro_Acc extends AppCompatActivity {
         });
 
         //애드 버튼 눌렀을때
-        findViewById(R.id.add_ga).setOnTouchListener(new View.OnTouchListener() {
+        findViewById(R.id.add_motion_progress).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {

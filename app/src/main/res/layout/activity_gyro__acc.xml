@@ -24,6 +24,7 @@
 
 
         <ProgressBar
+            android:clickable="true"
             android:id="@+id/add_motion_progress"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="350dp"
