@@ -22,22 +22,17 @@
         android:gravity="center"
         android:orientation="vertical">
 
+        <Button
+            android:id="@+id/add_ga"
+            android:layout_width="200dp"
+            android:layout_height="200dp"/>
 
         <ProgressBar
             android:id="@+id/add_motion_progress"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="350dp"
-            android:layout_height="350dp"
-            android:indeterminate="false"
-            android:progressDrawable="@drawable/circular_progress_bar"
-            android:background="@drawable/circular_shape"
-            android:progress="0"
-            android:max="100"/>
-
-        <Button
-            android:id="@+id/add_ga"
-            android:layout_width="100dp"
-            android:layout_height="100dp" />
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:progress="0" />
 
         <Button
             android:layout_width="wrap_content"
