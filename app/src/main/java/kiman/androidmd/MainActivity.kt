@@ -1,12 +1,19 @@
 package kiman.androidmd
 
+import android.app.ActivityManager
+import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.hardware.camera2.CameraManager
+import android.media.AudioManager
+import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -378,11 +385,13 @@ class MainActivity : AppCompatActivity(),
                     if (run_app >= 3 && Store_a.size > 2) {
                         Store_a.clear()
                         Log.d("log1", "app run!!!!!!!!!!!!!!!!!           ")
-                        val intent = packageManager.getLaunchIntentForPackage(packagename.get(j))
-                        startActivity(intent)
-//                        startActivity(Intent(applicationContext, MainActivity::class.java))
-//                        finish()
-//                        return
+                        if(packagename.get(j).startsWith("com.")) {
+                            val intent = packageManager.getLaunchIntentForPackage(packagename.get(j))
+                            startActivity(intent)
+                        }
+                        else{
+                            startInnerFunction(packagename.get(j));
+                        }
                     }
                 }
 
@@ -393,6 +402,74 @@ class MainActivity : AppCompatActivity(),
             sensor: Sensor,
             accuracy: Int
         ) {
+        }
+    }
+
+    fun startInnerFunction(packagename : String){
+
+        when(packagename){
+            "bluetooth"->{
+                val btAdapter = BluetoothAdapter.getDefaultAdapter()
+                if(btAdapter.isEnabled()) {
+                    btAdapter.disable()
+                }
+                else {
+                    btAdapter.enable()
+                }
+            }
+            "wifi" ->{
+                var wfManager: WifiManager = this?.getSystemService(Context.WIFI_SERVICE) as WifiManager
+                if (wfManager.isWifiEnabled) {
+                    wfManager.setWifiEnabled(false)
+                }
+                else {
+                    wfManager.setWifiEnabled(true)
+                }
+            }
+            "light"->{
+                var camManager: CameraManager = this?.getSystemService(Context.CAMERA_SERVICE) as CameraManager
+                val camID = camManager.cameraIdList[0]
+                var isFlashOn:Boolean = false
+                if (isFlashOn) {
+                    camManager.setTorchMode(camID, false)
+                    isFlashOn = false
+                }
+                else {
+                    camManager.setTorchMode(camID, true)
+                    isFlashOn = true
+                }
+            }
+            "killp"->{
+                val packages: List<ApplicationInfo>
+                val pm: PackageManager?
+                pm = this?.packageManager
+                //get a list of installed apps.
+                //get a list of installed apps.
+                packages = pm?.getInstalledApplications(0) as List<ApplicationInfo>
+                val activityManager = this?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+                for (p in packages) {
+                    // 안드로이드의 기본앱일 경우 종료시키지 않는 조건문
+//                if((p.flags and ApplicationInfo.FLAG_SYSTEM) == 1 ) {
+//                    continue
+//                }
+                    if (p.packageName.equals("kiman.androidmd")) {
+                        continue
+                    }
+                    activityManager.killBackgroundProcesses(p.packageName)
+                }
+            }
+            "silent"->{
+                var audioManager = this?.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+                if (audioManager.ringerMode == AudioManager.RINGER_MODE_NORMAL) {
+                    audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE)
+                }
+//            else if (audioManager.ringerMode == AudioManager.RINGER_MODE_SILENT){
+//                audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE)
+//            }
+                else {
+                    audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL)
+                }
+            }
         }
     }
 
