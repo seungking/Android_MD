@@ -22,29 +22,6 @@
         android:gravity="center"
         android:orientation="vertical">
 
-
-        <ProgressBar
-            android:clickable="true"
-            android:id="@+id/add_motion_progress"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="350dp"
-            android:layout_height="350dp"
-            android:indeterminate="false"
-            android:progressDrawable="@drawable/circular_progress_bar"
-            android:background="@drawable/circular_shape"
-            android:progress="0"
-            android:max="100"/>
-
-        <Button
-            android:id="@+id/add_ga"
-            android:layout_width="100dp"
-            android:layout_height="100dp" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/add_clear_ga"/>
-
         <com.tt.whorlviewlibrary.WhorlView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/onprogress"
             android:layout_width="1dp"
@@ -57,6 +34,27 @@
             app:whorlview_strokeWidth="6"
             app:whorlview_sweepAngle="90">
         </com.tt.whorlviewlibrary.WhorlView>
+
+        <ProgressBar
+            android:clickable="true"
+            android:id="@+id/add_motion_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="350dp"
+            android:layout_height="350dp"
+            android:indeterminate="false"
+            android:progressDrawable="@drawable/circular_progress_bar"
+            android:background="@drawable/circular_shape"
+            android:backgroundTint="@color/colorLightGrey"
+            android:progress="0"
+            android:max="100"/>
+
+        <Button
+            android:text="CLEAR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/add_clear_ga"/>
+
+
 
     </LinearLayout>
 
