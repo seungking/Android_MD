@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#AFAEAE"
+    android:background="#222222"
     tools:context="me.saket.inboxrecyclerview.sample.InboxActivity">
 
   <me.saket.inboxrecyclerview.InboxRecyclerView

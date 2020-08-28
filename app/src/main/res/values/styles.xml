@@ -2,11 +2,12 @@
 
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/color_primary</item>
-        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorPrimaryDark">#222222</item>
         <item name="colorAccent">@color/color_accent</item>
+        <item name="colorOnSecondary">@color/color_primary</item>
         <item name="android:windowBackground">@color/window_background</item>
-        <item name="android:statusBarColor">#D3DBDF</item>
-        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
+        <item name="android:statusBarColor">#222222</item>
+<!--        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>-->
         <item name="android:textViewStyle">@style/Expand.TextViewStyle</item>
 
         <!-- Layout preview complains without this :S -->
@@ -31,9 +32,9 @@
     </style>
 
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
+<!--    <style name="AppTheme.NoActionBar">-->
+<!--        <item name="windowActionBar">false</item>-->
+<!--        <item name="windowNoTitle">true</item>-->
+<!--    </style>-->
 
 </resources>

@@ -2,13 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="110dp"
+    android:layout_height="90dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginStart="4dp"
+    android:layout_marginStart="19dp"
     android:layout_marginTop="@dimen/emailthread_item_vertical_margin"
-    android:layout_marginEnd="4dp"
+    android:layout_marginEnd="19dp"
     android:layout_marginBottom="@dimen/emailthread_item_vertical_margin"
-    android:background="@drawable/corners1"
+    android:background="@drawable/corners"
     android:padding="10dp"
     android:paddingStart="14dp"
     android:paddingTop="18dp"
@@ -27,8 +27,8 @@
         android:id="@+id/emailthread_item_byline"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.6"
-        android:textColor="#3C4D54"
+        android:layout_weight="0"
+        android:textColor="#FFFFFF"
         android:textSize="13sp"
         tools:text="line1" />
 
@@ -39,7 +39,7 @@
         android:layout_below="@+id/emailthread_item_byline"
         android:layout_alignStart="@+id/emailthread_item_byline"
         android:layout_alignEnd="@+id/emailthread_item_byline"
-        android:layout_weight="1.8"
+        android:layout_weight="2"
         android:gravity="center">
 
       <de.hdodenhof.circleimageview.CircleImageView
@@ -60,7 +60,7 @@
           android:layout_marginStart="55dp"
           android:layout_marginTop="10dp"
           android:fontFamily="@font/worksans_bold"
-          android:textColor="#1D2C2F"
+          android:textColor="#FFFFFF"
           android:textSize="@dimen/emailthread_subject_textize_without_photo_attachments"
           tools:text="APP NAME" />
 
@@ -69,7 +69,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_alignParentEnd="true"
-          android:layout_weight="1.5"
+          android:layout_weight="1.7"
           android:scrollbarSize="15dp"
           app:sb_background="#ffffff"
           app:sb_shadow_effect="false" />
@@ -95,14 +95,13 @@
         android:layout_height="0dp"
         android:layout_below="@+id/app_name_layout"
         android:layout_marginEnd="24dp"
-        android:layout_weight="0.6"
-        android:drawableStart="@drawable/ic_attachment_24dp"
+        android:layout_weight="0.8"
         android:drawablePadding="16dp"
         android:drawableTint="#45676E"
         android:ellipsize="end"
         android:gravity="center_vertical"
         android:maxLines="1"
-        android:textColor="#3A4A51"
+        android:textColor="#FFFFFF"
         tools:text="BODY" />
 
   </LinearLayout>

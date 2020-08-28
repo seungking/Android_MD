@@ -9,15 +9,5 @@
         android:name="kiman.androidmd.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home">
-        <action
-            android:id="@+id/action_search"
-            app:destination="@id/search_dest"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
-    <fragment
-        android:id="@+id/search_dest"
-        android:name="com.example.viewpagernavigation.modules.home.SearchFragment"
-        android:label="Search" />
 </navigation>

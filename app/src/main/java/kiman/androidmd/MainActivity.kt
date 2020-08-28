@@ -414,6 +414,10 @@ class MainActivity : AppCompatActivity(),
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+    }
+
     fun startInnerFunction(packagename : String){
 
         when(packagename){

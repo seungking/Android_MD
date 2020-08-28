@@ -117,7 +117,7 @@ class EmailThreadFragment : Fragment() {
   @SuppressLint("SetTextI18n")
   private fun render(view: View, position : Int) {
 
-    Log.d("Log1","render in fragment");
+    Log.d("Log1","render in fragment  position : "  + position);
     val managepref : ManagePref =  ManagePref()
 
     appname = managepref.getStringArrayPref(activity!!.applicationContext, "appname")
@@ -160,6 +160,7 @@ class EmailThreadFragment : Fragment() {
 
 
     var view : View = View.inflate(context, R.layout.include_email_shipping_update, attachmentContainer)
+
     view.detail_button2.setOnClickListener {
 
       requireActivity().onBackPressed()

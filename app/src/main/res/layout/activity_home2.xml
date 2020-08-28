@@ -176,7 +176,7 @@
                     android:scrollbarSize="15dp"
                     app:sb_background="#ffffff"
                     app:sb_checked="true"
-                    app:sb_checked_color="19ceb3"
+                    app:sb_checked_color="#19ceb3"
                     app:sb_shadow_effect="false" />
 
 
