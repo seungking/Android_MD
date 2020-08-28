@@ -43,8 +43,11 @@ public class AppInfoActivity extends AppCompatActivity {
     private PackageManager pm;
 
     private View mLoadingContainer;
-    private ListView mListView = null;
-    private IAAdapter mAdapter = null;
+    private ListView mListView1 = null;
+    private IAAdapter mAdapter1 = null;
+
+    private ListView mListView2 = null;
+    private IFAdapter mAdapter2 = null;
 
     String select = null;
 
@@ -61,6 +64,8 @@ public class AppInfoActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 //        toolbar = (Toolbar)findViewById(R.id.app_list_toolbar);
+//
+//
 
         SharedPreferences test = getSharedPreferences("save", MODE_PRIVATE);
         final SharedPreferences.Editor editor = test.edit();
@@ -72,13 +77,44 @@ public class AppInfoActivity extends AppCompatActivity {
         editor.putString("packageName","");
 
         mLoadingContainer = findViewById(R.id.loading_container);
-        mListView = (ListView) findViewById(R.id.listView1);
+        mListView1 = (ListView) findViewById(R.id.listView1);
+        mListView2 = (ListView) findViewById(R.id.listView2);
 
-        mAdapter = new IAAdapter(this);
-        mListView.setAdapter(mAdapter);
+        mAdapter1 = new IAAdapter(this);
+        mListView1.setAdapter(mAdapter1);
 
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mAdapter2 = new IFAdapter(this);
+        mListView2.setAdapter(mAdapter2);
 
+        mListView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> av, View view, int position,
+                                    long id) {
+                // TODO Auto-generated method stub
+                String app_name = ((TextView) view.findViewById(R.id.app_name)).getText().toString();
+                String package_name = ((TextView) view.findViewById(R.id.app_package)).getText().toString();
+
+                ImageView imageView = (ImageView)view.findViewById(R.id.app_icon);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+
+                Toast.makeText(AppInfoActivity.this, package_name, Toast.LENGTH_SHORT).show();
+
+                Log.d("Log1",package_name);
+                    editor.putString("packageName",package_name);
+                    editor.commit();
+
+                Intent intent = new Intent(AppInfoActivity.this,Gyro_Acc.class);
+                intent.putExtra("appname",app_name);
+                intent.putExtra("packagename",package_name);
+                intent.putExtra("appicon",managePref.BitmapToString(bitmap));
+
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        mListView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> av, View view, int position,
                                     long id) {
@@ -132,10 +168,10 @@ public class AppInfoActivity extends AppCompatActivity {
         if (isView) {
             // 화면 로딩뷰 표시
             mLoadingContainer.setVisibility(View.VISIBLE);
-            mListView.setVisibility(View.GONE);
+            mListView1.setVisibility(View.GONE);
         } else {
             // 화면 어플 리스트 표시
-            mListView.setVisibility(View.VISIBLE);
+            mListView1.setVisibility(View.VISIBLE);
             mLoadingContainer.setVisibility(View.GONE);
         }
     }
@@ -275,6 +311,95 @@ public class AppInfoActivity extends AppCompatActivity {
         }
     }
 
+    private class IFAdapter extends BaseAdapter {
+        private Context mContext = null;
+
+        private List<ApplicationInfo> mAppList = null;
+        private ArrayList<AppInfo> mListData = new ArrayList<AppInfo>();
+
+        public IFAdapter(Context mContext) {
+            super();
+            this.mContext = mContext;
+        }
+
+        public int getCount() {
+            return mListData.size();
+        }
+
+        public Object getItem(int arg0) {
+            return mListData.get(arg0);
+        }
+
+        public long getItemId(int arg0) {
+            return 0;
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder holder;
+
+            if (convertView == null) {
+                holder = new ViewHolder();
+
+                LayoutInflater inflater = (LayoutInflater) mContext
+                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = inflater.inflate(R.layout.list_item_layout, null);
+
+                holder.mIcon = (ImageView) convertView
+                        .findViewById(R.id.app_icon);
+                holder.mName = (TextView) convertView
+                        .findViewById(R.id.app_name);
+                holder.mPacakge = (TextView) convertView
+                        .findViewById(R.id.app_package);
+
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+
+            AppInfo data = mListData.get(position);
+
+            if (data.mIcon != null) {
+                holder.mIcon.setImageBitmap(data.mIcon);
+            }
+
+            holder.mName.setText(data.mAppNaem);
+            holder.mPacakge.setText(data.mAppPackge);
+
+            return convertView;
+        }
+
+        /**
+         * 어플리케이션 리스트 작성
+         */
+        @SuppressLint("WrongConstant")
+        public void rebuild() {
+
+            Drawable drawable = getResources().getDrawable(R.drawable.avatar_googleexpress);
+            Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
+
+            Bitmap[] icons = {bitmap};
+            String[] appnames = {"블루투스 ON/OFF", "WIFI ON/OFF", "라이트 ON/OFF", "프로세스 종료 ON/OFF", "음소거모드 ON/OFF"};
+            String[] packageNames = {"bluetooth", "wifi", "light", "killp", "silent"};
+
+            // 기존 데이터 초기화
+            mListData.clear();
+
+            AppInfo addInfo = null;
+            for (int i=0; i<appnames.length; i++) {
+
+                addInfo = new AppInfo();
+                addInfo.mIcon = icons[0];
+                addInfo.mAppNaem = appnames[i];
+                addInfo.mAppPackge = packageNames[i];
+
+                mListData.add(addInfo);
+            }
+
+            // 알파벳 이름으로 소트(한글, 영어)
+            Collections.sort(mListData, AppInfo.ALPHA_COMPARATOR);
+        }
+    }
+
     @NonNull
     static private Bitmap getBitmapFromDrawable(@NonNull Drawable drawable) {
         final Bitmap bmp = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
@@ -298,7 +423,8 @@ public class AppInfoActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             // 어플리스트 작업시작
-            mAdapter.rebuild();
+            mAdapter1.rebuild();
+            mAdapter2.rebuild();
 
             return null;
         }
@@ -306,39 +432,12 @@ public class AppInfoActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             // 어댑터 갱신
-            mAdapter.notifyDataSetChanged();
+            mAdapter1.notifyDataSetChanged();
+            mAdapter2.notifyDataSetChanged();
 
             // 로딩뷰 정지
             setLoadingView(false);
         }
 
     };
-
-//    @Override
-//    public boolean onPrepareOptionsMenu(Menu menu) {
-//        if (MENU_MODE == MENU_DOWNLOAD) {
-//            menu.findItem(MENU_DOWNLOAD).setVisible(false);
-//            menu.findItem(MENU_ALL).setVisible(true);
-//        } else {
-//            menu.findItem(MENU_DOWNLOAD).setVisible(true);
-//            menu.findItem(MENU_ALL).setVisible(false);
-//        }
-//
-//        return true;
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int menuId = item.getItemId();
-//
-//        if (menuId == MENU_DOWNLOAD) {
-//            MENU_MODE = MENU_DOWNLOAD;
-//        } else {
-//            MENU_MODE = MENU_ALL;
-//        }
-//
-//        startTask();
-//
-//        return true;
-////    }
 }

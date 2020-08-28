@@ -1,12 +1,19 @@
 package kiman.androidmd
 
+import android.app.ActivityManager
+import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.hardware.camera2.CameraManager
+import android.media.AudioManager
+import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -46,7 +53,9 @@ class MainActivity : AppCompatActivity(),
     val threadsAdapter = ThreadsAdapter()
 
     var packagename = ArrayList<String>()
+    var mpackagename = ArrayList<String>()
     var patterns = ArrayList<String>()
+    var mpatterns_list = ArrayList<ArrayList<ArrayList<String>>>()
     var patterns_list = ArrayList<ArrayList<ArrayList<String>>>()
     val managePref = ManagePref()
     var runningservice = false;
@@ -210,6 +219,8 @@ class MainActivity : AppCompatActivity(),
     }
 
     fun updatepattern(){
+        mpackagename.clear();
+        mpatterns_list.clear();
         Log.d("log1","updatepattern")
         var mpackage = managePref.getStringArrayPref(this, "packagename")
         patterns = managePref.getStringArrayPref(this, "patterns")
@@ -234,12 +245,12 @@ class MainActivity : AppCompatActivity(),
                         cur_pattern.add(temp2)
                     }
                     Log.d("log1","pattenrs list pacakge name : "+ i + "   " + mpackage.get(i))
-                    packagename.add(mpackage.get(i))
-                    patterns_list.add(cur_pattern)
+                    mpackagename.add(mpackage.get(i))
+                    mpatterns_list.add(cur_pattern)
                 }
             }
-            Log.d("log1","pattern list size : " + patterns_list.size)
-            for(j in 0..patterns_list.size-1) Log.d("log1", "patterns "+j+" : "+patterns_list.get(j))
+            Log.d("log1","pattern list size : " + mpatterns_list.size)
+            for(j in 0..mpatterns_list.size-1) Log.d("log1", "patterns "+j+" : "+mpatterns_list.get(j))
         }
     }
 
@@ -354,19 +365,20 @@ class MainActivity : AppCompatActivity(),
 
 
 
-                for (j in patterns_list.indices) {
+                for (j in mpatterns_list.indices) {
                     val lcs = java.util.ArrayList<Int>()
                     var run_app = 0 //패턴들이랑 비교하는거
-                    for (i in patterns_list.get(j).indices) {
+                    for (i in mpatterns_list.get(j).indices) {
                         val num1: Int = downtop(
-                            patterns_list.get(j).get(i),
+                            mpatterns_list.get(j).get(i),
                             Store_a,
-                            patterns_list.get(j).get(i).size,
+                            mpatterns_list.get(j).get(i).size,
                             Store_a.size,
                             NIL
                         )
-                        val num2: Int = Math.min(Store_a.size, patterns_list.get(j).get(i).size)
-                        var num = ((num1 * 100) / num2).toInt()
+                        val num2: Int = Math.min(Store_a.size, mpatterns_list.get(j).get(i).size)
+                        var num =0;
+                        if(num2!=0) num = ((num1 * 100) / num2).toInt()
 
                         if (num >= matcing_rate) run_app++ //일치하는 패턴 개수추가
                         lcs.add(num)
@@ -378,11 +390,17 @@ class MainActivity : AppCompatActivity(),
                     if (run_app >= 3 && Store_a.size > 2) {
                         Store_a.clear()
                         Log.d("log1", "app run!!!!!!!!!!!!!!!!!           ")
-                        val intent = packageManager.getLaunchIntentForPackage(packagename.get(j))
-                        startActivity(intent)
-//                        startActivity(Intent(applicationContext, MainActivity::class.java))
-//                        finish()
-//                        return
+                        if(mpackagename.get(j).startsWith("com.")) {
+                            val intent = packageManager.getLaunchIntentForPackage(mpackagename.get(j))
+                            val intent1 = getIntent()
+                            finish()
+                            startActivity(intent1)
+                            startActivity(intent)
+
+                        }
+                        else{
+                            startInnerFunction(mpackagename.get(j));
+                        }
                     }
                 }
 
@@ -393,6 +411,74 @@ class MainActivity : AppCompatActivity(),
             sensor: Sensor,
             accuracy: Int
         ) {
+        }
+    }
+
+    fun startInnerFunction(packagename : String){
+
+        when(packagename){
+            "bluetooth"->{
+                val btAdapter = BluetoothAdapter.getDefaultAdapter()
+                if(btAdapter.isEnabled()) {
+                    btAdapter.disable()
+                }
+                else {
+                    btAdapter.enable()
+                }
+            }
+            "wifi" ->{
+                var wfManager: WifiManager = this?.getSystemService(Context.WIFI_SERVICE) as WifiManager
+                if (wfManager.isWifiEnabled) {
+                    wfManager.setWifiEnabled(false)
+                }
+                else {
+                    wfManager.setWifiEnabled(true)
+                }
+            }
+            "light"->{
+                var camManager: CameraManager = this?.getSystemService(Context.CAMERA_SERVICE) as CameraManager
+                val camID = camManager.cameraIdList[0]
+                var isFlashOn:Boolean = false
+                if (isFlashOn) {
+                    camManager.setTorchMode(camID, false)
+                    isFlashOn = false
+                }
+                else {
+                    camManager.setTorchMode(camID, true)
+                    isFlashOn = true
+                }
+            }
+            "killp"->{
+                val packages: List<ApplicationInfo>
+                val pm: PackageManager?
+                pm = this?.packageManager
+                //get a list of installed apps.
+                //get a list of installed apps.
+                packages = pm?.getInstalledApplications(0) as List<ApplicationInfo>
+                val activityManager = this?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+                for (p in packages) {
+                    // 안드로이드의 기본앱일 경우 종료시키지 않는 조건문
+//                if((p.flags and ApplicationInfo.FLAG_SYSTEM) == 1 ) {
+//                    continue
+//                }
+                    if (p.packageName.equals("kiman.androidmd")) {
+                        continue
+                    }
+                    activityManager.killBackgroundProcesses(p.packageName)
+                }
+            }
+            "silent"->{
+                var audioManager = this?.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+                if (audioManager.ringerMode == AudioManager.RINGER_MODE_NORMAL) {
+                    audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE)
+                }
+//            else if (audioManager.ringerMode == AudioManager.RINGER_MODE_SILENT){
+//                audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE)
+//            }
+                else {
+                    audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL)
+                }
+            }
         }
     }
 
