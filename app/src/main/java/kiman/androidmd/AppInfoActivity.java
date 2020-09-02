@@ -58,6 +58,12 @@ public class AppInfoActivity extends AppCompatActivity {
 
     ManagePref managePref = new ManagePref();
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, MainActivity.class));
+    }
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -152,6 +158,11 @@ public class AppInfoActivity extends AppCompatActivity {
 
         // 작업 시작
         startTask();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     /**

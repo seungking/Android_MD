@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
+import kiman.androidmd.fragment.HomeFragment;
 import kiman.androidmd.service.ManagePref;
 import kiman.androidmd.service.MyService;
 
@@ -228,7 +229,8 @@ public class Gyro_Acc extends AppCompatActivity {
                                 managePref.setStringArrayPref(Gyro_Acc.this,"switch",switch_motion);
                                 managePref.setStringArrayPref(Gyro_Acc.this,"patterns",patterns);
 
-//                                ((MainActivity)getApplicationContext()).updatepattern();
+                                ((MainActivity)getApplicationContext()).updatelist();
+
                                 finish();
                             } else {
                                 Toast.makeText(Gyro_Acc.this, "full", Toast.LENGTH_SHORT).show();
@@ -251,11 +253,14 @@ public class Gyro_Acc extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        startActivity(new Intent(this, MainActivity.class));
     }
 
     @Override
     protected void onDestroy() {
+
         super.onDestroy();
+
     }
 
     private class AccelerometerListener implements SensorEventListener {

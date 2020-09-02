@@ -62,7 +62,7 @@ class HomeFragment : Fragment(), MainActivity.IOnBackPressed {
     }
 
     @SuppressLint("CheckResult")
-    private fun setupThreadList() {
+    fun setupThreadList() {
 
         (activity as MainActivity).list.clear()
 
@@ -120,7 +120,7 @@ class HomeFragment : Fragment(), MainActivity.IOnBackPressed {
     }
 
     @SuppressLint("CheckResult")
-    private fun setupThreadPage() {
+    fun setupThreadPage() {
 
         var threadFragment = activity?.supportFragmentManager?.findFragmentById(emailPageLayout!!.id) as EmailThreadFragment?
         if (threadFragment == null) {

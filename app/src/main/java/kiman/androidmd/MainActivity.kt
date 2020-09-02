@@ -25,6 +25,7 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kiman.androidmd.adapter.ThreadsAdapter
 import kiman.androidmd.fragment.BaseFragment
+import kiman.androidmd.fragment.HomeFragment
 import kiman.androidmd.model.Email
 import kiman.androidmd.service.BackPressCloseHandler
 import kiman.androidmd.service.ManagePref
@@ -131,7 +132,7 @@ class MainActivity : AppCompatActivity(),
             stopMotionCatch()
             val nextIntent = Intent(this, AppInfoActivity::class.java)
             startActivity(nextIntent)
-//            finish()
+            finish()
         }
 
         backPressCloseHandler =
@@ -226,6 +227,10 @@ class MainActivity : AppCompatActivity(),
 
     }
 
+    fun updatelist(){
+        (fragments as HomeFragment).setupThreadList();
+//        (fragments as HomeFragment).setupThreadPage();
+    }
     fun updatepattern(){
         mpackagename.clear();
         mpatterns_list.clear();
@@ -401,9 +406,9 @@ class MainActivity : AppCompatActivity(),
                         Log.d("log1", "app run!!!!!!!!!!!!!!!!!           ")
                         if(mpackagename.get(j).startsWith("com.")) {
                             val intent = packageManager.getLaunchIntentForPackage(mpackagename.get(j))
-                            val intent1 = getIntent()
-                            finish()
-                            startActivity(intent1)
+//                            val intent1 = getIntent()
+//                            finish()
+//                            startActivity(intent1)
                             startActivity(intent)
 
                         }
