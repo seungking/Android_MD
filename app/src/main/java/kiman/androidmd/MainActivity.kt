@@ -15,6 +15,7 @@ import android.hardware.camera2.CameraManager
 import android.media.AudioManager
 import android.net.wifi.WifiManager
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -132,11 +133,8 @@ class MainActivity : AppCompatActivity(),
             stopMotionCatch()
             val nextIntent = Intent(this, AppInfoActivity::class.java)
             startActivity(nextIntent)
-            finish()
+            //finish()
         }
-
-        backPressCloseHandler =
-            BackPressCloseHandler(this);
 
         // initialize backStack with elements
         if (backStack.empty()) backStack.push(0)
@@ -172,7 +170,7 @@ class MainActivity : AppCompatActivity(),
         Log.d("log1","main resume!!")
 
 //        // setup main view pager
-//        main_pager.addOnPageChangeListener(this)
+       // main_pager.addOnPageChangeListener(this)
 //        main_pager.adapter = ViewPagerAdapter()
 //        main_pager.post(this::checkDeepLink)
 //        main_pager.offscreenPageLimit = fragments.size
@@ -228,8 +226,16 @@ class MainActivity : AppCompatActivity(),
     }
 
     fun updatelist(){
-        (fragments as HomeFragment).setupThreadList();
+        // setup main view pager
+       // main_pager.addOnPageChangeListener(this)
+//        main_pager.adapter = ViewPagerAdapter()
+//        //main_pager.post(this::checkDeepLink)
+//        main_pager.offscreenPageLimit = fragments.size
 //        (fragments as HomeFragment).setupThreadPage();
+        val firstFragment: HomeFragment =
+            supportFragmentManager.fragments[0] as HomeFragment
+        firstFragment.setupThreadList()
+        firstFragment.setupThreadPage()
     }
     fun updatepattern(){
         mpackagename.clear();

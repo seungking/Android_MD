@@ -123,7 +123,7 @@ public class Gyro_Acc extends AppCompatActivity {
                 Store_a.clear();
                 check=0;
                 progressBar.setProgress(0);
-                textViewMotionPercent.setText("20%");
+                textViewMotionPercent.setText("0%");
             }
         });
 
@@ -231,7 +231,7 @@ public class Gyro_Acc extends AppCompatActivity {
                                 managePref.setStringArrayPref(Gyro_Acc.this,"switch",switch_motion);
                                 managePref.setStringArrayPref(Gyro_Acc.this,"patterns",patterns);
 
-                                ((MainActivity)getApplicationContext()).updatelist();
+                                //((MainActivity)getApplicationContext()).updatelist();
 
                                 finish();
                             } else {
@@ -255,7 +255,7 @@ public class Gyro_Acc extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        startActivity(new Intent(this, MainActivity.class));
+        //startActivity(new Intent(this, MainActivity.class));
     }
 
     @Override

@@ -61,9 +61,9 @@ class EmailThreadFragment : Fragment() {
   override fun onViewCreated(view: View, savedState: Bundle?) {
     super.onViewCreated(view, savedState)
 
-//    if (savedState != null) {
-//      onRestoreInstanceState(savedState)
-//    }
+    if (savedState != null) {
+      onRestoreInstanceState(savedState)
+    }
 
     collapseButton.setOnClickListener {
       requireActivity().onBackPressed()

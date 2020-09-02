@@ -61,7 +61,7 @@ public class AppInfoActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(this, MainActivity.class));
+       // startActivity(new Intent(this, MainActivity.class));
     }
 
     /** Called when the activity is first created. */

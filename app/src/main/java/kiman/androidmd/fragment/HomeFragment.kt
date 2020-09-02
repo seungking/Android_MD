@@ -44,13 +44,21 @@ class HomeFragment : Fragment(), MainActivity.IOnBackPressed {
         val view: View = inflater.inflate(
             R.layout.activity_inbox, container,
             false)
+        Log.d("log1", "OnCreateView in HomeFragment")
         recyclerView = view.findViewById(R.id.inbox_recyclerview)
         emailPageLayout = view.findViewById(R.id.inbox_email_thread_page)
-        setupThreadList()
-        setupThreadPage()
+
         return view
     }
 
+    override fun onResume() {
+
+        super.onResume()
+        Log.d("log1", "OnResume in HomeFragment")
+        setupThreadList()
+        setupThreadPage()
+
+    }
     override fun onDestroy() {
         onDestroy.accept(Any())
         super.onDestroy()
