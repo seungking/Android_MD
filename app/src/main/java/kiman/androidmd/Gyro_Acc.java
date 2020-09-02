@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -123,6 +124,7 @@ public class Gyro_Acc extends AppCompatActivity {
         });
 
         //애드 버튼 눌렀을때
+        final TextView textViewMotionPercent = (TextView) findViewById(R.id.textView_motion_percent);
         findViewById(R.id.add_motion_progress).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -162,18 +164,23 @@ public class Gyro_Acc extends AppCompatActivity {
                             patterns.add(temp);
                             Store_a.clear();
                             if (check == 1) {//한번 클릭마다 다음으로 넘어가면서 저장
+                                textViewMotionPercent.setText("20%");
                                 progressBar.setProgress(20,true);
                                 Toast.makeText(Gyro_Acc.this, "not bad1", Toast.LENGTH_SHORT).show();
                             } else if (check == 2) {
+                                textViewMotionPercent.setText("40%");
                                 progressBar.setProgress(40,true);
                                 Toast.makeText(Gyro_Acc.this, "good2", Toast.LENGTH_SHORT).show();
                             } else if (check == 3) {
+                                textViewMotionPercent.setText("60%");
                                 progressBar.setProgress(60,true);
                                 Toast.makeText(Gyro_Acc.this, "great3", Toast.LENGTH_SHORT).show();
                             } else if (check == 4) {
+                                textViewMotionPercent.setText("80%");
                                 progressBar.setProgress(80,true);
                                 Toast.makeText(Gyro_Acc.this, "perfect4", Toast.LENGTH_SHORT).show();
                             } else if (check == 5) {
+                                textViewMotionPercent.setText("100%");
                                 progressBar.setProgress(100,true);
                                 Toast.makeText(Gyro_Acc.this, "wonderful5", Toast.LENGTH_SHORT).show();
 
