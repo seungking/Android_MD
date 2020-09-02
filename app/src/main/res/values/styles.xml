@@ -6,8 +6,8 @@
         <item name="colorAccent">@color/color_accent</item>
         <item name="colorOnSecondary">@color/color_primary</item>
         <item name="android:windowBackground">@color/window_background</item>
-        <item name="android:statusBarColor">#222222</item>
-<!--        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>-->
+        <item name="android:statusBarColor">@color/color_main1</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
         <item name="android:textViewStyle">@style/Expand.TextViewStyle</item>
 
         <!-- Layout preview complains without this :S -->
@@ -16,6 +16,16 @@
 
     <style name="Expand" />
 
+    <style nane="Theme.MyToolbar" parent="android:Theme.Holo" name="TODO">
+        <item name="android:homeAsUpIndicator">@drawable/ic_baseline_arrow_back_ios_24</item>
+        <item name="colorControlNormal">#000000</item>
+    </style>
+
+    <style name="NavigationView" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">#000000</item>
+        <item name="colorPrimaryDark">#FFFFFF</item>
+        <item name="colorAccent">#000000</item>
+    </style>
     <style name="Expand.TextViewStyle">
         <item name="android:fontFamily">@font/worksans_regular</item>
     </style>

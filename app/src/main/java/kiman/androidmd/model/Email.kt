@@ -1,7 +1,6 @@
-package kiman.androidmd
+package kiman.androidmd.model
 
 import android.graphics.Bitmap
-import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.DiffUtil
 
 typealias EmailThreadId = Long
@@ -22,7 +21,7 @@ data class Email(
     //EmailThread
     data class EmailThread(
         val id: EmailThreadId,
-        val sender: Email.Person,
+        val sender: Person,
         val subject: String,
         val emails: List<Email>,
         var active : String

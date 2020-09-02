@@ -23,9 +23,13 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kiman.androidmd.adapter.ThreadsAdapter
+import kiman.androidmd.fragment.BaseFragment
+import kiman.androidmd.model.Email
+import kiman.androidmd.service.BackPressCloseHandler
+import kiman.androidmd.service.ManagePref
+import kiman.androidmd.service.MyService
 import kotlinx.android.synthetic.main.activity_inbox.*
-import kotlinx.android.synthetic.main.activity_main.bottom_nav
-import kotlinx.android.synthetic.main.activity_main.main_pager
 import kotlinx.android.synthetic.main.activity_main_2.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -130,12 +134,14 @@ class MainActivity : AppCompatActivity(),
 //            finish()
         }
 
-        backPressCloseHandler = BackPressCloseHandler(this);
+        backPressCloseHandler =
+            BackPressCloseHandler(this);
 
         // initialize backStack with elements
         if (backStack.empty()) backStack.push(0)
 
-        backPressCloseHandler = BackPressCloseHandler(this);
+        backPressCloseHandler =
+            BackPressCloseHandler(this);
 
         //센서 켬 (여긴 왜켯지)
         mSensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -256,7 +262,8 @@ class MainActivity : AppCompatActivity(),
 
     fun startMotionCatch(){
         Log.d("log1","Start Motion Catch");
-        startService(Intent(applicationContext,MyService::class.java))
+        startService(Intent(applicationContext,
+            MyService::class.java))
 
         updatepattern()
         if(!runningservice) {

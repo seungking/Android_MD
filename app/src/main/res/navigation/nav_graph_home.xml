@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/home_dest"
-        android:name="kiman.androidmd.HomeFragment"
+        android:name="kiman.androidmd.fragment.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home">
     </fragment>

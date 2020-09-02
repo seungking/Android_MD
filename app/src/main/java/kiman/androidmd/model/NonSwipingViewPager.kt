@@ -1,4 +1,4 @@
-package kiman.androidmd
+package kiman.androidmd.model
 
 import android.content.Context
 import androidx.viewpager.widget.ViewPager

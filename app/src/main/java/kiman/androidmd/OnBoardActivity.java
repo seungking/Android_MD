@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import kiman.androidmd.adapter.ViewPagerAdapter;
+
 public class OnBoardActivity extends AppCompatActivity {
 
     private ViewPager viewPager;

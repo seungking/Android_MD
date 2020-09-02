@@ -1,4 +1,4 @@
-package kiman.androidmd;
+package kiman.androidmd.service;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,7 +8,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
 import android.util.Base64;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,8 +16,6 @@ import org.json.JSONException;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 //로커 DB 접근 클래스
 public class ManagePref extends AppCompatActivity {

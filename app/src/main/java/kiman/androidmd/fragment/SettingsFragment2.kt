@@ -1,4 +1,4 @@
-package kiman.androidmd
+package kiman.androidmd.fragment
 
 import android.content.Intent
 import android.net.Uri
@@ -10,10 +10,8 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.google.android.play.core.review.ReviewInfo
-import com.google.android.play.core.review.ReviewManager
 import com.google.android.play.core.review.ReviewManagerFactory
-import com.google.android.play.core.review.testing.FakeReviewManager
+import kiman.androidmd.R
 
 class SettingsFragment2: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

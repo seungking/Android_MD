@@ -15,4 +15,9 @@
   <color name="color_primary_purple">#BB86FC</color>
   <color name="color_example_orange">#FFB74D</color>
   <color name="color_neon_purple">#ab20fd</color>
+  <color name="color_main1">#FFFFFF</color>
+  <color name="color_main2">#2e3d62</color>
+  <color name="color_main3">#4648b7</color>
+  <color name="color_main4">#139077</color>
+  <color name="color_text">#000000</color>
 </resources>

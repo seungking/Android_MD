@@ -24,6 +24,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
+import kiman.androidmd.service.ManagePref;
+import kiman.androidmd.service.MyService;
+
 public class Gyro_Acc extends AppCompatActivity {
 
     String packageName = "";

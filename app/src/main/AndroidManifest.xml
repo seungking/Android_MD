@@ -41,7 +41,7 @@ package="kiman.androidmd">
     </activity>
 
     <service
-        android:name=".MyService"
+        android:name=".service.MyService"
         android:enabled="true"
         android:exported="true" />
 

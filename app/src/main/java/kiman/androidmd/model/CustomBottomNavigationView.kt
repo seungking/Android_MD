@@ -1,10 +1,10 @@
-package kiman.androidmd
+package kiman.androidmd.model
 
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.content.Context
 import android.util.AttributeSet
-import androidx.core.content.ContextCompat
 import android.graphics.*
+import kiman.androidmd.R
 
 
 class CustomBottomNavigationView : BottomNavigationView {
@@ -39,7 +39,7 @@ class CustomBottomNavigationView : BottomNavigationView {
 
     private fun init() {
 //        mPaint.style = Paint.Style.FILL_AND_STROKE
-        mPaint.color = Color.parseColor("#313335");
+        mPaint.color = context.getResources().getColor(R.color.color_main2, null)
         setBackgroundColor(Color.TRANSPARENT)
     }
 

@@ -33,6 +33,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import kiman.androidmd.model.AppInfo;
+import kiman.androidmd.service.ManagePref;
+
 public class AppInfoActivity extends AppCompatActivity {
     private static final String TAG = AppInfoActivity.class.getSimpleName();
     // 메뉴 KEY

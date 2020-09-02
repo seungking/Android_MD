@@ -1,8 +1,7 @@
-package kiman.androidmd;
+package kiman.androidmd.model;
 
 import android.content.pm.ApplicationInfo;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 
 import java.text.Collator;
 import java.util.Comparator;

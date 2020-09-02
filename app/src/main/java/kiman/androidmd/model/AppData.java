@@ -1,4 +1,4 @@
-package kiman.androidmd;
+package kiman.androidmd.model;
  
 import android.app.Application;
 import android.content.pm.PackageInfo;
