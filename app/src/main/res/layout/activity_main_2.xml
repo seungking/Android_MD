@@ -5,7 +5,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <kiman.androidmd.NonSwipingViewPager
+    <kiman.androidmd.model.NonSwipingViewPager
         android:id="@+id/main_pager"
         android:layout_width="match_parent"
         android:background="#ffffff"
@@ -19,15 +19,15 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
-        <kiman.androidmd.CustomBottomNavigationView
+        <kiman.androidmd.model.CustomBottomNavigationView
             android:id="@+id/bottom_nav"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#EEEEEE"
             app:itemIconTint="@color/drawer_item"
             app:itemHorizontalTranslationEnabled="true"
             android:layout_gravity="bottom"
             android:translationZ="1dp"
+            android:theme="@style/NavigationView"
             app:labelVisibilityMode="unlabeled"
             app:menu="@menu/menu_main"
             />
@@ -47,7 +47,7 @@
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#454A53"
+            android:backgroundTint="@color/color_main2"
             android:clickable="true"
             android:layout_marginBottom="7dp"
             android:layout_marginTop="7dp"

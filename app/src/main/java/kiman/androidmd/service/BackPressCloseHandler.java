@@ -1,4 +1,4 @@
-package kiman.androidmd;
+package kiman.androidmd.service;
 
 import android.app.Activity;
 import android.widget.Toast;

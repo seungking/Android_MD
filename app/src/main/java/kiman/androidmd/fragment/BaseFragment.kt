@@ -1,4 +1,4 @@
-package kiman.androidmd
+package kiman.androidmd.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.navigateUp
+import kiman.androidmd.model.rootDestinations
 
 class BaseFragment: Fragment() {
 
@@ -70,7 +71,8 @@ class BaseFragment: Fragment() {
         private const val KEY_TOOLBAR = "toolbar_key"
         private const val KEY_NAV_HOST = "nav_host_key"
 
-        fun newInstance(layoutRes: Int, toolbarId: Int, navHostId: Int) = BaseFragment().apply {
+        fun newInstance(layoutRes: Int, toolbarId: Int, navHostId: Int) = BaseFragment()
+            .apply {
             arguments = Bundle().apply {
                 putInt(KEY_LAYOUT, layoutRes)
                 putInt(KEY_TOOLBAR, toolbarId)

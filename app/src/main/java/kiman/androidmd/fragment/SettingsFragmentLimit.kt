@@ -1,7 +1,6 @@
-package kiman.androidmd
+package kiman.androidmd.fragment
 
 import android.app.AlertDialog
-import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +10,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import com.suke.widget.SwitchButton
+import kiman.androidmd.MainActivity
+import kiman.androidmd.R
 
 class SettingsFragmentLimit : Fragment() {
 

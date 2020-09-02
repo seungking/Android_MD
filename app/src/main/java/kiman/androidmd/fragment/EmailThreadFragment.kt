@@ -1,4 +1,4 @@
-package kiman.androidmd
+package kiman.androidmd.fragment
 
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
@@ -16,6 +16,10 @@ import androidx.preference.PreferenceManager
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.PublishRelay
 import com.suke.widget.SwitchButton
+import kiman.androidmd.*
+import kiman.androidmd.model.Email
+import kiman.androidmd.model.EmailThreadId
+import kiman.androidmd.service.ManagePref
 import kotlinx.android.synthetic.main.include_email_shipping_update.view.*
 import me.saket.inboxrecyclerview.globalVisibleRect
 import me.saket.inboxrecyclerview.page.ExpandablePageLayout
@@ -47,7 +51,8 @@ class EmailThreadFragment : Fragment() {
   var patterns = ArrayList<String>()
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedState: Bundle?): View? {
-    val view: View = inflater.inflate(R.layout.fragment_email_thread, container,
+    val view: View = inflater.inflate(
+        R.layout.fragment_email_thread, container,
       false)
     return view
   }
@@ -118,7 +123,8 @@ class EmailThreadFragment : Fragment() {
   private fun render(view: View, position : Int) {
 
     Log.d("Log1","render in fragment  position : "  + position);
-    val managepref : ManagePref =  ManagePref()
+    val managepref : ManagePref =
+      ManagePref()
 
     appname = managepref.getStringArrayPref(activity!!.applicationContext, "appname")
     packagename = managepref.getStringArrayPref(activity!!.applicationContext, "packagename")
@@ -159,7 +165,8 @@ class EmailThreadFragment : Fragment() {
     }
 
 
-    var view : View = View.inflate(context, R.layout.include_email_shipping_update, attachmentContainer)
+    var view : View = View.inflate(context,
+        R.layout.include_email_shipping_update, attachmentContainer)
 
     view.detail_button2.setOnClickListener {
 

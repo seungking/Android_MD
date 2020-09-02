@@ -1,4 +1,4 @@
-package kiman.androidmd
+package kiman.androidmd.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -14,9 +14,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxrelay2.PublishRelay
 import com.suke.widget.SwitchButton
+import kiman.androidmd.MainActivity
+import kiman.androidmd.service.ManagePref
+import kiman.androidmd.R
+import kiman.androidmd.model.Email
 
 
-class ThreadsAdapter : ListAdapter<Email.EmailThread, EmailViewHolder>(Email.EmailThread.ItemDiffer()) {
+class ThreadsAdapter : ListAdapter<Email.EmailThread, EmailViewHolder>(
+    Email.EmailThread.ItemDiffer()) {
 
 
   var ctx: Context? = null
@@ -52,7 +57,8 @@ class ThreadsAdapter : ListAdapter<Email.EmailThread, EmailViewHolder>(Email.Ema
     }
     holder.switch_motion_item.setOnCheckedChangeListener { CompoundButton, onSwitch ->
 
-      val managepref : ManagePref = ManagePref()
+      val managepref : ManagePref =
+        ManagePref()
       val switch : ArrayList<String> = managepref.getStringArrayPref(ctx,"switch");
 
       if (onSwitch) switch.set(position,"on");

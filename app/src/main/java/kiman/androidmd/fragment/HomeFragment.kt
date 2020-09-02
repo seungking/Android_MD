@@ -1,4 +1,4 @@
-package kiman.androidmd
+package kiman.androidmd.fragment
 
 import android.annotation.SuppressLint
 import android.graphics.Color
@@ -7,11 +7,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jakewharton.rxrelay2.PublishRelay
-import com.suke.widget.SwitchButton
+import kiman.androidmd.model.Email
+import kiman.androidmd.MainActivity
+import kiman.androidmd.service.ManagePref
+import kiman.androidmd.R
 import me.saket.inboxrecyclerview.InboxRecyclerView
 import me.saket.inboxrecyclerview.dimming.TintPainter
 import me.saket.inboxrecyclerview.page.ExpandablePageLayout
@@ -39,7 +41,8 @@ class HomeFragment : Fragment(), MainActivity.IOnBackPressed {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view: View = inflater.inflate(R.layout.activity_inbox, container,
+        val view: View = inflater.inflate(
+            R.layout.activity_inbox, container,
             false)
         recyclerView = view.findViewById(R.id.inbox_recyclerview)
         emailPageLayout = view.findViewById(R.id.inbox_email_thread_page)
@@ -68,7 +71,8 @@ class HomeFragment : Fragment(), MainActivity.IOnBackPressed {
         recyclerView!!.tintPainter = TintPainter.uncoveredArea(color = Color.WHITE, opacity = 0.65F)
 
         Log.d("Log1","setupthreadlist");
-        val managepref : ManagePref =  ManagePref()
+        val managepref : ManagePref =
+            ManagePref()
 
         var appname = ArrayList<String>()
         var packagename = ArrayList<String>()
@@ -84,16 +88,23 @@ class HomeFragment : Fragment(), MainActivity.IOnBackPressed {
         patterns = managepref.getStringArrayPref(activity!!.applicationContext, "patterns")
 
         for( i in 0 until (appname.size) ){
-            var temp : Email.EmailThread = Email.EmailThread(
-                id = 0,
-                sender = Email.Person("MOTION 1", managepref.StringToBitmap(appicon.get(i))),
-                subject = appname.get(i),
-                emails = listOf(
-                    Email(
-                        excerpt = date.get(i),
-                        body = "MOTION 1",
-                        timestamp = packagename.get(i))),
-                active = switch.get(i))
+            var temp : Email.EmailThread =
+                Email.EmailThread(
+                    id = 0,
+                    sender = Email.Person(
+                        "MOTION 1",
+                        managepref.StringToBitmap(appicon.get(i))
+                    ),
+                    subject = appname.get(i),
+                    emails = listOf(
+                        Email(
+                            excerpt = date.get(i),
+                            body = "MOTION 1",
+                            timestamp = packagename.get(i)
+                        )
+                    ),
+                    active = switch.get(i)
+                )
             (activity as MainActivity).list.add(temp)
         }
         Log.d("Log1","list size : " + (activity as MainActivity).list.size)

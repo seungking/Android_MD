@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
@@ -8,101 +8,152 @@
     android:orientation="vertical"
     tools:context=".Gyro_Acc">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/add_motion_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.7" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="15dp"
+        android:src="@drawable/ic_baseline_arrow_back_ios_24"/>
+
+    <TextView
+        android:id="@+id/addyourmotion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Add Your Motion"
+        android:textSize="25dp"
+        android:fontFamily="@font/worksans_regular"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="15dp"/>
+
+    <com.tt.whorlviewlibrary.WhorlView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/onprogress"
+        android:layout_width="1dp"
+        android:visibility="invisible"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        app:whorlview_circle_colors="#F14336_#ffffff_#5677fc_#F44336_#4CAF50"
+        app:whorlview_circle_speed="270"
+        app:whorlview_parallax="fast"
+        app:whorlview_strokeWidth="6"
+        app:layout_constraintTop_toBottomOf="@+id/add_motion_progress"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:whorlview_sweepAngle="90">
+    </com.tt.whorlviewlibrary.WhorlView>
+
+    <ProgressBar
+        android:clickable="true"
+        android:id="@+id/add_motion_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="270dp"
+        android:layout_height="270dp"
+        android:indeterminate="false"
+        android:progressDrawable="@drawable/circular_progress_bar"
+        android:background="@drawable/circular_shape"
+        android:backgroundTint="@color/colorLightGrey"
+        android:progress="0"
+        app:layout_constraintTop_toBottomOf="@+id/addyourmotion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        android:max="100"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Add Your Motion"
+        android:textSize="25dp"
+        android:fontFamily="@font/worksans_semibold"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="15dp"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="8.3"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/onprogress"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/onprogress"
+        android:gravity="center">
 
-        <com.tt.whorlviewlibrary.WhorlView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/onprogress"
-            android:layout_width="1dp"
-            android:visibility="invisible"
-            android:layout_height="1dp"
-            android:layout_marginTop="12dp"
-            app:whorlview_circle_colors="#F14336_#ffffff_#5677fc_#F44336_#4CAF50"
-            app:whorlview_circle_speed="270"
-            app:whorlview_parallax="fast"
-            app:whorlview_strokeWidth="6"
-            app:whorlview_sweepAngle="90">
-        </com.tt.whorlviewlibrary.WhorlView>
-
-        <ProgressBar
-            android:clickable="true"
-            android:id="@+id/add_motion_progress"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="350dp"
-            android:layout_height="350dp"
-            android:indeterminate="false"
-            android:progressDrawable="@drawable/circular_progress_bar"
-            android:background="@drawable/circular_shape"
-            android:backgroundTint="@color/colorLightGrey"
-            android:progress="0"
-            android:max="100"/>
-
-        <Button
-            android:text="CLEAR"
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/add_clear_ga"/>
+            android:src="@drawable/ic_baseline_arrow_back_ios_24"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Progress"
+            android:fontFamily="@font/worksans_regular"
+            android:textSize="20dp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3/5"
+            android:fontFamily="@font/worksans_semibold"
+            android:textSize="15dp"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/onprogress"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@+id/onprogress"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Progress"
+            android:fontFamily="@font/worksans_regular"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3/5"
+            android:fontFamily="@font/worksans_semibold"
+            android:textSize="15dp"/>
+
     </LinearLayout>
 
-</LinearLayout>
+    <Button
+        android:text="CLEAR"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="100dp"
+        android:textColor="#000000"
+        android:backgroundTint="#727272"
+        android:id="@+id/add_clear_ga"/>
 
-    <!--<?xml version="1.0" encoding="utf-8"?>-->
-    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--    xmlns:tools="http://schemas.android.com/tools"-->
-    <!--    android:layout_width="match_parent"-->
-    <!--    android:layout_height="match_parent"-->
-    <!--    android:orientation="vertical">-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@+id/add_motion_progress"
+        app:layout_constraintStart_toStartOf="@+id/add_motion_progress"
+        app:layout_constraintEnd_toEndOf="@+id/add_motion_progress"
+        app:layout_constraintBottom_toBottomOf="@+id/add_motion_progress"
+        android:text="0%"
+        android:fontFamily="@font/worksans_medium"
+        android:textSize="100dp"/>
 
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:orientation="horizontal">-->
 
-    <!--        <LinearLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:orientation="vertical"-->
-    <!--            android:layout_marginTop="20dp"-->
-    <!--            android:layout_weight="1">-->
-
-    <!--            <Button-->
-    <!--                android:id="@+id/add_ga"-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="60dp"-->
-    <!--                android:layout_marginTop="20dp"-->
-    <!--                android:layout_gravity="center"-->
-    <!--                android:text="add" />-->
-
-    <!--            <Button-->
-    <!--                android:id="@+id/add_clear_ga"-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="60dp"-->
-    <!--                android:layout_gravity="center"-->
-    <!--                android:text="clear" />-->
-    <!--        </LinearLayout>-->
-
-    <!--    -->
-    <!--    </LinearLayout>-->
-    <!--</LinearLayout>-->
+</androidx.constraintlayout.widget.ConstraintLayout>

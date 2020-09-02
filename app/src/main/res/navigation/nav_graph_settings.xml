@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/settings_dest"
-        android:name="kiman.androidmd.SettingsFragment2"
+        android:name="kiman.androidmd.fragment.SettingsFragment2"
         android:label="Settings">
         <action
             android:id="@+id/action_appInfor_settings"
@@ -24,22 +24,11 @@
     </fragment>
     <fragment
         android:id="@+id/limit_settings_dest"
-        android:name="kiman.androidmd.SettingsFragmentLimit"
+        android:name="kiman.androidmd.fragment.SettingsFragmentLimit"
         android:label="Limit Settings" />
     <fragment
         android:id="@+id/appInfor_settings_dest"
-        android:name="kiman.androidmd.SettingsFragmentInfor"
+        android:name="kiman.androidmd.fragment.SettingsFragmentInfor"
         android:label="App Information">
-        <action
-            android:id="@+id/action_example"
-            app:destination="@id/example_dest"
-            app:enterAnim="@animator/slide_from_right"
-            app:exitAnim="@animator/slide_to_left"
-            app:popEnterAnim="@animator/slide_from_left"
-            app:popExitAnim="@animator/slide_to_right" />
     </fragment>
-    <fragment
-        android:id="@+id/example_dest"
-        android:name="kiman.androidmd.SettingsFragmentExamples"
-        android:label="Examples" />
 </navigation>
