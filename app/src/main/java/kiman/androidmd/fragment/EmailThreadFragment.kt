@@ -70,17 +70,27 @@ class EmailThreadFragment : Fragment() {
     }
 
     emailThreadPage.pullToCollapseInterceptor = { downX, downY, upwardPull ->
+//      if (scrollableContainer.globalVisibleRect().contains(downX, downY).not()) {
+//        Log.d("Log1","emailthread1");
+//        InterceptResult.IGNORED
+//      } else {
+//        Log.d("Log1","emailthread2");
+//        val directionInt = if (upwardPull) +1 else -1
+//        val canScrollFurther = scrollableContainer.canScrollVertically(directionInt)
+//        when {
+//          canScrollFurther -> InterceptResult.INTERCEPTED
+//          else -> InterceptResult.IGNORED
+//        }
+//      }
       if (scrollableContainer.globalVisibleRect().contains(downX, downY).not()) {
-        Log.d("Log1","emailthread1");
         InterceptResult.IGNORED
-      } else {
-        Log.d("Log1","emailthread2");
-        val directionInt = if (upwardPull) +1 else -1
-        val canScrollFurther = scrollableContainer.canScrollVertically(directionInt)
-        when {
-          canScrollFurther -> InterceptResult.INTERCEPTED
-          else -> InterceptResult.IGNORED
-        }
+      }
+
+      val directionInt = if (upwardPull) +1 else -1
+      val canScrollFurther = scrollableContainer.canScrollVertically(directionInt)
+      when {
+        canScrollFurther -> InterceptResult.INTERCEPTED
+        else -> InterceptResult.IGNORED
       }
     }
 

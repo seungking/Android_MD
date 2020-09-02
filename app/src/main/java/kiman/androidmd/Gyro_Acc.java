@@ -112,6 +112,8 @@ public class Gyro_Acc extends AppCompatActivity {
         mGyroscopeSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
         mAccelerometer= mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
+        final TextView textViewMotionPercent = (TextView) findViewById(R.id.textView_motion_percent);
+
         //클리어
         final Button addclear = (Button) findViewById(R.id.add_clear_ga);
         addclear.setOnClickListener(new View.OnClickListener() {
@@ -121,11 +123,11 @@ public class Gyro_Acc extends AppCompatActivity {
                 Store_a.clear();
                 check=0;
                 progressBar.setProgress(0);
+                textViewMotionPercent.setText("20%");
             }
         });
 
         //애드 버튼 눌렀을때
-        final TextView textViewMotionPercent = (TextView) findViewById(R.id.textView_motion_percent);
         findViewById(R.id.add_motion_progress).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
