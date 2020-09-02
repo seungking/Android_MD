@@ -170,11 +170,11 @@ class MainActivity : AppCompatActivity(),
         super.onResume()
         Log.d("log1","main resume!!")
 
-        // setup main view pager
-        main_pager.addOnPageChangeListener(this)
-        main_pager.adapter = ViewPagerAdapter()
-        main_pager.post(this::checkDeepLink)
-        main_pager.offscreenPageLimit = fragments.size
+//        // setup main view pager
+//        main_pager.addOnPageChangeListener(this)
+//        main_pager.adapter = ViewPagerAdapter()
+//        main_pager.post(this::checkDeepLink)
+//        main_pager.offscreenPageLimit = fragments.size
 
         val pref: SharedPreferences = PreferenceManager
             .getDefaultSharedPreferences(this)
@@ -184,6 +184,8 @@ class MainActivity : AppCompatActivity(),
             runningservice = true;
         }
     }
+
+
 
     override fun onBackPressed() {
         if(inbox_recyclerview.expandedItem.viewIndex==0) inbox_recyclerview.collapse()
@@ -423,6 +425,7 @@ class MainActivity : AppCompatActivity(),
 
     override fun onPause() {
         super.onPause()
+        // setup main view pager
     }
 
     fun startInnerFunction(packagename : String){

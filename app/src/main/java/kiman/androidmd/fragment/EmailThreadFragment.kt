@@ -16,6 +16,7 @@ import androidx.preference.PreferenceManager
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.PublishRelay
 import com.suke.widget.SwitchButton
+import de.hdodenhof.circleimageview.CircleImageView
 import kiman.androidmd.*
 import kiman.androidmd.model.Email
 import kiman.androidmd.model.EmailThreadId
@@ -36,8 +37,8 @@ class EmailThreadFragment : Fragment() {
   private val avatarImageView by lazy { view!!.findViewById<ImageView>(R.id.emailthread_avatar) }
   private val bodyTextView by lazy { view!!.findViewById<TextView>(R.id.emailthread_body) }
   private val collapseButton by lazy { view!!.findViewById<ImageButton>(R.id.emailthread_collapse) }
-  private val attachmentContainer by lazy { view!!.findViewById<ViewGroup>(R.id.emailthread_attachment_container) }
-  private val switch_motion_fg by lazy { view!!.findViewById<SwitchButton>(R.id.switch_motion_fg) }
+  val attachmentContainer by lazy { view!!.findViewById<ViewGroup>(R.id.emailthread_attachment_container) }
+  private val switch_motion_fg by lazy { view!!.findViewById<CircleImageView>(R.id.switch_motion_fg) }
   private val remove_button by lazy { view!!.findViewById<ImageView>(R.id.detail_button2) }
 
   private val threadIds = BehaviorRelay.create<EmailThreadId>()
@@ -60,9 +61,9 @@ class EmailThreadFragment : Fragment() {
   override fun onViewCreated(view: View, savedState: Bundle?) {
     super.onViewCreated(view, savedState)
 
-    if (savedState != null) {
-      onRestoreInstanceState(savedState)
-    }
+//    if (savedState != null) {
+//      onRestoreInstanceState(savedState)
+//    }
 
     collapseButton.setOnClickListener {
       requireActivity().onBackPressed()
@@ -93,7 +94,7 @@ class EmailThreadFragment : Fragment() {
 
   override fun onDestroyView() {
     Log.d("Log1","emailthread4");
-    onDestroys.accept(Any())
+//    onDestroys.accept(Any())
     super.onDestroyView()
   }
 
@@ -140,34 +141,22 @@ class EmailThreadFragment : Fragment() {
     bodyTextView.text = date.get(position)
     avatarImageView.setImageBitmap(managepref.StringToBitmap(appicon.get(position)))
 
-    attachmentContainer.removeAllViews()
+//    attachmentContainer.removeAllViews()
+
 
     if(switch.get(position)=="on") {
-      switch_motion_fg.setChecked(true)
-    };
-    else {
-      switch_motion_fg.setChecked(false)
-    };
-
-    switch_motion_fg.setOnCheckedChangeListener { CompoundButton, onSwitch ->
-      if (onSwitch) {
-        switch.set(position,"on")
-        (activity as MainActivity).threadsAdapter.changeswitch(position,"on")
-      };
-      else {
-        switch.set(position,"off")
-        (activity as MainActivity).threadsAdapter.changeswitch(position,"off")
-      };
-
-      managepref.setStringArrayPref(activity!!.applicationContext, "switch", switch)
-
-      (activity as MainActivity).updatepattern()
+      switch_motion_fg.setImageResource(R.drawable.ic_030_confirm);
+    }
+    else{
+      switch_motion_fg.setImageResource(R.drawable.ic_029_delete);
     }
 
-
+    Log.d("Log1","render 2");
     var view : View = View.inflate(context,
         R.layout.include_email_shipping_update, attachmentContainer)
 
+    if(view==null)
+      Log.d("Log1","render view null");
     view.detail_button2.setOnClickListener {
 
       requireActivity().onBackPressed()
