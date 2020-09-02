@@ -22,11 +22,11 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:text="Add Your Motion"
         android:textSize="25dp"
-        android:fontFamily="@font/worksans_regular"
-        android:layout_marginTop="60dp"
-        android:layout_marginStart="15dp"/>
+        android:fontFamily="@font/worksans_semibold"
+        android:layout_marginTop="60dp" />
 
     <com.tt.whorlviewlibrary.WhorlView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/onprogress"
@@ -34,7 +34,7 @@
         android:visibility="invisible"
         android:layout_height="1dp"
         android:layout_marginTop="12dp"
-        app:whorlview_circle_colors="#F14336_#ffffff_#5677fc_#F44336_#4CAF50"
+        app:whorlview_circle_colors="#0064AB_#007DD6_#3297DE_#66B1E6_#99CBEE"
         app:whorlview_circle_speed="270"
         app:whorlview_parallax="fast"
         app:whorlview_strokeWidth="6"
@@ -60,17 +60,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp"
         android:max="100"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="Add Your Motion"
-        android:textSize="25dp"
-        android:fontFamily="@font/worksans_semibold"
-        android:layout_marginTop="60dp"
-        android:layout_marginStart="15dp"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -145,6 +134,7 @@
         android:id="@+id/add_clear_ga"/>
 
     <TextView
+        android:id="@+id/textView_motion_percent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@+id/add_motion_progress"
@@ -153,7 +143,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/add_motion_progress"
         android:text="0%"
         android:fontFamily="@font/worksans_medium"
-        android:textSize="100dp"/>
+        android:textSize="80dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
