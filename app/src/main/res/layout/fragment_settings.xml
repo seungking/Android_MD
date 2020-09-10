@@ -1,274 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/color_main1"
-    >
+    android:layout_height="match_parent">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        />
+
     <LinearLayout
-        android:id="@+id/cat_motionLimit"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:weightSum="10"
         android:orientation="vertical"
-        android:clickable="true"
-        android:focusable="true"
-        android:paddingBottom="7dp"
-        android:background="?android:attr/selectableItemBackground"
-        >
+        tools:ignore="RtlCompat">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/relative"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:background="@color/color_blue"
+            android:layout_height="0dp"
+            android:layout_weight="1.5">
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/ic_lock_black_24dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="7"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_weight="13"
-                android:fontFamily="@font/worksans_bold"
-                android:text="@string/frag_settings_limit"
-                android:textSize="8pt" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/cat_motionLimit"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:background="@drawable/corners_setting"
+                android:gravity="center"
+                android:clickable="true"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/cat_appInfor"
+                app:layout_constraintBottom_toTopOf="@+id/cat_review">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/ic_navigate_next_black_24dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_lock_black_24dp"/>
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/g_medium"
+                    android:text="동작 수정" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/cat_appInfor"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:clickable="true"
+                android:background="@drawable/corners_setting"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cat_motionLimit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/cat_feedback">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:id="@+id/cat_appInfor_img"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_help_center_black_24dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/g_medium"
+                    android:id="@+id/cat_appInfor_text"
+                    android:text="소리 ON"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/cat_review"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:clickable="true"
+                android:background="@drawable/corners_setting"
+                app:layout_constraintTop_toBottomOf="@+id/cat_motionLimit"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/cat_donation"
+                app:layout_constraintEnd_toStartOf="@id/cat_feedback">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_grading_black_24dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/g_medium"
+                    android:text="리뷰 작성"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/cat_feedback"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:clickable="true"
+                android:background="@drawable/corners_setting"
+                app:layout_constraintTop_toBottomOf="@+id/cat_appInfor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/cat_not"
+                app:layout_constraintStart_toEndOf="@+id/cat_review">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_feedback_black_24dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/g_medium"
+                    android:text="개발자를 위한 기부함"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/cat_donation"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:clickable="true"
+                android:background="@drawable/corners_setting"
+                app:layout_constraintTop_toBottomOf="@+id/cat_review"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/cat_not">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_grading_black_24dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/g_medium"
+                    android:text="리뷰 작성"/>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/cat_not"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:clickable="true"
+                android:background="@drawable/corners_setting"
+                app:layout_constraintTop_toBottomOf="@+id/cat_feedback"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cat_donation">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_feedback_black_24dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/g_medium"
+                    android:text="개발자를 위한 기부함"/>
+
+
+            </LinearLayout>
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        />
-    <LinearLayout
-        android:id="@+id/cat_appInfor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:clickable="true"
-        android:focusable="true"
-        android:paddingBottom="7dp"
-        android:background="?android:attr/selectableItemBackground">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/ic_help_center_black_24dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_weight="13"
-                android:fontFamily="@font/worksans_bold"
-                android:text="@string/frag_settings_appInfor"
-                android:textSize="8pt" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/ic_navigate_next_black_24dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        />
-    <LinearLayout
-        android:id="@+id/cat_review"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:clickable="true"
-        android:focusable="true"
-        android:paddingBottom="7dp"
-        android:background="?android:attr/selectableItemBackground">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/ic_grading_black_24dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_weight="13"
-                android:fontFamily="@font/worksans_bold"
-                android:text="@string/frag_settings_review"
-                android:textSize="8pt" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/ic_navigate_next_black_24dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        />
-    <LinearLayout
-        android:id="@+id/cat_feedback"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:clickable="true"
-        android:focusable="true"
-        android:paddingBottom="7dp"
-        android:background="?android:attr/selectableItemBackground">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/ic_feedback_black_24dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_weight="13"
-                android:fontFamily="@font/worksans_bold"
-                android:text="@string/frag_settings_feedback"
-                android:textSize="8pt" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/ic_navigate_next_black_24dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        />
-    <LinearLayout
-        android:id="@+id/cat_donation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:clickable="true"
-        android:focusable="true"
-        android:paddingBottom="7dp"
-        android:background="?android:attr/selectableItemBackground">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/ic_attach_money_black_24dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_weight="13"
-                android:fontFamily="@font/worksans_bold"
-                android:text="@string/frag_settings_donation"
-                android:textSize="8pt" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/ic_navigate_next_black_24dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        />
 </LinearLayout>

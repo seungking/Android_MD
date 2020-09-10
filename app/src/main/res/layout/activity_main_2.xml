@@ -1,64 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+<LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
+    android:orientation="vertical"
+    android:weightSum="10"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <kiman.androidmd.model.NonSwipingViewPager
         android:id="@+id/main_pager"
         android:layout_width="match_parent"
+        android:layout_weight="8"
         android:background="#ffffff"
-        android:layout_height="match_parent" />
-
-    <FrameLayout
-        android:id="@+id/layout_bottom"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-
-        <kiman.androidmd.model.CustomBottomNavigationView
-            android:id="@+id/bottom_nav"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:itemIconTint="@color/drawer_item"
-            app:itemHorizontalTranslationEnabled="true"
-            android:layout_gravity="bottom"
-            android:translationZ="1dp"
-            android:theme="@style/NavigationView"
-            app:labelVisibilityMode="unlabeled"
-            app:menu="@menu/menu_main"
-            />
-
-    </FrameLayout>
+        android:layout_height="0dp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_bottom_2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp">
+        <FrameLayout
+            android:id="@+id/layout_bottom"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/color_main2"
-            android:clickable="true"
-            android:layout_marginBottom="7dp"
-            android:layout_marginTop="7dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:src="@drawable/ic_baseline_add_24"
-            app:backgroundTint="#00FFFFFF"
-            android:tint="#ffffff"
-            android:padding="3dp"
-            app:rippleColor="#ffffff" />
+            app:layout_constraintRight_toRightOf="parent">
 
+            <kiman.androidmd.model.CustomBottomNavigationView
+                android:id="@+id/bottom_nav"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:itemHorizontalTranslationEnabled="true"
+                android:layout_gravity="bottom"
+                android:translationZ="1dp"
+                android:theme="@style/NavigationView"
+                app:labelVisibilityMode="unlabeled"
+                app:menu="@menu/menu_main"
+                />
+
+        </FrameLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_bottom_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:backgroundTint="@color/color_blue"
+                android:clickable="true"
+                android:layout_marginBottom="7dp"
+                android:layout_marginTop="7dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:src="@drawable/ic_baseline_add_24"
+                app:fabCustomSize="45dp"
+                app:backgroundTint="#00FFFFFF"
+                android:tint="#ffffff"
+                android:padding="3dp"
+                app:rippleColor="#ffffff" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

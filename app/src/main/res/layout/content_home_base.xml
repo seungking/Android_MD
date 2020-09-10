@@ -16,48 +16,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:titleTextColor="#FFFFFF" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/color_main1"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_home"
-        android:id="@+id/toolbar_home1">
-
-        <TextView
-            android:layout_marginTop="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/color_text"
-            android:text="Motion List"
-            android:layout_marginStart="15dp"
-            android:textSize="25dp"
-            android:fontFamily="@font/worksans_semibold"
-            android:layout_gravity="bottom"/>
-
-        <View
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:layout_width="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_height="1dp"
-            android:background="#666666"
-            />
-
-    </LinearLayout>
-
     <fragment
         android:id="@+id/nav_host_home"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_home1"
         app:navGraph="@navigation/nav_graph_home" />
 
 

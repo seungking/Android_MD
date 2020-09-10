@@ -25,7 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:text="Add Your Motion"
         android:textSize="25dp"
-        android:fontFamily="@font/worksans_semibold"
+        android:fontFamily="@font/g_bold"
         android:layout_marginTop="60dp" />
 
     <com.tt.whorlviewlibrary.WhorlView xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -54,7 +54,7 @@
         android:progressDrawable="@drawable/circular_progress_bar"
         android:background="@drawable/circular_shape"
         android:backgroundTint="@color/colorLightGrey"
-        android:progress="0"
+        android:progress="40"
         app:layout_constraintTop_toBottomOf="@+id/addyourmotion"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -73,20 +73,22 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_arrow_back_ios_24"/>
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/ic_baseline_sync_alt_24"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Progress"
-            android:fontFamily="@font/worksans_regular"
+            android:text="Completed"
+            android:fontFamily="@font/g_medium"
+            android:layout_marginBottom="5dp"
             android:textSize="20dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="3/5"
-            android:fontFamily="@font/worksans_semibold"
+            android:fontFamily="@font/g_medium"
             android:textSize="15dp"/>
 
     </LinearLayout>
@@ -103,35 +105,38 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:src="@drawable/ic_baseline_arrow_back_ios_24"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Progress"
-            android:fontFamily="@font/worksans_regular"
+            android:fontFamily="@font/g_medium"
+            android:layout_marginBottom="5dp"
             android:textSize="20dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="3/5"
-            android:fontFamily="@font/worksans_semibold"
+            android:fontFamily="@font/g_medium"
             android:textSize="15dp"/>
+
 
     </LinearLayout>
 
-    <Button
-        android:text="CLEAR"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="100dp"
-        android:textColor="#000000"
-        android:backgroundTint="#727272"
-        android:id="@+id/add_clear_ga"/>
+<!--    <Button-->
+<!--        android:text="CLEAR"-->
+<!--        android:layout_width="250dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        android:layout_marginBottom="100dp"-->
+<!--        android:textColor="#000000"-->
+<!--        android:backgroundTint="#727272"-->
+<!--        android:id="@+id/add_clear_ga"/>-->
 
     <TextView
         android:id="@+id/textView_motion_percent"
@@ -141,9 +146,32 @@
         app:layout_constraintStart_toStartOf="@+id/add_motion_progress"
         app:layout_constraintEnd_toEndOf="@+id/add_motion_progress"
         app:layout_constraintBottom_toBottomOf="@+id/add_motion_progress"
-        android:text="0%"
-        android:fontFamily="@font/worksans_medium"
+        android:text="40%"
+        android:fontFamily="@font/g_light"
         android:textSize="80dp"/>
+
+
+    <stream.custombutton.CustomButton
+        android:id="@+id/play_show"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"
+        android:singleLine="true"
+        android:ellipsize="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="80dp"
+        app:btn_cornerRadius="20dp"
+        android:text="Reset"
+        app:btn_strokeWidth="1dp"
+        app:btn_buttonColor="#00ffffff"
+        app:btn_buttonSelectColor="#000000"
+        app:btn_strokeColor="#000000"
+        app:btn_strokeSelectColor="#000000"
+        app:btn_textColor="#000000"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
