@@ -25,10 +25,25 @@
     <fragment
         android:id="@+id/limit_settings_dest"
         android:name="kiman.androidmd.fragment.SettingsFragmentLimit"
-        android:label="Limit Settings" />
+        android:label="Limit Settings" >
+        <action
+            android:id="@+id/action_back1"
+            app:destination="@id/settings_dest"
+            app:enterAnim="@animator/slide_from_left"
+            app:exitAnim="@animator/slide_to_right"
+            app:popEnterAnim="@animator/slide_from_right"
+            app:popExitAnim="@animator/slide_to_left" />
+    </fragment>
     <fragment
         android:id="@+id/appInfor_settings_dest"
         android:name="kiman.androidmd.fragment.SettingsFragmentInfor"
         android:label="App Information">
+        <action
+            android:id="@+id/action_back2"
+            app:destination="@id/settings_dest"
+            app:enterAnim="@animator/slide_from_left"
+            app:exitAnim="@animator/slide_to_right"
+            app:popEnterAnim="@animator/slide_from_right"
+            app:popExitAnim="@animator/slide_to_left" />
     </fragment>
 </navigation>

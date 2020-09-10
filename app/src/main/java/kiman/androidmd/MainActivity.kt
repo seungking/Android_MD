@@ -15,14 +15,17 @@ import android.hardware.camera2.CameraManager
 import android.media.AudioManager
 import android.net.wifi.WifiManager
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.MenuItem
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kiman.androidmd.adapter.ThreadsAdapter
 import kiman.androidmd.fragment.BaseFragment
@@ -32,7 +35,7 @@ import kiman.androidmd.service.BackPressCloseHandler
 import kiman.androidmd.service.ManagePref
 import kiman.androidmd.service.MyService
 import kotlinx.android.synthetic.main.activity_inbox.*
-import kotlinx.android.synthetic.main.activity_main_2.*
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -57,6 +60,8 @@ class MainActivity : AppCompatActivity(),
     val indexToPage = mapOf(0 to R.id.home, 1 to R.id.settings)
     var list = mutableListOf<Email.EmailThread>();
     val threadsAdapter = ThreadsAdapter()
+    lateinit var setting_back : ImageView
+
 
     var packagename = ArrayList<String>()
     var mpackagename = ArrayList<String>()
@@ -115,9 +120,20 @@ class MainActivity : AppCompatActivity(),
 
     private var backPressCloseHandler: BackPressCloseHandler? = null
 
+    lateinit var mAdView : AdView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_2)
+        setContentView(R.layout.activity_main)
+
+
+        //banner
+        MobileAds.initialize(this) {}
+
+        mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+        //
 
         // setup main view pager
         main_pager.addOnPageChangeListener(this)
@@ -128,6 +144,8 @@ class MainActivity : AppCompatActivity(),
         // set bottom nav
         bottom_nav.setOnNavigationItemSelectedListener(this)
         bottom_nav.setOnNavigationItemReselectedListener(this)
+        setting_back = findViewById(R.id.setting_back)
+
 
         fab.setOnClickListener {
             stopMotionCatch()

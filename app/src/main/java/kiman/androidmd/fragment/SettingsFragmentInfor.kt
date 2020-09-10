@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import kiman.androidmd.BuildConfig
+import kiman.androidmd.MainActivity
 import kiman.androidmd.R
 
 
@@ -28,7 +30,10 @@ class SettingsFragmentInfor : Fragment() {
             val intent = Intent(Intent.ACTION_VIEW, uri)
             startActivity(intent)
         }
-
+        (activity as MainActivity).setting_back.setOnClickListener{
+            view.findNavController().navigate(R.id.action_back2)
+            (activity as MainActivity).setting_back.visibility = View.INVISIBLE;
+        }
         return view
     }
 

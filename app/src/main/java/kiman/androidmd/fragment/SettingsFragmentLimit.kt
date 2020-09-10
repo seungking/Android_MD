@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.preference.PreferenceManager
 import com.suke.widget.SwitchButton
 import kiman.androidmd.MainActivity
@@ -59,7 +60,10 @@ class SettingsFragmentLimit : Fragment() {
                 (activity as MainActivity).stopMotionCatch()
             }
         }
-
+        (activity as MainActivity).setting_back.setOnClickListener{
+            view.findNavController().navigate(R.id.action_back1)
+            (activity as MainActivity).setting_back.visibility = View.INVISIBLE;
+        }
         return view
     }
 

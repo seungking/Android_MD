@@ -72,4 +72,7 @@ dependencies {
     implementation 'com.airbnb.android:lottie:3.4.2'
     implementation 'com.github.searchy2:CustomButton:1.9.1'
     implementation 'com.github.GrenderG:Toasty:1.5.0'
+
+    implementation 'com.google.android.gms:play-services-ads:19.3.0'
+    implementation 'com.github.Cutta:ContinuousScrollableImageView:1.0'
 }

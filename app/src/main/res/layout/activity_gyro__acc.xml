@@ -5,12 +5,14 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:weightSum="10"
+    android:layout_margin="20dp"
     android:orientation="vertical"
     tools:context=".Gyro_Acc">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="25dp"
+        android:id="@+id/gyro_back"
+        android:layout_height="25dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="15dp"
@@ -80,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Completed"
-            android:fontFamily="@font/g_medium"
+            android:fontFamily="@font/g_bold"
             android:layout_marginBottom="5dp"
             android:textSize="20dp"/>
 
@@ -112,7 +114,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Progress"
-            android:fontFamily="@font/g_medium"
+            android:fontFamily="@font/g_bold"
             android:layout_marginBottom="5dp"
             android:textSize="20dp"/>
 
@@ -146,13 +148,12 @@
         app:layout_constraintStart_toStartOf="@+id/add_motion_progress"
         app:layout_constraintEnd_toEndOf="@+id/add_motion_progress"
         app:layout_constraintBottom_toBottomOf="@+id/add_motion_progress"
-        android:text="40%"
-        android:fontFamily="@font/g_light"
-        android:textSize="80dp"/>
+        android:text="0%"
+        android:fontFamily="@font/g_bold"
+        android:textSize="65dp"/>
 
 
     <stream.custombutton.CustomButton
-        android:id="@+id/play_show"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
@@ -165,7 +166,8 @@
         android:layout_marginBottom="80dp"
         app:btn_cornerRadius="20dp"
         android:text="Reset"
-        app:btn_strokeWidth="1dp"
+        android:fontFamily="@font/g_bold"
+        app:btn_strokeWidth="1.5dp"
         app:btn_buttonColor="#00ffffff"
         app:btn_buttonSelectColor="#000000"
         app:btn_strokeColor="#000000"

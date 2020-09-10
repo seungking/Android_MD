@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical"
@@ -8,17 +8,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/nav_const"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/setting_back"
+            android:visibility="invisible"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            app:layout_constraintTop_toTopOf="@+id/main_logo"
+            app:layout_constraintBottom_toBottomOf="@+id/main_logo"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="15dp"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24"/>
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/main_logo"
             android:src="@drawable/logo"
             android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"
@@ -27,23 +48,54 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     <kiman.androidmd.model.NonSwipingViewPager
         android:id="@+id/main_pager"
         android:layout_width="match_parent"
         android:layout_weight="8"
         android:background="#ffffff"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_height="0dp" />
 
+    </LinearLayout>
+
+
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/nav_const"
+        ads:adSize="BANNER"
+        android:layout_margin="10dp"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+    </com.google.android.gms.ads.AdView>
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/nav_const"
         android:layout_width="match_parent"
         android:layout_weight="1"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_height="0dp">
+
         <FrameLayout
-            android:id="@+id/layout_bottom"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
+            android:background="#ffffff"
             app:layout_constraintRight_toRightOf="parent">
 
             <kiman.androidmd.model.CustomBottomNavigationView
@@ -61,7 +113,6 @@
         </FrameLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_bottom_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -88,5 +139,7 @@
                 app:rippleColor="#ffffff" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

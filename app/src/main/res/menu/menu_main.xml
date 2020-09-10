@@ -6,7 +6,6 @@
         android:icon="@drawable/ic_baseline_storage_24"
         android:title="@string/title_home" />
     <item
-        android:id="@+id/empty"
         android:title=""
         android:enabled="false"
         android:checkable="false" />

@@ -3,7 +3,6 @@
     <string name="app_name">Android_MD</string>
     <string name="title_home">홈</string>
     <string name="title_settings">설정</string>
-    <string name="title_search">검색</string>
     <string name="VPA_titles_1">권한 설정</string>
     <string name="VPA_titles_2">앱 선택</string>
     <string name="VPA_titles_3">나만의 모션 설정</string>
@@ -14,13 +13,15 @@
     <string name="VPA_descs_4">설정이 완료되었습니다! 자유롭게 EXEMO를 이용해보세요!</string>
     <string name="app_infor_appList">실행 가능한 앱 리스트</string>
     <string name="app_infor_fList">기능 리스트</string>
+    <string name="frag_settings_limit_num_title">실행 가능 동작 갯수 제한</string>
+    <string name="frag_settings_limit_back_title">백그라운드 실행</string>
+    <string name="frag_settings_limit_num">실행 가능한 동작의 갯수를 5개로 제한합니다.</string>
+    <string name="frag_settings_limit_back">백그라운드에서 EXEMO가 동작합니다.</string>
     <string name="frag_settings_limit">동작 제한</string>
     <string name="frag_settings_appInfor">앱 정보</string>
     <string name="frag_settings_review">리뷰 작성</string>
     <string name="frag_settings_feedback">피드백</string>
     <string name="frag_settings_donation">기부하기</string>
-    <string name="frag_settings_limit_num_title">실행 가능 동작 갯수 제한</string>
-    <string name="frag_settings_limit_back_title">백그라운드 실행</string>
-    <string name="frag_settings_limit_num">실행 가능한 동작의 갯수를 5개로 제한합니다.</string>
-    <string name="frag_settings_limit_back">백그라운드에서 EXEMO가 동작합니다.</string>
+
 </resources>
+

@@ -11,21 +11,25 @@ import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.android.play.core.review.ReviewManagerFactory
+import kiman.androidmd.MainActivity
 import kiman.androidmd.R
 
 class SettingsFragment2: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
 
+
         val cat_motionLimit = view.findViewById<LinearLayout>(R.id.cat_motionLimit)
         val cat_appInfor = view.findViewById<LinearLayout>(R.id.cat_appInfor)
         cat_motionLimit?.setOnClickListener {view->
             Log.d("cat_motionLimit", "Activating")
             view.findNavController().navigate(R.id.action_limit_settings)
+            (activity as MainActivity).setting_back.visibility = View.VISIBLE
         }
         cat_appInfor?.setOnClickListener {view->
             Log.d("cat_appInfor", "Activating")
             view.findNavController().navigate(R.id.action_appInfor_settings)
+            (activity as MainActivity).setting_back.visibility = View.VISIBLE
         }
         val cat_feedback = view.findViewById<LinearLayout>(R.id.cat_feedback)
         cat_feedback?.setOnClickListener { view ->

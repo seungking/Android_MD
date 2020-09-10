@@ -103,6 +103,10 @@ public class Gyro_Acc extends AppCompatActivity {
         progressBar = (ProgressBar)findViewById(R.id.add_motion_progress);
         onProgress = (WhorlView)findViewById(R.id.onprogress);
 
+        findViewById(R.id.gyro_back).setOnClickListener(v->{
+            finish();
+        });
+
         //센서 켬 (여긴 왜켯지)
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mGgyroSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
