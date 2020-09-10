@@ -23,7 +23,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_weight="7"
                 android:fontFamily="@font/worksans_bold"
-                android:text="실행 동작 갯수 제한"
+                android:text="@string/frag_settings_limit_num_title"
                 android:textSize="8pt" />
 
             <com.suke.widget.SwitchButton
@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="설정 가능한 동작의 갯수를 5개로 제한합니다."
+            android:text="@string/frag_settings_limit_num"
             android:fontFamily="@font/worksans_light"
             android:textColor="@color/colorGrey"/>
     </LinearLayout>
@@ -68,7 +68,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_weight="7"
                 android:fontFamily="@font/worksans_bold"
-                android:text="백그라운드 실행"
+                android:text="@string/frag_settings_limit_back_title"
                 android:textSize="8pt" />
 
             <com.suke.widget.SwitchButton
@@ -90,7 +90,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="백그라운드에서 android_md가 동작합니다."
+            android:text="@string/frag_settings_limit_back"
             android:fontFamily="@font/worksans_light"
             android:textColor="@color/colorGrey"/>
     </LinearLayout>

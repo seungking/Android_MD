@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
-        android:text="실행 가능한 앱 목록"
+        android:text="@string/app_infor_appList"
         android:gravity="center"/>
 
     <ListView
@@ -40,7 +40,7 @@
         <TextView android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="로딩중"
+            android:text="Loading"
             android:paddingTop="4dip"
             android:singleLine="true" />
     </LinearLayout>
@@ -49,7 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
-        android:text="기능 목록"
+        android:text="@string/app_infor_fList"
         android:gravity="center"/>
 
     <ListView

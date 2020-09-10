@@ -27,18 +27,21 @@ public class ViewPagerAdapter extends PagerAdapter {
             R.drawable.p1,
             R.drawable.p2,
             R.drawable.p3,
+            R.drawable.p3,
     };
 
     private String titles[] ={
-            "Learn",
-            "Create",
-            "Enjoy"
+            String.valueOf(R.string.VPA_titles_1),
+            String.valueOf(R.string.VPA_titles_2),
+            String.valueOf(R.string.VPA_titles_3),
+            String.valueOf(R.string.VPA_titles_4)
     };
 
     private String descs[] ={
-            "lorem  ipsum dolor contraint spaces dolor ipsum loremters termainal lorem ispsum contanirnts.",
-            "lorem  ipsum dolor contraint spaces dolor ipsum loremters termainal lorem ispsum contanirnts.",
-            "lorem  ipsum dolor contraint spaces dolor ipsum loremters termainal lorem ispsum contanirnts."
+            String.valueOf(R.string.VPA_descs_1),
+            String.valueOf(R.string.VPA_descs_2),
+            String.valueOf(R.string.VPA_descs_3),
+            String.valueOf(R.string.VPA_descs_4)
     };
 
     @Override
