@@ -32,17 +32,17 @@ public class ViewPagerAdapter extends PagerAdapter {
     };
 
     private String titles[] ={
-            "권한 설정",
-            "앱 선택",
-            "모션 설정",
-            "설정 완료!"
+            String.valueOf(R.string.VPA_titles_1),
+            String.valueOf(R.string.VPA_titles_2),
+            String.valueOf(R.string.VPA_titles_3),
+            String.valueOf(R.string.VPA_titles_4)
     };
 
     private String descs[] ={
-            "EXEMO를 사용하기 위해 권한 허용해 주세요.",
-            "모션을 통해 실행할 동작을 선택해 주세요.",
-            "나만의 멋진 모션을 등록해 주세요!",
-            "설정이 완료되었습니다! 자유롭게 EXEMO를 이용해보세요!"
+            String.valueOf(R.string.VPA_descs_1),
+            String.valueOf(R.string.VPA_descs_2),
+            String.valueOf(R.string.VPA_descs_3),
+            String.valueOf(R.string.VPA_descs_4)
     };
 
     @Override
