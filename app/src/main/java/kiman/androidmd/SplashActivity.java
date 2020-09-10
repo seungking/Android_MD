@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 public class SplashActivity extends AppCompatActivity {
 
     @Override
@@ -19,13 +21,20 @@ public class SplashActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_splash);
 
+        //Lottie Animation
+        LottieAnimationView animationView = (LottieAnimationView) findViewById(R.id.splash_logo);
+        animationView.setAnimation("loading.json");
+        animationView.loop(true);
+        //Lottie Animation start
+        animationView.playAnimation();
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 isFirstTime();
             }
-        },1500);
+        },1700);
     }
 
 

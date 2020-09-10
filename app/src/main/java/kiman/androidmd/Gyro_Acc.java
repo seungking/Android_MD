@@ -114,18 +114,18 @@ public class Gyro_Acc extends AppCompatActivity {
 
         final TextView textViewMotionPercent = (TextView) findViewById(R.id.textView_motion_percent);
 
-        //클리어
-        final Button addclear = (Button) findViewById(R.id.add_clear_ga);
-        addclear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                patterns.clear();
-                Store_a.clear();
-                check=0;
-                progressBar.setProgress(0);
-                textViewMotionPercent.setText("0%");
-            }
-        });
+//        //클리어
+//        final Button addclear = (Button) findViewById(R.id.add_clear_ga);
+//        addclear.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                patterns.clear();
+//                Store_a.clear();
+//                check=0;
+//                progressBar.setProgress(0);
+//                textViewMotionPercent.setText("0%");
+//            }
+//        });
 
         //애드 버튼 눌렀을때
         findViewById(R.id.add_motion_progress).setOnTouchListener(new View.OnTouchListener() {

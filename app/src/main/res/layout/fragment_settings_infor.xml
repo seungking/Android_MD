@@ -13,8 +13,7 @@
         android:clickable="true"
         android:focusable="true"
         android:paddingBottom="7dp"
-        android:background="?android:attr/selectableItemBackground"
-        >
+        android:background="?android:attr/selectableItemBackground">
 
 
         <LinearLayout
@@ -37,7 +36,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="13"
-                android:fontFamily="@font/worksans_bold"
+                android:fontFamily="@font/g_bold"
                 android:text="App Name"
                 android:textSize="11pt" />
 
@@ -48,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="120dp"
             android:layout_marginTop="15dp"
-            android:fontFamily="@font/worksans_light"
+            android:fontFamily="@font/g_medium"
             android:text="App Version"
             android:textSize="8pt" />
     </LinearLayout>
@@ -89,7 +88,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="13"
-                android:fontFamily="@font/worksans_bold"
+                android:fontFamily="@font/g_bold"
                 android:text="Github"
                 android:textSize="8pt" />
 
@@ -141,7 +140,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="13"
-                android:fontFamily="@font/worksans_bold"
+                android:fontFamily="@font/g_bold"
                 android:text="Examples"
                 android:textSize="8pt" />
 

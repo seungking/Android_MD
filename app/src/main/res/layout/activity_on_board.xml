@@ -12,36 +12,57 @@
       android:layout_height="match_parent"
       android:id="@+id/view_pager"></androidx.viewpager.widget.ViewPager>
 
-  <RelativeLayout
+  <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:paddingBottom="10dp"
       android:layout_alignParentBottom="true"
       android:layout_height="wrap_content">
 
-    <Button
+    <TextView
+        android:id="@+id/btnLeft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Skip"
-        android:background="@android:color/transparent"
-        android:id="@+id/btnLeft"/>
+        android:layout_marginStart="20dp"
+        android:textSize="18sp"
+        android:singleLine="true"
+        android:ellipsize="none"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Reset"
+        android:fontFamily="@font/g_medium"
+        android:padding="7dp" />
 
 
     <LinearLayout
         android:id="@+id/dotsLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:orientation="horizontal"
         android:layout_centerInParent="true"
         android:layout_alignParentTop="true"></LinearLayout>
 
-    <Button
+    <TextView
+        android:id="@+id/btnRight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:textSize="18sp"
+        android:singleLine="true"
+        android:ellipsize="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:text="Next"
-        android:layout_alignParentRight="true"
-        android:background="@android:color/transparent"
-        android:id="@+id/btnRight"/>
+        android:fontFamily="@font/g_medium"
+        android:padding="7dp" />
 
-  </RelativeLayout>
+
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

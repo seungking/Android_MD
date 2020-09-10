@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.PagerAdapter;
 
 import kiman.androidmd.R;
@@ -27,18 +28,21 @@ public class ViewPagerAdapter extends PagerAdapter {
             R.drawable.p1,
             R.drawable.p2,
             R.drawable.p3,
+            R.drawable.p4
     };
 
     private String titles[] ={
-            "Learn",
-            "Create",
-            "Enjoy"
+            "권한 설정",
+            "앱 선택",
+            "모션 설정",
+            "설정 완료!"
     };
 
     private String descs[] ={
-            "lorem  ipsum dolor contraint spaces dolor ipsum loremters termainal lorem ispsum contanirnts.",
-            "lorem  ipsum dolor contraint spaces dolor ipsum loremters termainal lorem ispsum contanirnts.",
-            "lorem  ipsum dolor contraint spaces dolor ipsum loremters termainal lorem ispsum contanirnts."
+            "EXEMO를 사용하기 위해 권한 허용해 주세요.",
+            "모션을 통해 실행할 동작을 선택해 주세요.",
+            "나만의 멋진 모션을 등록해 주세요!",
+            "설정이 완료되었습니다! 자유롭게 EXEMO를 이용해보세요!"
     };
 
     @Override
@@ -48,7 +52,7 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view == (LinearLayout)object;
+        return view == (ConstraintLayout)object;
     }
 
     @NonNull
@@ -71,6 +75,6 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        container.removeView((LinearLayout)object);
+        container.removeView((ConstraintLayout)object);
     }
 }
