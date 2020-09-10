@@ -46,7 +46,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_weight="13"
                 android:fontFamily="@font/worksans_bold"
-                android:text="동작 제한"
+                android:text="@string/frag_settings_limit"
                 android:textSize="8pt" />
 
             <ImageView
@@ -97,7 +97,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_weight="13"
                 android:fontFamily="@font/worksans_bold"
-                android:text="앱 정보"
+                android:text="@string/frag_settings_appInfor"
                 android:textSize="8pt" />
 
             <ImageView
@@ -148,7 +148,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_weight="13"
                 android:fontFamily="@font/worksans_bold"
-                android:text="리뷰 작성"
+                android:text="@string/frag_settings_review"
                 android:textSize="8pt" />
 
             <ImageView
@@ -199,7 +199,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_weight="13"
                 android:fontFamily="@font/worksans_bold"
-                android:text="피드백"
+                android:text="@string/frag_settings_feedback"
                 android:textSize="8pt" />
 
             <ImageView
@@ -250,7 +250,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_weight="13"
                 android:fontFamily="@font/worksans_bold"
-                android:text="기부하기"
+                android:text="@string/frag_settings_donation"
                 android:textSize="8pt" />
 
             <ImageView
