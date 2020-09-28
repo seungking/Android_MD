@@ -18,9 +18,24 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     private Context context;
     private LayoutInflater inflater;
-
+    private String[] titles;
+    private String[] descs;
     public ViewPagerAdapter(Context context) {
         this.context = context;
+
+        titles = new String[]{
+                context.getString(R.string.VPA_titles_1),
+                context.getString(R.string.VPA_titles_2),
+                context.getString(R.string.VPA_titles_3),
+                context.getString(R.string.VPA_titles_4)
+        };
+
+        descs = new String[]{
+                context.getString(R.string.VPA_descs_1),
+                context.getString(R.string.VPA_descs_2),
+                context.getString(R.string.VPA_descs_3),
+                context.getString(R.string.VPA_descs_4)
+        };
     }
 
     //설정 값들 선언
@@ -29,20 +44,6 @@ public class ViewPagerAdapter extends PagerAdapter {
             R.drawable.p2,
             R.drawable.p3,
             R.drawable.p4
-    };
-
-    private String titles[] ={
-            String.valueOf(R.string.VPA_titles_1),
-            String.valueOf(R.string.VPA_titles_2),
-            String.valueOf(R.string.VPA_titles_3),
-            String.valueOf(R.string.VPA_titles_4)
-    };
-
-    private String descs[] ={
-            String.valueOf(R.string.VPA_descs_1),
-            String.valueOf(R.string.VPA_descs_2),
-            String.valueOf(R.string.VPA_descs_3),
-            String.valueOf(R.string.VPA_descs_4)
     };
 
     @Override

@@ -10,8 +10,10 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.preference.PreferenceManager
 import com.google.android.play.core.review.ReviewManagerFactory
 import kiman.androidmd.MainActivity
+import kiman.androidmd.OnBoardActivity
 import kiman.androidmd.R
 
 class SettingsFragment2: Fragment() {
@@ -71,6 +73,14 @@ class SettingsFragment2: Fragment() {
         val cat_donation = view.findViewById<LinearLayout>(R.id.cat_donation)
         cat_donation?.setOnClickListener { view->
 
+        }
+
+        val cat_not = view.findViewById<LinearLayout>(R.id.cat_not)
+        cat_not?.setOnClickListener { view->
+
+            val pref = PreferenceManager.getDefaultSharedPreferences(context)
+            pref.edit().putBoolean("fromsetting",false).commit();
+            startActivity(Intent(context, OnBoardActivity::class.java))
         }
         return view
     }

@@ -49,7 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/g_medium"
-                    android:text="동작 수정" />
+                    android:text="@string/frag_settings_limit" />
 
             </LinearLayout>
 
@@ -78,7 +78,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/g_medium"
-                    android:text="소리 ON"/>
+                    android:text="@string/frag_settings_appInfor"/>
 
 
             </LinearLayout>
@@ -109,7 +109,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/g_medium"
-                    android:text="리뷰 작성"/>
+                    android:text="@string/frag_settings_review"/>
 
 
             </LinearLayout>
@@ -140,7 +140,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/g_medium"
-                    android:text="피드백 보내기"/>
+                    android:text="@string/frag_settings_feedback"/>
 
 
             </LinearLayout>
@@ -170,7 +170,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/g_medium"
-                    android:text="개발자 커피값"/>
+                    android:text="@string/frag_settings_donation"/>
 
 
             </LinearLayout>
@@ -201,8 +201,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/g_medium"
-                    android:text="개발자를 위한 기부함"/>
-
+                    android:text="사용설명 다시보기"/>
 
             </LinearLayout>
 
