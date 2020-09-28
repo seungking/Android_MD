@@ -2,14 +2,17 @@ package kiman.androidmd;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -17,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import com.tt.whorlviewlibrary.WhorlView;
 
@@ -97,6 +101,7 @@ public class Gyro_Acc extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        showHowTo();
         Intent getintent = getIntent();
         packageName = getintent.getStringExtra("packagename");
         appName = getintent.getStringExtra("appname");
@@ -125,7 +130,7 @@ public class Gyro_Acc extends AppCompatActivity {
         final CustomButton addclear = (CustomButton) findViewById(R.id.add_clear_ga);
         addclear.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View myView) {
                 patterns.clear();
                 Store_a.clear();
                 check=0;
@@ -451,4 +456,38 @@ public class Gyro_Acc extends AppCompatActivity {
         }
     }
 
+    public void showHowTo(){
+        findViewById(R.id.add_motion_progress).setClickable(false);
+        findViewById(R.id.add_clear_ga).setClickable(false);
+
+        HowTODialog mDialog1 = new HowTODialog(Gyro_Acc.this, R.layout.layout_howto1);
+//        HowTODialog mDialog2 = new HowTODialog(Gyro_Acc.this, R.layout.layout_howto2);
+//        HowTODialog mDialog3 = new HowTODialog(Gyro_Acc.this, R.layout.layout_howto3);
+        mDialog1.show();
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+
+        Window window = mDialog1.getWindow();
+
+        window.setLayout(size.x, size.y);
+
+        mDialog1.findViewById(R.id.howto_layout).setOnClickListener(v->{
+//            mDialog1.findViewById(R.id.howto_layout).setVisibility(View.INVISIBLE);
+//            mDialog2.show();
+            mDialog1.dismiss();
+        });
+//        mDialog2.findViewById(R.id.howto_layout).setOnClickListener(v->{
+//            mDialog2.findViewById(R.id.howto_layout).setVisibility(View.INVISIBLE);
+//            mDialog3.show();
+//            mDialog2.dismiss();
+//        });
+//        mDialog3.findViewById(R.id.howto_layout).setOnClickListener(v->{
+//            mDialog3.dismiss();
+//        });
+
+        findViewById(R.id.add_motion_progress).setClickable(true);
+        findViewById(R.id.add_clear_ga).setClickable(true);
+    }
 }

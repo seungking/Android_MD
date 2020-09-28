@@ -10,6 +10,7 @@
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
         <item name="android:textViewStyle">@style/Expand.TextViewStyle</item>
         <item name="android:fontFamily">@font/g_medium</item>
+        <item name="android:windowDisablePreview">true</item>
         <!-- Layout preview complains without this :S -->
         <item name="coordinatorLayoutStyle">@style/Widget.Support.CoordinatorLayout</item>
     </style>
