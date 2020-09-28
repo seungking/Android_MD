@@ -12,7 +12,7 @@
     <string name="VPA_descs_2">Select the action to be executed through motion.</string>
     <string name="VPA_descs_3">Please register your own cool motion!</string>
     <string name="VPA_descs_4">The setup is complete! Try EXEMO!</string>
-    <string name="app_infor_appList">List of executable apps</string>
+    <string name="app_infor_appList">Executable apps</string>
     <string name="app_infor_fList">Function List</string>
     <string name="frag_settings_limit_num_title">Limit the number of actions</string>
     <string name="frag_settings_limit_back_title">Background Execution</string>

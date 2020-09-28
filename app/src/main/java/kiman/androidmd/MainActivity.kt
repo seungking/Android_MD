@@ -126,6 +126,7 @@ class MainActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        Log.d("log1",getString(R.string.VPA_descs_1));
 
         //banner
         MobileAds.initialize(this) {}

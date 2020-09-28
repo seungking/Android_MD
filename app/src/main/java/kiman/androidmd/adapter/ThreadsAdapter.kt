@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.ListAdapter
@@ -44,6 +45,12 @@ class ThreadsAdapter : ListAdapter<Email.EmailThread, EmailViewHolder>(
   }
 
   override fun onBindViewHolder(holder: EmailViewHolder, position: Int) {
+
+    if(position%5==0)holder.itemLayout.setBackground(ctx!!.getDrawable(R.drawable.corners_item1));
+    else if(position%5==1)holder.itemLayout.setBackground(ctx!!.getDrawable(R.drawable.corners_item2));
+    else if(position%5==2)holder.itemLayout.setBackground(ctx!!.getDrawable(R.drawable.corners_item3));
+    else if(position%5==3)holder.itemLayout.setBackground(ctx!!.getDrawable(R.drawable.corners_item4));
+    else if(position%5==4)holder.itemLayout.setBackground(ctx!!.getDrawable(R.drawable.corners_item5));
 
     holder.emailThread = getItem(position)
     holder.itemView.setOnClickListener{
@@ -92,6 +99,7 @@ open class EmailViewHolder(
   private val subjectTextView = itemView.findViewById<TextView>(R.id.emailthread_item_subject)
   private val bodyTextView = itemView.findViewById<TextView>(R.id.emailthread_item_body)
   private val avatarImageView = itemView.findViewById<ImageView>(R.id.emailthread_item_avatar)
+  val itemLayout = itemView.findViewById<RelativeLayout>(R.id.itemLayout)
   val switch_motion_item = itemView.findViewById<SwitchButton>(R.id.switch_motion)
 
   lateinit var emailThread: Email.EmailThread
