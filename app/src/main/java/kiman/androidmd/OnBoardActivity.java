@@ -2,9 +2,12 @@ package kiman.androidmd;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -47,7 +50,11 @@ public class OnBoardActivity extends AppCompatActivity {
             }
             else{
                 // 다 끝나면 인증창으로
-                startActivity(new Intent(OnBoardActivity.this,MainActivity.class));
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+                if(sharedPreferences.getBoolean("fromsetting",true)){
+                    startActivity(new Intent(OnBoardActivity.this,MainActivity.class));
+                }
                 finish();
             }
         });
