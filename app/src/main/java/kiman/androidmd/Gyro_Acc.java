@@ -25,9 +25,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
+import es.dmoral.toasty.Toasty;
 import kiman.androidmd.fragment.HomeFragment;
 import kiman.androidmd.service.ManagePref;
 import kiman.androidmd.service.MyService;
+import stream.custombutton.CustomButton;
 
 public class Gyro_Acc extends AppCompatActivity {
 
@@ -117,19 +119,22 @@ public class Gyro_Acc extends AppCompatActivity {
         mAccelerometer= mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         final TextView textViewMotionPercent = (TextView) findViewById(R.id.textView_motion_percent);
+        final TextView gyroCompleteText = (TextView) findViewById(R.id.gyroCompleteText);
 
-//        //클리어
-//        final Button addclear = (Button) findViewById(R.id.add_clear_ga);
-//        addclear.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                patterns.clear();
-//                Store_a.clear();
-//                check=0;
-//                progressBar.setProgress(0);
-//                textViewMotionPercent.setText("0%");
-//            }
-//        });
+        //클리어
+        final CustomButton addclear = (CustomButton) findViewById(R.id.add_clear_ga);
+        addclear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                patterns.clear();
+                Store_a.clear();
+                check=0;
+                gyroCompleteText.setText("0/5");
+                progressBar.setProgress(0);
+                textViewMotionPercent.setText("0%");
+                Toasty.info(Gyro_Acc.this, "reset", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         //애드 버튼 눌렀을때
         findViewById(R.id.add_motion_progress).setOnTouchListener(new View.OnTouchListener() {
@@ -172,24 +177,29 @@ public class Gyro_Acc extends AppCompatActivity {
                             Store_a.clear();
                             if (check == 1) {//한번 클릭마다 다음으로 넘어가면서 저장
                                 textViewMotionPercent.setText("20%");
+                                gyroCompleteText.setText("1/5");
                                 progressBar.setProgress(20,true);
-                                Toast.makeText(Gyro_Acc.this, "not bad1", Toast.LENGTH_SHORT).show();
+                                Toasty.success(Gyro_Acc.this, "not bad1", Toast.LENGTH_SHORT).show();
                             } else if (check == 2) {
                                 textViewMotionPercent.setText("40%");
+                                gyroCompleteText.setText("2/5");
                                 progressBar.setProgress(40,true);
-                                Toast.makeText(Gyro_Acc.this, "good2", Toast.LENGTH_SHORT).show();
+                                Toasty.success(Gyro_Acc.this, "good2", Toast.LENGTH_SHORT).show();
                             } else if (check == 3) {
                                 textViewMotionPercent.setText("60%");
+                                gyroCompleteText.setText("3/5");
                                 progressBar.setProgress(60,true);
-                                Toast.makeText(Gyro_Acc.this, "great3", Toast.LENGTH_SHORT).show();
+                                Toasty.success(Gyro_Acc.this, "great3", Toast.LENGTH_SHORT).show();
                             } else if (check == 4) {
                                 textViewMotionPercent.setText("80%");
+                                gyroCompleteText.setText("4/5");
                                 progressBar.setProgress(80,true);
-                                Toast.makeText(Gyro_Acc.this, "perfect4", Toast.LENGTH_SHORT).show();
+                                Toasty.success(Gyro_Acc.this, "perfect4", Toast.LENGTH_SHORT).show();
                             } else if (check == 5) {
                                 textViewMotionPercent.setText("100%");
+                                gyroCompleteText.setText("5/5");
                                 progressBar.setProgress(100,true);
-                                Toast.makeText(Gyro_Acc.this, "wonderful5", Toast.LENGTH_SHORT).show();
+                                Toasty.success(Gyro_Acc.this, "wonderful5", Toast.LENGTH_SHORT).show();
 
                                 String checksave = "";
                                 for(int i=0; i<patterns.size(); i++) checksave+=patterns.get(i).toString();
@@ -242,7 +252,7 @@ public class Gyro_Acc extends AppCompatActivity {
                                 Toast.makeText(Gyro_Acc.this, "full", Toast.LENGTH_SHORT).show();
                             }
                         } else {//만족못하면 다시하라고함
-                            Toast.makeText(Gyro_Acc.this, "retry", Toast.LENGTH_SHORT).show();
+                            Toasty.error(Gyro_Acc.this, "retry", Toast.LENGTH_SHORT).show();
                         }
 
                         temp_a = "";

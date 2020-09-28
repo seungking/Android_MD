@@ -58,23 +58,11 @@ public class AppInfoActivity extends AppCompatActivity {
 
     ManagePref managePref = new ManagePref();
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-       // startActivity(new Intent(this, MainActivity.class));
-    }
-
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_info);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-//        toolbar = (Toolbar)findViewById(R.id.app_list_toolbar);
-//
-//
 
         SharedPreferences test = getSharedPreferences("save", MODE_PRIVATE);
         final SharedPreferences.Editor editor = test.edit();
@@ -107,7 +95,7 @@ public class AppInfoActivity extends AppCompatActivity {
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
 
-                Toast.makeText(AppInfoActivity.this, package_name, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(AppInfoActivity.this, package_name, Toast.LENGTH_SHORT).show();
 
                 Log.d("Log1",package_name);
                     editor.putString("packageName",package_name);
@@ -149,6 +137,10 @@ public class AppInfoActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
+        });
+
+        findViewById(R.id.appInfoBack).setOnClickListener(v->{
+            finish();
         });
     }
 

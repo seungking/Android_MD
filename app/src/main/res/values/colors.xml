@@ -11,4 +11,10 @@
   <color name="color_main2">#2e3d62</color>
     <color name="color_blue">#007DD6</color>
 
+    <color name="color_item1">#0064AB</color>
+    <color name="color_item2">#007DD6</color>
+    <color name="color_item3">#3297DE</color>
+    <color name="color_item4">#66B1E6</color>
+    <color name="color_item5">#99CBEE</color>
+
 </resources>
