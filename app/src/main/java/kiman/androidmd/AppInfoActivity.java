@@ -11,6 +11,7 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +28,8 @@ import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -35,6 +38,7 @@ import java.util.List;
 
 import kiman.androidmd.model.AppInfo;
 import kiman.androidmd.service.ManagePref;
+
 
 public class AppInfoActivity extends AppCompatActivity {
     private static final String TAG = AppInfoActivity.class.getSimpleName();
@@ -57,6 +61,11 @@ public class AppInfoActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     ManagePref managePref = new ManagePref();
+    private int modify = -1;
+
+    ArrayList<String> appname = new ArrayList<String>();
+    ArrayList<String> packagename = new ArrayList<String>();
+    ArrayList<String> appicon = new ArrayList<String>();
 
     /** Called when the activity is first created. */
     @Override
@@ -69,7 +78,7 @@ public class AppInfoActivity extends AppCompatActivity {
 
         Intent get_intent = getIntent();
         select = get_intent.getStringExtra("select");
-        Log.e("package11",select + "\n###\n");
+        modify = get_intent.getIntExtra("modify",-1);
 
         editor.putString("packageName","");
 
@@ -83,6 +92,10 @@ public class AppInfoActivity extends AppCompatActivity {
         mAdapter2 = new IFAdapter(this);
         mListView2.setAdapter(mAdapter2);
 
+        appname = managePref.getStringArrayPref(AppInfoActivity.this,"appname");
+        packagename = managePref.getStringArrayPref(AppInfoActivity.this,"packagename");
+        appicon = managePref.getStringArrayPref(AppInfoActivity.this,"appicon");
+
         mListView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> av, View view, int position,
@@ -95,19 +108,29 @@ public class AppInfoActivity extends AppCompatActivity {
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
 
-//                Toast.makeText(AppInfoActivity.this, package_name, Toast.LENGTH_SHORT).show();
 
-                Log.d("Log1",package_name);
-                    editor.putString("packageName",package_name);
-                    editor.commit();
+                if(modify==-1) {
+                    Intent intent = new Intent(AppInfoActivity.this, Gyro_Acc.class);
+                    intent.putExtra("appname", app_name);
+                    intent.putExtra("packagename", package_name);
+                    intent.putExtra("appicon", managePref.BitmapToString(bitmap));
 
-                Intent intent = new Intent(AppInfoActivity.this,Gyro_Acc.class);
-                intent.putExtra("appname",app_name);
-                intent.putExtra("packagename",package_name);
-                intent.putExtra("appicon",managePref.BitmapToString(bitmap));
+                    startActivity(intent);
+                    finish();
+                }
+                else{
 
-                startActivity(intent);
-                finish();
+                    appname.set(modify,app_name);
+                    packagename.set(modify,package_name);
+                    appicon.set(modify,managePref.BitmapToString(bitmap));
+
+                    managePref.setStringArrayPref(AppInfoActivity.this,"appname",appname);
+                    managePref.setStringArrayPref(AppInfoActivity.this,"packagename",packagename);
+                    managePref.setStringArrayPref(AppInfoActivity.this,"appicon",appicon);
+
+                    startActivity(new Intent(AppInfoActivity.this, MainActivity.class));
+                    finish();
+                }
             }
         });
 
@@ -123,19 +146,28 @@ public class AppInfoActivity extends AppCompatActivity {
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
 
-                Toast.makeText(AppInfoActivity.this, package_name, Toast.LENGTH_SHORT).show();
+                if(modify==-1) {
+                    Intent intent = new Intent(AppInfoActivity.this, Gyro_Acc.class);
+                    intent.putExtra("appname", app_name);
+                    intent.putExtra("packagename", package_name);
+                    intent.putExtra("appicon", managePref.BitmapToString(bitmap));
 
-                Log.d("Log1",package_name);
-                    editor.putString("packageName",package_name);
-                    editor.commit();
+                    startActivity(intent);
+                    finish();
+                }
+                else{
 
-                Intent intent = new Intent(AppInfoActivity.this,Gyro_Acc.class);
-                intent.putExtra("appname",app_name);
-                intent.putExtra("packagename",package_name);
-                intent.putExtra("appicon",managePref.BitmapToString(bitmap));
+                    appname.set(modify,app_name);
+                    packagename.set(modify,package_name);
+                    appicon.set(modify,managePref.BitmapToString(bitmap));
 
-                startActivity(intent);
-                finish();
+                    managePref.setStringArrayPref(AppInfoActivity.this,"appname",appname);
+                    managePref.setStringArrayPref(AppInfoActivity.this,"packagename",packagename);
+                    managePref.setStringArrayPref(AppInfoActivity.this,"appicon",appicon);
+
+                    startActivity(new Intent(AppInfoActivity.this, MainActivity.class));
+                    finish();
+                }
             }
         });
 
@@ -299,7 +331,7 @@ public class AppInfoActivity extends AppCompatActivity {
 
                 if (filter == null || filter.filterApp(info)) {
                     // 필터된 데이터
-
+                    if(app.packageName.contains("daemon")) continue;
                     addInfo = new AppInfo();
                     // App Icon
 //                    addInfo.mIcon = app.loadIcon(pm);
@@ -380,10 +412,13 @@ public class AppInfoActivity extends AppCompatActivity {
         @SuppressLint("WrongConstant")
         public void rebuild() {
 
-            Drawable drawable = getResources().getDrawable(R.drawable.avatar_googleexpress);
-            Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
+            Bitmap bitmap = getBitmapFromVectorDrawable(AppInfoActivity.this ,R.drawable.ic_bluetooth_black_24dp);
+            Bitmap bitmap1 = getBitmapFromVectorDrawable(AppInfoActivity.this ,R.drawable.ic_wifi_black_24dp);
+            Bitmap bitmap2 = getBitmapFromVectorDrawable(AppInfoActivity.this ,R.drawable.ic_flash_on_black_24dp);
+            Bitmap bitmap3 = getBitmapFromVectorDrawable(AppInfoActivity.this ,R.drawable.ic_bluetooth_black_24dp);
+            Bitmap bitmap4 = getBitmapFromVectorDrawable(AppInfoActivity.this ,R.drawable.ic_volume_mute_black_24dp);
 
-            Bitmap[] icons = {bitmap};
+            Bitmap[] icons = {bitmap,bitmap1,bitmap2,bitmap3,bitmap4};
             String[] appnames = {"블루투스 ON/OFF", "WIFI ON/OFF", "라이트 ON/OFF", "프로세스 종료 ON/OFF", "음소거모드 ON/OFF"};
             String[] packageNames = {"bluetooth", "wifi", "light", "killp", "silent"};
 
@@ -394,7 +429,7 @@ public class AppInfoActivity extends AppCompatActivity {
             for (int i=0; i<appnames.length; i++) {
 
                 addInfo = new AppInfo();
-                addInfo.mIcon = icons[0];
+                addInfo.mIcon = icons[i];
                 addInfo.mAppNaem = appnames[i];
                 addInfo.mAppPackge = packageNames[i];
 
@@ -446,4 +481,21 @@ public class AppInfoActivity extends AppCompatActivity {
         }
 
     };
+
+    public static Bitmap getBitmapFromVectorDrawable(Context context, int drawableId) {
+        Drawable drawable = ContextCompat.getDrawable(context, drawableId);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            drawable = (DrawableCompat.wrap(drawable)).mutate();
+        }
+
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
+                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+
+        return bitmap;
+    }
+
+
 }

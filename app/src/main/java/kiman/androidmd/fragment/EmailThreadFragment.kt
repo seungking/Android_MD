@@ -1,9 +1,9 @@
 package kiman.androidmd.fragment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +15,6 @@ import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.PublishRelay
-import com.suke.widget.SwitchButton
 import de.hdodenhof.circleimageview.CircleImageView
 import kiman.androidmd.*
 import kiman.androidmd.model.Email
@@ -70,18 +69,6 @@ class EmailThreadFragment : Fragment() {
     }
 
     emailThreadPage.pullToCollapseInterceptor = { downX, downY, upwardPull ->
-//      if (scrollableContainer.globalVisibleRect().contains(downX, downY).not()) {
-//        Log.d("Log1","emailthread1");
-//        InterceptResult.IGNORED
-//      } else {
-//        Log.d("Log1","emailthread2");
-//        val directionInt = if (upwardPull) +1 else -1
-//        val canScrollFurther = scrollableContainer.canScrollVertically(directionInt)
-//        when {
-//          canScrollFurther -> InterceptResult.INTERCEPTED
-//          else -> InterceptResult.IGNORED
-//        }
-//      }
       if (scrollableContainer.globalVisibleRect().contains(downX, downY).not()) {
         InterceptResult.IGNORED
       }
@@ -96,16 +83,9 @@ class EmailThreadFragment : Fragment() {
 
     emailThreadPage.addStateChangeCallbacks(object : SimplePageStateChangeCallbacks() {
       override fun onPageCollapsed() {
-        Log.d("Log1","emailthread3 " + (activity as MainActivity).list.size.toString());
         scrollableContainer.scrollTo(0, 0)
       }
     })
-  }
-
-  override fun onDestroyView() {
-    Log.d("Log1","emailthread4");
-//    onDestroys.accept(Any())
-    super.onDestroyView()
   }
 
   override fun onSaveInstanceState(outState: Bundle) {
@@ -133,7 +113,6 @@ class EmailThreadFragment : Fragment() {
   @SuppressLint("SetTextI18n")
   private fun render(view: View, position : Int) {
 
-    Log.d("Log1","render in fragment  position : "  + position);
     val managepref : ManagePref =
       ManagePref()
 
@@ -161,37 +140,45 @@ class EmailThreadFragment : Fragment() {
       switch_motion_fg.setImageResource(R.drawable.ic_029_delete);
     }
 
-    Log.d("Log1","render 2");
     var view : View = View.inflate(context,
         R.layout.include_email_shipping_update, attachmentContainer)
 
-    if(view==null)
-      Log.d("Log1","render view null");
-    view.detail_button2.setOnClickListener {
+    if(view!=null) {
+      view.detail_button2.setOnClickListener {
 
-      requireActivity().onBackPressed()
+        requireActivity().onBackPressed()
 
-      appname.removeAt(position)
-      packagename.removeAt(position)
-      appicon.removeAt(position)
-      date.removeAt(position)
-      switch.removeAt(position)
-      patterns.removeAt(position)
+        appname.removeAt(position)
+        packagename.removeAt(position)
+        appicon.removeAt(position)
+        date.removeAt(position)
+        switch.removeAt(position)
+        patterns.removeAt(position)
 
-      managepref.setStringArrayPref(activity!!.applicationContext,"appname",appname)
-      managepref.setStringArrayPref(activity!!.applicationContext,"packagename",packagename)
-      managepref.setStringArrayPref(activity!!.applicationContext,"appicon",appicon)
-      managepref.setStringArrayPref(activity!!.applicationContext,"date",date)
-      managepref.setStringArrayPref(activity!!.applicationContext,"switch",switch)
-      managepref.setStringArrayPref(activity!!.applicationContext,"patterns",patterns)
+        managepref.setStringArrayPref(activity!!.applicationContext, "appname", appname)
+        managepref.setStringArrayPref(activity!!.applicationContext, "packagename", packagename)
+        managepref.setStringArrayPref(activity!!.applicationContext, "appicon", appicon)
+        managepref.setStringArrayPref(activity!!.applicationContext, "date", date)
+        managepref.setStringArrayPref(activity!!.applicationContext, "switch", switch)
+        managepref.setStringArrayPref(activity!!.applicationContext, "patterns", patterns)
 
 
-      (activity as MainActivity).updatepattern()
-      (activity as MainActivity).list.removeAt(position)
-      (activity as MainActivity).threadsAdapter.submitList((activity as MainActivity).list)
-      (activity as MainActivity).threadsAdapter.notifyItemRemoved(position)
-      (activity as MainActivity).threadsAdapter.notifyItemRangeChanged(0,(activity as MainActivity).list.size)
+        (activity as MainActivity).updatepattern()
+        (activity as MainActivity).list.removeAt(position)
+        (activity as MainActivity).threadsAdapter.submitList((activity as MainActivity).list)
+        (activity as MainActivity).threadsAdapter.notifyItemRemoved(position)
+        (activity as MainActivity).threadsAdapter.notifyItemRangeChanged(0, (activity as MainActivity).list.size)
 
+      }
+
+      view.detail_button1.setOnClickListener{
+
+
+        (activity as MainActivity).stopMotionCatch();
+        context!!.startActivity(Intent(context,AppInfoActivity::class.java).putExtra("modify",position));
+        requireActivity().onBackPressed()
+      }
     }
+
   }
 }

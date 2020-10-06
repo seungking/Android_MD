@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 import kiman.androidmd.R;
 
 public class ViewPagerAdapter extends PagerAdapter {
@@ -62,11 +64,29 @@ public class ViewPagerAdapter extends PagerAdapter {
         inflater = (LayoutInflater)context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.view_pager,container,false);
 
+
+        LottieAnimationView lottieAnimationView;
+        lottieAnimationView = v.findViewById(R.id.imgViewPager_lottie);
+        lottieAnimationView.loop(true);
+        lottieAnimationView.playAnimation();
+
         ImageView imageView = v.findViewById(R.id.imgViewPager);
         TextView txtTitle = v.findViewById(R.id.txtTitleViewPager);
         TextView txtDesc = v.findViewById(R.id.txtDescViewPager);
 
-        imageView.setImageResource(images[position]);
+        if(position==0){
+            lottieAnimationView.setAnimation("onboard1.json");
+        }
+        else if(position==1){
+            lottieAnimationView.setAnimation("onboard2.json");
+        }
+        else if(position==2){
+            lottieAnimationView.setAnimation("onboard3.json");
+        }
+        else if(position==3){
+            lottieAnimationView.setAnimation("onboard4.json");
+        }
+
         txtTitle.setText(titles[position]);
         txtDesc.setText(descs[position]);
 

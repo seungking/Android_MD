@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="Reset"
+        android:text="Skip"
         android:fontFamily="@font/g_medium"
         android:padding="7dp" />
 
