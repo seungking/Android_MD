@@ -164,7 +164,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_baseline_sync_alt_24"/>
+                    android:src="@drawable/ic_local_atm_black_24dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -195,13 +195,13 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_baseline_delete_24"/>
+                    android:src="@drawable/ic_fact_check_black_24dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/g_medium"
-                    android:text="사용설명 다시보기"/>
+                    android:text="@string/frag_settings_instruction"/>
 
             </LinearLayout>
 
