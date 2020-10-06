@@ -22,6 +22,7 @@
     <string name="frag_settings_review">리뷰 작성</string>
     <string name="frag_settings_feedback">피드백</string>
     <string name="frag_settings_donation">기부하기</string>
+    <string name="frag_settings_instruction">사용설명 다시보기</string>
 
 </resources>
 

@@ -7,10 +7,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
-import android.hardware.Sensor
-import android.hardware.SensorEvent
-import android.hardware.SensorEventListener
-import android.hardware.SensorManager
+import android.hardware.*
+import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
 import android.media.AudioManager
 import android.net.wifi.WifiManager
@@ -481,9 +479,12 @@ class MainActivity : AppCompatActivity(),
             }
             "light"->{
                 var camManager: CameraManager = this?.getSystemService(Context.CAMERA_SERVICE) as CameraManager
+
+
                 val camID = camManager.cameraIdList[0]
-                var isFlashOn:Boolean = false
-                if (isFlashOn) {
+                var isFlashOn: Boolean? = camManager.getCameraCharacteristics(camID).get(CameraCharacteristics.FLASH_INFO_AVAILABLE)
+
+                if (isFlashOn!!) {
                     camManager.setTorchMode(camID, false)
                     isFlashOn = false
                 }
