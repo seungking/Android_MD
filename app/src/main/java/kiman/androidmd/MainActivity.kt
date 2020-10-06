@@ -7,8 +7,10 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
-import android.hardware.*
-import android.hardware.camera2.CameraCharacteristics
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.hardware.camera2.CameraManager
 import android.media.AudioManager
 import android.net.wifi.WifiManager
@@ -16,6 +18,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
@@ -27,11 +30,10 @@ import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kiman.androidmd.adapter.ThreadsAdapter
 import kiman.androidmd.fragment.BaseFragment
-import kiman.androidmd.fragment.HomeFragment
 import kiman.androidmd.model.Email
 import kiman.androidmd.service.BackPressCloseHandler
 import kiman.androidmd.service.ManagePref
-import kiman.androidmd.service.MyService
+import kiman.androidmd.service.UndeadService
 import kotlinx.android.synthetic.main.activity_inbox.*
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -120,11 +122,13 @@ class MainActivity : AppCompatActivity(),
 
     lateinit var mAdView : AdView
 
+
+    var foregroundServiceIntent : Intent? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        Log.d("log1",getString(R.string.VPA_descs_1));
 
         //banner
         MobileAds.initialize(this) {}
@@ -184,13 +188,6 @@ class MainActivity : AppCompatActivity(),
 
     override fun onResume() {
         super.onResume()
-        Log.d("log1","main resume!!")
-
-//        // setup main view pager
-       // main_pager.addOnPageChangeListener(this)
-//        main_pager.adapter = ViewPagerAdapter()
-//        main_pager.post(this::checkDeepLink)
-//        main_pager.offscreenPageLimit = fragments.size
 
         val pref: SharedPreferences = PreferenceManager
             .getDefaultSharedPreferences(this)
@@ -200,8 +197,6 @@ class MainActivity : AppCompatActivity(),
             runningservice = true;
         }
     }
-
-
 
     override fun onBackPressed() {
         if(inbox_recyclerview.expandedItem.viewIndex==0) inbox_recyclerview.collapse()
@@ -242,29 +237,15 @@ class MainActivity : AppCompatActivity(),
 
     }
 
-    fun updatelist(){
-        // setup main view pager
-       // main_pager.addOnPageChangeListener(this)
-//        main_pager.adapter = ViewPagerAdapter()
-//        //main_pager.post(this::checkDeepLink)
-//        main_pager.offscreenPageLimit = fragments.size
-//        (fragments as HomeFragment).setupThreadPage();
-        val firstFragment: HomeFragment =
-            supportFragmentManager.fragments[0] as HomeFragment
-        firstFragment.setupThreadList()
-        firstFragment.setupThreadPage()
-    }
     fun updatepattern(){
         mpackagename.clear();
         mpatterns_list.clear();
         Log.d("log1","updatepattern")
+
         var mpackage = managePref.getStringArrayPref(this, "packagename")
         patterns = managePref.getStringArrayPref(this, "patterns")
 
         var switch = managePref.getStringArrayPref(this, "switch")
-//            for (i in 0..switch.size()-1) {
-        Log.d("log1",packagename.toString())
-        Log.d("log1",switch.toString())
 
         if(patterns.size>0) {
             patterns_list.clear()
@@ -280,54 +261,49 @@ class MainActivity : AppCompatActivity(),
 
                         cur_pattern.add(temp2)
                     }
-                    Log.d("log1","pattenrs list pacakge name : "+ i + "   " + mpackage.get(i))
                     mpackagename.add(mpackage.get(i))
                     mpatterns_list.add(cur_pattern)
                 }
             }
-            Log.d("log1","pattern list size : " + mpatterns_list.size)
             for(j in 0..mpatterns_list.size-1) Log.d("log1", "patterns "+j+" : "+mpatterns_list.get(j))
         }
     }
-
     fun startMotionCatch(){
-        Log.d("log1","Start Motion Catch");
-        startService(Intent(applicationContext,
-            MyService::class.java))
-
         updatepattern()
-        if(!runningservice) {
-            startService(Intent(applicationContext, MyService::class.java))
-            //센서켬
 
-            //센서켬
-            mSensorManager!!.registerListener(mGyroLis, mGgyroSensor, SensorManager.SENSOR_DELAY_UI)
-            mSensorManager!!.registerListener(
-                userSensorListner,
-                mGyroscopeSensor,
-                SensorManager.SENSOR_DELAY_UI
-            )
-            mSensorManager!!.registerListener(
-                userSensorListner,
-                mAccelerometer,
-                SensorManager.SENSOR_DELAY_UI
-            )
+        if (null == UndeadService.serviceIntent) {
+            foregroundServiceIntent = Intent (this, UndeadService::class.java)
+            startService(foregroundServiceIntent);
 
-            runningservice=true
+        } else {
+            foregroundServiceIntent = UndeadService.serviceIntent;
+            Toast.makeText(getApplicationContext(), "already", Toast.LENGTH_LONG).show();
         }
+
+        mSensorManager!!.registerListener(mGyroLis, mGgyroSensor, SensorManager.SENSOR_DELAY_UI)
+        mSensorManager!!.registerListener(
+            userSensorListner,
+            mGyroscopeSensor,
+            SensorManager.SENSOR_DELAY_UI
+        )
+        mSensorManager!!.registerListener(
+            userSensorListner,
+            mAccelerometer,
+            SensorManager.SENSOR_DELAY_UI
+        )
     }
 
     fun stopMotionCatch(){
-        Log.d("log1","Stop Motion Catch")
 
-        if(runningservice) {
-            stopService(Intent(applicationContext, MyService::class.java))
-            //센서끄고 패턴에 저장
+        if (null != foregroundServiceIntent) {
+            stopService(foregroundServiceIntent);
+            foregroundServiceIntent = null;
             mSensorManager!!.unregisterListener(mGyroLis)
             mSensorManager!!.unregisterListener(userSensorListner)
             runningservice = false
         }
     }
+
 
     inner class AccelerometerListener : SensorEventListener {
         override fun onSensorChanged(event: SensorEvent) {
@@ -366,19 +342,7 @@ class MainActivity : AppCompatActivity(),
 
                 //라벨링 값 받아옴
                 Check_sum = check_sum.toString()
-                Log.e(
-                    "LOG1",
-                    " [X]:" + String.format(
-                        "%.4f",
-                        event.values[0]
-                    ) + "    [Y]:" + String.format(
-                        "%.4f",
-                        event.values[1]
-                    ) + "    [Z]:" + String.format(
-                        "%.4f",
-                        event.values[2]
-                    ) + "   roll : " + roll + "  r : " + r + "   pitch : " + pitch + "   p : " + p + "   Check_sum : " + Check_sum
-                )
+                Log.e("LOG1", " [X]:" + String.format("%.4f", event.values[0]) + "    [Y]:" + String.format("%.4f", event.values[1]) + "    [Z]:" + String.format("%.4f", event.values[2]) + "   roll : " + roll + "  r : " + r + "   pitch : " + pitch + "   p : " + p + "   Check_sum : " + Check_sum)
 
                 //전에 값과 같거나 아무것도 안들어오면 거른다
                 if (Store_a.size > 0 && Store_a.get(Store_a.size - 1) != Check_sum) {
@@ -398,9 +362,6 @@ class MainActivity : AppCompatActivity(),
                 for (i in Store_a.indices) {
                     temp_a = temp_a + Store_a.get(i) + " "
                 }
-                Log.d("log1", temp_a)
-
-
 
                 for (j in mpatterns_list.indices) {
                     val lcs = java.util.ArrayList<Int>()
@@ -426,12 +387,9 @@ class MainActivity : AppCompatActivity(),
                     //패턴개수 3개 넘거나 사이즈 2개 이상이면 어플실행
                     if (run_app >= 3 && Store_a.size > 2) {
                         Store_a.clear()
-                        Log.d("log1", "app run!!!!!!!!!!!!!!!!!           ")
+                        Log.d("log1", "app run!!!!!!!!!!!!!!!!!           " + mpackagename.get(j))
                         if(mpackagename.get(j).startsWith("com.")) {
                             val intent = packageManager.getLaunchIntentForPackage(mpackagename.get(j))
-//                            val intent1 = getIntent()
-//                            finish()
-//                            startActivity(intent1)
                             startActivity(intent)
 
                         }
@@ -479,12 +437,9 @@ class MainActivity : AppCompatActivity(),
             }
             "light"->{
                 var camManager: CameraManager = this?.getSystemService(Context.CAMERA_SERVICE) as CameraManager
-
-
                 val camID = camManager.cameraIdList[0]
-                var isFlashOn: Boolean? = camManager.getCameraCharacteristics(camID).get(CameraCharacteristics.FLASH_INFO_AVAILABLE)
-
-                if (isFlashOn!!) {
+                var isFlashOn:Boolean = false
+                if (isFlashOn) {
                     camManager.setTorchMode(camID, false)
                     isFlashOn = false
                 }

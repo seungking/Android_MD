@@ -2,16 +2,19 @@ package kiman.androidmd.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.appcompat.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.navigateUp
+import com.airbnb.lottie.LottieAnimationView
+import kiman.androidmd.R
 import kiman.androidmd.model.rootDestinations
+import kotlinx.android.synthetic.main.content_settings_base.*
 
 class BaseFragment: Fragment() {
 
@@ -30,6 +33,7 @@ class BaseFragment: Fragment() {
             navHostId = it.getInt(KEY_NAV_HOST)
 
         } ?: return
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -40,6 +44,7 @@ class BaseFragment: Fragment() {
 
     override fun onStart() {
         super.onStart()
+
         // return early if no arguments were parsed
         if (toolbarId == defaultInt || navHostId == defaultInt) return
 

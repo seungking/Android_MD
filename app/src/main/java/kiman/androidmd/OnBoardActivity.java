@@ -9,11 +9,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.airbnb.lottie.LottieAnimationView;
 
 import kiman.androidmd.adapter.ViewPagerAdapter;
 import stream.custombutton.CustomButton;
@@ -26,6 +29,7 @@ public class OnBoardActivity extends AppCompatActivity {
     private LinearLayout dotsLayout;
     private TextView[] dots;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +38,7 @@ public class OnBoardActivity extends AppCompatActivity {
     }
 
     private void init() {
+
         viewPager = findViewById(R.id.view_pager);
         btnLeft = findViewById(R.id.btnLeft);
         btnRight = findViewById(R.id.btnRight);
@@ -52,6 +57,7 @@ public class OnBoardActivity extends AppCompatActivity {
                 // 다 끝나면 인증창으로
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
+                btnRight.setClickable(false);
                 if(sharedPreferences.getBoolean("fromsetting",true)){
                     startActivity(new Intent(OnBoardActivity.this,MainActivity.class));
                 }
@@ -99,24 +105,36 @@ public class OnBoardActivity extends AppCompatActivity {
             //움직일때마다 버튼설정
             //첫페이지에만 skip버튼 표시
             if(position==0){
+                btnLeft.setVisibility(View.GONE);
                 btnLeft.setVisibility(View.VISIBLE);
                 btnLeft.setEnabled(true);
                 btnRight.setText("Next");
             }
             else if(position==1){
                 btnLeft.setVisibility(View.GONE);
+                btnLeft.setVisibility(View.GONE);
                 btnLeft.setEnabled(false);
                 btnRight.setText("Next");
             }
             else if(position==2){
+                btnLeft.setVisibility(View.GONE);
                 btnLeft.setVisibility(View.GONE);
                 btnLeft.setEnabled(false);
                 btnRight.setText("Next");
             }
             else{
                 btnLeft.setVisibility(View.GONE);
+                btnRight.setVisibility(View.GONE);
                 btnLeft.setEnabled(false);
-                btnRight.setText("Finish");
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnRight.setVisibility(View.VISIBLE);
+                        btnRight.setText("Finish");
+                    }
+                },2000);
+
             }
         }
 

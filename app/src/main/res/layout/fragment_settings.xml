@@ -17,6 +17,12 @@
         android:orientation="vertical"
         tools:ignore="RtlCompat">
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/setting_lottie"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"/>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -164,7 +170,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_local_atm_black_24dp"/>
+                    android:src="@drawable/ic_baseline_sync_alt_24"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -195,13 +201,13 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_fact_check_black_24dp"/>
+                    android:src="@drawable/ic_baseline_delete_24"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/g_medium"
-                    android:text="@string/frag_settings_instruction"/>
+                    android:text="사용설명 다시보기"/>
 
             </LinearLayout>
 
