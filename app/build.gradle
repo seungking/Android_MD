@@ -78,4 +78,8 @@ dependencies {
 
     implementation 'com.android.billingclient:billing:2.1.0'
     implementation 'com.anjlab.android.iab.v3:library:1.0.44'
+
+    //for coroutine
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-alpha01'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
 }

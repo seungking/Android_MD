@@ -22,6 +22,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
 import com.google.android.gms.ads.AdRequest
@@ -36,6 +37,8 @@ import kiman.androidmd.service.ManagePref
 import kiman.androidmd.service.UndeadService
 import kotlinx.android.synthetic.main.activity_inbox.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -43,6 +46,7 @@ class MainActivity : AppCompatActivity(),
     ViewPager.OnPageChangeListener,
     BottomNavigationView.OnNavigationItemReselectedListener,
     BottomNavigationView.OnNavigationItemSelectedListener {
+
 
 
     // overall back stack of containers
@@ -244,7 +248,6 @@ class MainActivity : AppCompatActivity(),
 
         var mpackage = managePref.getStringArrayPref(this, "packagename")
         patterns = managePref.getStringArrayPref(this, "patterns")
-
         var switch = managePref.getStringArrayPref(this, "switch")
 
         if(patterns.size>0) {
@@ -291,6 +294,7 @@ class MainActivity : AppCompatActivity(),
             mAccelerometer,
             SensorManager.SENSOR_DELAY_UI
         )
+
     }
 
     fun stopMotionCatch(){
@@ -307,101 +311,103 @@ class MainActivity : AppCompatActivity(),
 
     inner class AccelerometerListener : SensorEventListener {
         override fun onSensorChanged(event: SensorEvent) {
-            //센서 바뀔때마다
-            var Check_sum = ""
-            var check_sum = 0
 
-            //임계값 하나라도 넘어가면 실행
-            if ((Math.abs(event.values[0]) >= threshold) or
-                (Math.abs(event.values[1]) >= threshold) or
-                (Math.abs(event.values[2]) >= threshold)) {
-//            if (r>40 | p>40) {
+            lifecycleScope.launch(Dispatchers.IO) {
 
-                //값들 저장하고 정렬(지금 은 필요없음)
-                val eventvalues =
-                    java.util.ArrayList<Float>()
-                eventvalues.add(Math.abs(event.values[0]))
-                eventvalues.add(Math.abs(event.values[1]))
-                eventvalues.add(Math.abs(event.values[2]))
-                Collections.sort(eventvalues)
+                //센서 바뀔때마다
+                var Check_sum = ""
+                var check_sum = 0
 
-                //값에 따라 라벨링
-                if (eventvalues[2] - Math.abs(event.values[0]) < 0.01 || eventvalues[1] - Math.abs(event.values[0]) < 0.01) {
-                    check_sum += if (event.values[0] > 0) 10000 else 20000
-                }
-                if (eventvalues[2] - Math.abs(event.values[1]) < 0.01 || eventvalues[1] - Math.abs(event.values[1]) < 0.01) {
-                    check_sum += if (event.values[1] > 0) 1000 else 2000
-                }
-                if (eventvalues[2] - Math.abs(event.values[2]) < 0.01 || eventvalues[1] - Math.abs(event.values[2]) < 0.01
-                ) {
-                    check_sum += if (event.values[2] > 0) 100 else 200
-                }
+                //임계값 하나라도 넘어가면 실행
+                if ((Math.abs(event.values[0]) >= threshold) or (Math.abs(event.values[1]) >= threshold) or (Math.abs(event.values[2]) >= threshold)) {
 
-                check_sum += if (roll >= 0) 10 else 20
-                check_sum += if (pitch >= 0) 1 else 2
+                    //값들 저장하고 정렬(지금 은 필요없음)
+                    val eventvalues =
+                        java.util.ArrayList<Float>()
+                    eventvalues.add(Math.abs(event.values[0]))
+                    eventvalues.add(Math.abs(event.values[1]))
+                    eventvalues.add(Math.abs(event.values[2]))
+                    Collections.sort(eventvalues)
 
-                //라벨링 값 받아옴
-                Check_sum = check_sum.toString()
-                Log.e("LOG1", " [X]:" + String.format("%.4f", event.values[0]) + "    [Y]:" + String.format("%.4f", event.values[1]) + "    [Z]:" + String.format("%.4f", event.values[2]) + "   roll : " + roll + "  r : " + r + "   pitch : " + pitch + "   p : " + p + "   Check_sum : " + Check_sum)
+                    //값에 따라 라벨링
+                    if (eventvalues[2] - Math.abs(event.values[0]) < 0.01 || eventvalues[1] - Math.abs(event.values[0]) < 0.01)
+                        check_sum += if (event.values[0] > 0) 10000 else 20000
+                    if (eventvalues[2] - Math.abs(event.values[1]) < 0.01 || eventvalues[1] - Math.abs(event.values[1]) < 0.01)
+                        check_sum += if (event.values[1] > 0) 1000 else 2000
+                    if (eventvalues[2] - Math.abs(event.values[2]) < 0.01 || eventvalues[1] - Math.abs(event.values[2]) < 0.01)
+                        check_sum += if (event.values[2] > 0) 100 else 200
 
-                //전에 값과 같거나 아무것도 안들어오면 거른다
-                if (Store_a.size > 0 && Store_a.get(Store_a.size - 1) != Check_sum) {
 
-                    //사이즈는 사용자가 설정한 사이즈
-                    var arrsize_temp: Int = Arrsize
-                    //테스트 모드에서 사이즈는 다른 변수로 설정
-                    arrsize_temp = Arrsize_catch
-                    if (Store_a.size >= arrsize_temp) { //전에값 같으면 맨앞에꺼 삭제하고 삽입
-                        Store_a.removeAt(0)
-                        Store_a.add(Check_sum)
-                    } else Store_a.add(Check_sum) //아니면 그냥삽입
+                    check_sum += if (roll >= 0) 10 else 20
+                    check_sum += if (pitch >= 0) 1 else 2
 
-                } else if (Store_a.size == 0) Store_a.add(Check_sum)
+                    //라벨링 값 받아옴
+                    Check_sum = check_sum.toString()
+                    Log.e(
+                        "LOG1",
+                        " [X]:" + String.format("%.4f", event.values[0]) + "    [Y]:" + String.format("%.4f", event.values[1]) + "    [Z]:" + String.format("%.4f", event.values[2]) + "   roll : " + roll + "  r : " + r + "   pitch : " + pitch + "   p : " + p + "   Check_sum : " + Check_sum
+                    )
 
-                temp_a = String() //스트링으로 값들 저장
-                for (i in Store_a.indices) {
-                    temp_a = temp_a + Store_a.get(i) + " "
-                }
+                    //전에 값과 같거나 아무것도 안들어오면 거른다
+                    if (Store_a.size > 0 && Store_a.get(Store_a.size - 1) != Check_sum) {
 
-                for (j in mpatterns_list.indices) {
-                    val lcs = java.util.ArrayList<Int>()
-                    var run_app = 0 //패턴들이랑 비교하는거
-                    for (i in mpatterns_list.get(j).indices) {
-                        val num1: Int = downtop(
-                            mpatterns_list.get(j).get(i),
-                            Store_a,
-                            mpatterns_list.get(j).get(i).size,
-                            Store_a.size,
-                            NIL
-                        )
-                        val num2: Int = Math.min(Store_a.size, mpatterns_list.get(j).get(i).size)
-                        var num =0;
-                        if(num2!=0) num = ((num1 * 100) / num2).toInt()
+                        //사이즈는 사용자가 설정한 사이즈
+                        var arrsize_temp: Int = Arrsize
+                        //테스트 모드에서 사이즈는 다른 변수로 설정
+                        arrsize_temp = Arrsize_catch
+                        if (Store_a.size >= arrsize_temp) { //전에값 같으면 맨앞에꺼 삭제하고 삽입
+                            Store_a.removeAt(0)
+                            Store_a.add(Check_sum)
+                        } else Store_a.add(Check_sum) //아니면 그냥삽입
 
-                        if (num >= matcing_rate) run_app++ //일치하는 패턴 개수추가
-                        lcs.add(num)
+                    } else if (Store_a.size == 0) Store_a.add(Check_sum)
+
+                    temp_a = String() //스트링으로 값들 저장
+                    for (i in Store_a.indices) {
+                        temp_a = temp_a + Store_a.get(i) + " "
                     }
 
-                    Log.e("lcs", " 번째 : lcs : " + lcs)
+                    for (j in mpatterns_list.indices) {
+                        val lcs = java.util.ArrayList<Int>()
+                        var run_app = 0 //패턴들이랑 비교하는거
+                        for (i in mpatterns_list.get(j).indices) {
+                            val num1: Int = downtop(
+                                mpatterns_list.get(j).get(i),
+                                Store_a,
+                                mpatterns_list.get(j).get(i).size,
+                                Store_a.size,
+                                NIL
+                            )
+                            val num2: Int =
+                                Math.min(Store_a.size, mpatterns_list.get(j).get(i).size)
+                            var num = 0;
+                            if (num2 != 0) num = ((num1 * 100) / num2).toInt()
 
-                    //패턴개수 3개 넘거나 사이즈 2개 이상이면 어플실행
-                    if (run_app >= 3 && Store_a.size > 2) {
-                        Store_a.clear()
-                        Log.d("log1", "app run!!!!!!!!!!!!!!!!!           " + mpackagename.get(j))
-                        if(mpackagename.get(j).startsWith("com.")) {
-                            val intent = packageManager.getLaunchIntentForPackage(mpackagename.get(j))
-                            startActivity(intent)
-
+                            if (num >= matcing_rate) run_app++ //일치하는 패턴 개수추가
+                            lcs.add(num)
                         }
-                        else{
-                            startInnerFunction(mpackagename.get(j));
+
+                        Log.e("lcs", " 번째 : lcs : " + lcs)
+
+                        //패턴개수 3개 넘거나 사이즈 2개 이상이면 어플실행
+                        if (run_app >= 3 && Store_a.size > 2) {
+                            Store_a.clear()
+
+                            Log.d("log1", "app run!!!!!!!!!!!!!!!!!           " + mpackagename.get(j))
+
+                            if (mpackagename.get(j).startsWith("com.")) {
+                                val intent =
+                                    packageManager.getLaunchIntentForPackage(mpackagename.get(j))
+                                startActivity(intent)
+                            }
+                            else  startInnerFunction(mpackagename.get(j));
                         }
                     }
-                }
 
+                }
             }
-        }
 
+        }
         override fun onAccuracyChanged(
             sensor: Sensor,
             accuracy: Int
@@ -493,26 +499,21 @@ class MainActivity : AppCompatActivity(),
         var NIL = NIL
         NIL = Array(m + 1) { IntArray(n + 1) }
 
-//        Log.d("log1","downtop() : " + first + "   " + second)
-        // calculate table
         for (i in 0..m)  // first
         {
             for (j in 0..n)  // second
             {
                 if (i == 0 || j == 0) NIL[i][j] = 0 // initaliztion
                 else if (first.get(i - 1).contains(second.get(j - 1))) {
-//                    Log.d("log1","downtop() in first 1111111: " + first[i-1] + "   second : " + second[j-1])
                     NIL[i][j] = NIL[i - 1][j - 1] + 1
                 }
                 else { // insert max value into table
-//                    Log.d("log1","downtop() in first 222222 : " + first[i-1] + "   second : " + second[j-1])
                     var temp = 0
                     temp = if (NIL[i - 1][j] > NIL[i][j - 1]) NIL[i - 1][j] else NIL[i][j - 1]
                     NIL[i][j] = temp
                 }
             }
         }
-//        Log.d("log1","NIL : " + NIL[m][n])
         return NIL[m][n] // return last value
     }
 

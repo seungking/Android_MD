@@ -96,8 +96,8 @@ public class Gyro_Acc extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gyro__acc);
-        Intent intent = new Intent(getApplicationContext(), MyService.class); // 실행시키고픈 서비스클래스 이름
-        startService(intent); // 서비스 실행
+//        Intent intent = new Intent(getApplicationContext(), MyService.class); // 실행시키고픈 서비스클래스 이름
+//        startService(intent); // 서비스 실행
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
