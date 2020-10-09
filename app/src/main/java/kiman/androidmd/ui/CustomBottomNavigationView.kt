@@ -1,4 +1,4 @@
-package kiman.androidmd.model
+package kiman.androidmd.ui
 
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.content.Context

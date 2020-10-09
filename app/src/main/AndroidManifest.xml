@@ -22,10 +22,14 @@
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
-
-    <activity android:name=".AppInfoActivity" />
-    <activity android:name=".Gyro_Acc" />
-    <activity android:name=".OnBoardActivity"/>
+    <activity android:name=".AppInfoActivity"
+        android:screenOrientation="portrait"/>
+    <activity android:name=".Gyro_Acc"
+        android:screenOrientation="portrait"/>
+    <activity android:name=".OnBoardActivity"
+        android:screenOrientation="portrait"/>
+    <activity android:name=".PaintingActivity"
+        android:screenOrientation="portrait"/>
     <activity
         android:name=".MainActivity"
         android:theme="@style/AppTheme"

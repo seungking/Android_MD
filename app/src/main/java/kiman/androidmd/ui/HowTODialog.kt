@@ -1,4 +1,4 @@
-package kiman.androidmd
+package kiman.androidmd.ui
 
 import android.app.Dialog
 import android.content.Context

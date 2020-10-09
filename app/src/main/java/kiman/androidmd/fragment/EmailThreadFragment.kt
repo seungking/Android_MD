@@ -20,6 +20,7 @@ import kiman.androidmd.*
 import kiman.androidmd.model.Email
 import kiman.androidmd.model.EmailThreadId
 import kiman.androidmd.service.ManagePref
+import kotlinx.android.synthetic.main.include_email_shipping_update.*
 import kotlinx.android.synthetic.main.include_email_shipping_update.view.*
 import me.saket.inboxrecyclerview.globalVisibleRect
 import me.saket.inboxrecyclerview.page.ExpandablePageLayout
@@ -38,6 +39,7 @@ class EmailThreadFragment : Fragment() {
   private val collapseButton by lazy { view!!.findViewById<ImageButton>(R.id.emailthread_collapse) }
   val attachmentContainer by lazy { view!!.findViewById<ViewGroup>(R.id.emailthread_attachment_container) }
   private val switch_motion_fg by lazy { view!!.findViewById<CircleImageView>(R.id.switch_motion_fg) }
+//  private val patternImgview by lazy { view!!.findViewById<ImageView>(R.id.patternImgview) }
   private val remove_button by lazy { view!!.findViewById<ImageView>(R.id.detail_button2) }
 
   private val threadIds = BehaviorRelay.create<EmailThreadId>()
@@ -49,6 +51,7 @@ class EmailThreadFragment : Fragment() {
   var date = ArrayList<String>()
   var switch = ArrayList<String>()
   var patterns = ArrayList<String>()
+  var images = ArrayList<String>()
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedState: Bundle?): View? {
     val view: View = inflater.inflate(
@@ -122,6 +125,7 @@ class EmailThreadFragment : Fragment() {
     date = managepref.getStringArrayPref(activity!!.applicationContext, "date")
     switch = managepref.getStringArrayPref(activity!!.applicationContext, "switch")
     patterns = managepref.getStringArrayPref(activity!!.applicationContext, "patterns")
+    images = managepref.getStringArrayPref(activity!!.applicationContext, "images")
     val list = mutableListOf<Email.EmailThread>();
 
     subjectTextView.text = appname.get(position)
@@ -129,7 +133,6 @@ class EmailThreadFragment : Fragment() {
 
     bodyTextView.text = date.get(position)
     avatarImageView.setImageBitmap(managepref.StringToBitmap(appicon.get(position)))
-
 //    attachmentContainer.removeAllViews()
 
 
@@ -144,6 +147,9 @@ class EmailThreadFragment : Fragment() {
         R.layout.include_email_shipping_update, attachmentContainer)
 
     if(view!=null) {
+
+      view.patternImgview.setImageBitmap(managepref.StringToBitmap(images.get(position)))
+
       view.detail_button2.setOnClickListener {
 
         requireActivity().onBackPressed()
@@ -154,6 +160,7 @@ class EmailThreadFragment : Fragment() {
         date.removeAt(position)
         switch.removeAt(position)
         patterns.removeAt(position)
+        images.removeAt(position)
 
         managepref.setStringArrayPref(activity!!.applicationContext, "appname", appname)
         managepref.setStringArrayPref(activity!!.applicationContext, "packagename", packagename)
@@ -161,6 +168,7 @@ class EmailThreadFragment : Fragment() {
         managepref.setStringArrayPref(activity!!.applicationContext, "date", date)
         managepref.setStringArrayPref(activity!!.applicationContext, "switch", switch)
         managepref.setStringArrayPref(activity!!.applicationContext, "patterns", patterns)
+        managepref.setStringArrayPref(activity!!.applicationContext, "images", images)
 
 
         (activity as MainActivity).updatepattern()
@@ -172,7 +180,6 @@ class EmailThreadFragment : Fragment() {
       }
 
       view.detail_button1.setOnClickListener{
-
 
         (activity as MainActivity).stopMotionCatch();
         context!!.startActivity(Intent(context,AppInfoActivity::class.java).putExtra("modify",position));

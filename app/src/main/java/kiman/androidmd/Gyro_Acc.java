@@ -14,13 +14,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 
 import com.tt.whorlviewlibrary.WhorlView;
 
@@ -30,9 +28,8 @@ import java.util.Collections;
 import java.util.Date;
 
 import es.dmoral.toasty.Toasty;
-import kiman.androidmd.fragment.HomeFragment;
 import kiman.androidmd.service.ManagePref;
-import kiman.androidmd.service.MyService;
+import kiman.androidmd.ui.HowTODialog;
 import stream.custombutton.CustomButton;
 
 public class Gyro_Acc extends AppCompatActivity {
@@ -96,8 +93,6 @@ public class Gyro_Acc extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gyro__acc);
-//        Intent intent = new Intent(getApplicationContext(), MyService.class); // 실행시키고픈 서비스클래스 이름
-//        startService(intent); // 서비스 실행
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -217,42 +212,16 @@ public class Gyro_Acc extends AppCompatActivity {
                                 // nowDate 변수에 값을 저장한다.
                                 String formatDate = sdfNow.format(date1);
 
-                                Log.d("LOG1", "저장 패턴 : " + checksave);
-//                                Log.d("LOG1", "패키지 이름 : " + packageName1);
 
-                                ManagePref managePref = new ManagePref();
-                                ArrayList<String> appname = new ArrayList<String>();
-                                ArrayList<String> packagename = new ArrayList<String>();
-                                ArrayList<String> appicon = new ArrayList<String>();
-                                ArrayList<String> date = new ArrayList<String>();
-                                ArrayList<String> switch_motion = new ArrayList<String>();
-                                ArrayList<String> patterns = new ArrayList<String>();
-
-                                appname = managePref.getStringArrayPref(Gyro_Acc.this,"appname");
-                                packagename = managePref.getStringArrayPref(Gyro_Acc.this,"packagename");
-                                appicon = managePref.getStringArrayPref(Gyro_Acc.this,"appicon");
-                                date = managePref.getStringArrayPref(Gyro_Acc.this,"date");
-                                switch_motion = managePref.getStringArrayPref(Gyro_Acc.this,"switch");
-                                patterns = managePref.getStringArrayPref(Gyro_Acc.this,"patterns");
-
-                                appname.add(appName);
-                                packagename.add(packageName);
-                                appicon.add(appIcon);
-                                date.add(formatDate);
-                                switch_motion.add("off");
-                                patterns.add(checksave);
-                                Log.d("log1","gyro acc pattern size : " + patterns.size());
-
-                                managePref.setStringArrayPref(Gyro_Acc.this,"appname",appname);
-                                managePref.setStringArrayPref(Gyro_Acc.this,"packagename",packagename);
-                                managePref.setStringArrayPref(Gyro_Acc.this,"appicon",appicon);
-                                managePref.setStringArrayPref(Gyro_Acc.this,"date",date);
-                                managePref.setStringArrayPref(Gyro_Acc.this,"switch",switch_motion);
-                                managePref.setStringArrayPref(Gyro_Acc.this,"patterns",patterns);
-
-                                //((MainActivity)getApplicationContext()).updatelist();
-
+                                Intent topaint = new Intent(Gyro_Acc.this,PaintingActivity.class);
+                                topaint.putExtra("appname",appName);
+                                topaint.putExtra("packagename",packageName);
+                                topaint.putExtra("appicon",appIcon);
+                                topaint.putExtra("date",formatDate);
+                                topaint.putExtra("patterns",checksave);
+                                startActivity(topaint);
                                 finish();
+
                             } else {
                                 Toast.makeText(Gyro_Acc.this, "full", Toast.LENGTH_SHORT).show();
                             }
@@ -271,19 +240,6 @@ public class Gyro_Acc extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        //startActivity(new Intent(this, MainActivity.class));
-    }
-
-    @Override
-    protected void onDestroy() {
-
-        super.onDestroy();
-
-    }
-
     private class AccelerometerListener implements SensorEventListener {
 
         @Override
@@ -294,7 +250,6 @@ public class Gyro_Acc extends AppCompatActivity {
 
             //임계값 하나라도 넘어가면 실행
             if (Math.abs(event.values[0]) >= threshold | Math.abs(event.values[1]) >= threshold | Math.abs(event.values[2]) >= threshold) {
-//            if (r>40 | p>40) {
 
                 //값들 저장하고 정렬
                 ArrayList<Float> eventvalues = new ArrayList<Float>();
@@ -305,17 +260,14 @@ public class Gyro_Acc extends AppCompatActivity {
 
                 //값에 따라 라벨링
                 if ((eventvalues.get(2) - (Math.abs(event.values[0])) < 0.01 || (eventvalues.get(1) - Math.abs(event.values[0])) < 0.01)) {
-//                if ((eventvalues.get(2) - (Math.abs(event.values[0])) < 0.01)){
                     if (event.values[0] > 0) check_sum += 10000;
                     else check_sum += 20000;
                 }
                 if ((eventvalues.get(2) - (Math.abs(event.values[1])) < 0.01 || (eventvalues.get(1) - Math.abs(event.values[1])) < 0.01)) {
-//                if ((eventvalues.get(2) - (Math.abs(event.values[1])) < 0.01)){
                     if (event.values[1] > 0) check_sum += 1000;
                     else check_sum += 2000;
                 }
                 if ((eventvalues.get(2) - (Math.abs(event.values[2])) < 0.01 || (eventvalues.get(1) - Math.abs(event.values[2])) < 0.01)) {
-//                if ((eventvalues.get(2) - (Math.abs(event.values[2])) < 0.01)){
                     if (event.values[2] > 0) check_sum += 100;
                     else check_sum += 200;
                 }
@@ -461,8 +413,7 @@ public class Gyro_Acc extends AppCompatActivity {
         findViewById(R.id.add_clear_ga).setClickable(false);
 
         HowTODialog mDialog1 = new HowTODialog(Gyro_Acc.this, R.layout.layout_howto1);
-//        HowTODialog mDialog2 = new HowTODialog(Gyro_Acc.this, R.layout.layout_howto2);
-//        HowTODialog mDialog3 = new HowTODialog(Gyro_Acc.this, R.layout.layout_howto3);
+
         mDialog1.show();
 
         Display display = getWindowManager().getDefaultDisplay();

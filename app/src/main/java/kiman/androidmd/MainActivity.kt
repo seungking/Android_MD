@@ -2,9 +2,7 @@ package kiman.androidmd
 
 import android.app.ActivityManager
 import android.bluetooth.BluetoothAdapter
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
+import android.content.*
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.hardware.Sensor
@@ -55,7 +53,12 @@ class MainActivity : AppCompatActivity(),
     // list of base destination containers
     val fragments = listOf(
         BaseFragment.newInstance(R.layout.content_home_base, R.id.toolbar_home, R.id.nav_host_home),
-        BaseFragment.newInstance(R.layout.content_settings_base, R.id.toolbar_settings, R.id.nav_host_settings))
+        BaseFragment.newInstance(
+            R.layout.content_settings_base,
+            R.id.toolbar_settings,
+            R.id.nav_host_settings
+        )
+    )
     //BaseFragment.newInstance(R.layout.content_library_base, R.id.toolbar_library, R.id.nav_host_library))
 
 
@@ -153,6 +156,24 @@ class MainActivity : AppCompatActivity(),
         bottom_nav.setOnNavigationItemReselectedListener(this)
         setting_back = findViewById(R.id.setting_back)
 
+        val intentFilter = IntentFilter()
+        intentFilter.addAction(Intent.ACTION_SCREEN_OFF)
+        intentFilter.addAction(Intent.ACTION_SCREEN_ON)
+
+        val screenOnOff: BroadcastReceiver = object : BroadcastReceiver() {
+            val ScreenOff = "android.intent.action.SCREEN_OFF"
+            val ScreenOn = "android.intent.action.SCREEN_ON"
+            override fun onReceive(contex: Context?, intent: Intent) {
+                if (intent.action == ScreenOff) {
+                    stopMotionCatch()
+                    Log.e("MainActivity", "Screen Off")
+                } else if (intent.action == ScreenOn) {
+                    startMotionCatch()
+                    Log.e("MainActivity", "Screen On")
+                }
+            }
+        }
+        registerReceiver(screenOnOff, intentFilter)
 
         fab.setOnClickListener {
             stopMotionCatch()
@@ -195,7 +216,7 @@ class MainActivity : AppCompatActivity(),
 
         val pref: SharedPreferences = PreferenceManager
             .getDefaultSharedPreferences(this)
-        val switch_backbround : Boolean = pref.getBoolean("switch_background",false)
+        val switch_backbround : Boolean = pref.getBoolean("switch_background", false)
         if(switch_backbround) {
             startMotionCatch()
             runningservice = true;
@@ -244,7 +265,7 @@ class MainActivity : AppCompatActivity(),
     fun updatepattern(){
         mpackagename.clear();
         mpatterns_list.clear();
-        Log.d("log1","updatepattern")
+        Log.d("log1", "updatepattern")
 
         var mpackage = managePref.getStringArrayPref(this, "packagename")
         patterns = managePref.getStringArrayPref(this, "patterns")
@@ -268,14 +289,15 @@ class MainActivity : AppCompatActivity(),
                     mpatterns_list.add(cur_pattern)
                 }
             }
-            for(j in 0..mpatterns_list.size-1) Log.d("log1", "patterns "+j+" : "+mpatterns_list.get(j))
+            for(j in 0..mpatterns_list.size-1) Log.d(
+                "log1", "patterns " + j + " : " + mpatterns_list.get(j))
         }
     }
     fun startMotionCatch(){
         updatepattern()
 
         if (null == UndeadService.serviceIntent) {
-            foregroundServiceIntent = Intent (this, UndeadService::class.java)
+            foregroundServiceIntent = Intent(this, UndeadService::class.java)
             startService(foregroundServiceIntent);
 
         } else {
@@ -319,7 +341,7 @@ class MainActivity : AppCompatActivity(),
                 var check_sum = 0
 
                 //임계값 하나라도 넘어가면 실행
-                if ((Math.abs(event.values[0]) >= threshold) or (Math.abs(event.values[1]) >= threshold) or (Math.abs(event.values[2]) >= threshold)) {
+                if (mpatterns_list.size>0 && ((Math.abs(event.values[0]) >= threshold) or (Math.abs(event.values[1]) >= threshold) or (Math.abs(event.values[2]) >= threshold))) {
 
                     //값들 저장하고 정렬(지금 은 필요없음)
                     val eventvalues =
@@ -330,11 +352,17 @@ class MainActivity : AppCompatActivity(),
                     Collections.sort(eventvalues)
 
                     //값에 따라 라벨링
-                    if (eventvalues[2] - Math.abs(event.values[0]) < 0.01 || eventvalues[1] - Math.abs(event.values[0]) < 0.01)
+                    if (eventvalues[2] - Math.abs(event.values[0]) < 0.01 || eventvalues[1] - Math.abs(
+                            event.values[0]
+                        ) < 0.01)
                         check_sum += if (event.values[0] > 0) 10000 else 20000
-                    if (eventvalues[2] - Math.abs(event.values[1]) < 0.01 || eventvalues[1] - Math.abs(event.values[1]) < 0.01)
+                    if (eventvalues[2] - Math.abs(event.values[1]) < 0.01 || eventvalues[1] - Math.abs(
+                            event.values[1]
+                        ) < 0.01)
                         check_sum += if (event.values[1] > 0) 1000 else 2000
-                    if (eventvalues[2] - Math.abs(event.values[2]) < 0.01 || eventvalues[1] - Math.abs(event.values[2]) < 0.01)
+                    if (eventvalues[2] - Math.abs(event.values[2]) < 0.01 || eventvalues[1] - Math.abs(
+                            event.values[2]
+                        ) < 0.01)
                         check_sum += if (event.values[2] > 0) 100 else 200
 
 
@@ -345,7 +373,16 @@ class MainActivity : AppCompatActivity(),
                     Check_sum = check_sum.toString()
                     Log.e(
                         "LOG1",
-                        " [X]:" + String.format("%.4f", event.values[0]) + "    [Y]:" + String.format("%.4f", event.values[1]) + "    [Z]:" + String.format("%.4f", event.values[2]) + "   roll : " + roll + "  r : " + r + "   pitch : " + pitch + "   p : " + p + "   Check_sum : " + Check_sum
+                        " [X]:" + String.format(
+                            "%.4f",
+                            event.values[0]
+                        ) + "    [Y]:" + String.format(
+                            "%.4f",
+                            event.values[1]
+                        ) + "    [Z]:" + String.format(
+                            "%.4f",
+                            event.values[2]
+                        ) + "   roll : " + roll + "  r : " + r + "   pitch : " + pitch + "   p : " + p + "   Check_sum : " + Check_sum
                     )
 
                     //전에 값과 같거나 아무것도 안들어오면 거른다
@@ -393,7 +430,10 @@ class MainActivity : AppCompatActivity(),
                         if (run_app >= 3 && Store_a.size > 2) {
                             Store_a.clear()
 
-                            Log.d("log1", "app run!!!!!!!!!!!!!!!!!           " + mpackagename.get(j))
+                            Log.d(
+                                "log1",
+                                "app run!!!!!!!!!!!!!!!!!           " + mpackagename.get(j)
+                            )
 
                             if (mpackagename.get(j).startsWith("com.")) {
                                 val intent =
@@ -420,48 +460,48 @@ class MainActivity : AppCompatActivity(),
         // setup main view pager
     }
 
-    fun startInnerFunction(packagename : String){
+    fun startInnerFunction(packagename: String){
 
         when(packagename){
-            "bluetooth"->{
+            "bluetooth" -> {
                 val btAdapter = BluetoothAdapter.getDefaultAdapter()
-                if(btAdapter.isEnabled()) {
+                if (btAdapter.isEnabled()) {
                     btAdapter.disable()
-                }
-                else {
+                } else {
                     btAdapter.enable()
                 }
             }
-            "wifi" ->{
-                var wfManager: WifiManager = this?.getSystemService(Context.WIFI_SERVICE) as WifiManager
+            "wifi" -> {
+                var wfManager: WifiManager =
+                    this?.getSystemService(Context.WIFI_SERVICE) as WifiManager
                 if (wfManager.isWifiEnabled) {
                     wfManager.setWifiEnabled(false)
-                }
-                else {
+                } else {
                     wfManager.setWifiEnabled(true)
                 }
             }
-            "light"->{
-                var camManager: CameraManager = this?.getSystemService(Context.CAMERA_SERVICE) as CameraManager
+            "light" -> {
+                var camManager: CameraManager =
+                    this?.getSystemService(Context.CAMERA_SERVICE) as CameraManager
                 val camID = camManager.cameraIdList[0]
-                var isFlashOn:Boolean = false
+                var isFlashOn: Boolean = false
                 if (isFlashOn) {
                     camManager.setTorchMode(camID, false)
                     isFlashOn = false
-                }
-                else {
+                } else {
                     camManager.setTorchMode(camID, true)
                     isFlashOn = true
                 }
             }
-            "killp"->{
+            "killp" -> {
                 val packages: List<ApplicationInfo>
                 val pm: PackageManager?
                 pm = this?.packageManager
                 //get a list of installed apps.
                 //get a list of installed apps.
                 packages = pm?.getInstalledApplications(0) as List<ApplicationInfo>
-                val activityManager = this?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+                val activityManager =
+                    this?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
                 for (p in packages) {
                     // 안드로이드의 기본앱일 경우 종료시키지 않는 조건문
 //                if((p.flags and ApplicationInfo.FLAG_SYSTEM) == 1 ) {
@@ -473,7 +513,7 @@ class MainActivity : AppCompatActivity(),
                     activityManager.killBackgroundProcesses(p.packageName)
                 }
             }
-            "silent"->{
+            "silent" -> {
                 var audioManager = this?.getSystemService(Context.AUDIO_SERVICE) as AudioManager
                 if (audioManager.ringerMode == AudioManager.RINGER_MODE_NORMAL) {
                     audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE)

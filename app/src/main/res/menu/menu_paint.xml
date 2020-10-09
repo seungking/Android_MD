@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/action_share"
+        android:title="Share"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_brush_black_24dp"/>
+    <item android:id="@+id/action_clear"
+        android:title="Clear"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_insert_photo_black_30dp"/>
+
+</menu>
