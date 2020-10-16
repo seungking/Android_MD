@@ -34,7 +34,7 @@ public class DrawingView extends View
 
 	// Set default values
 	private int mBackgroundColor = 0xFFFFFFFF;
-	private int mPaintColor = Color.parseColor("#ff4444");
+	private int mPaintColor = Color.parseColor("#007DD6");
 	private int mStrokeWidth = 25;
 
 	public DrawingView(Context context, AttributeSet attrs)
@@ -158,5 +158,9 @@ public class DrawingView extends View
 			mPaints.add(mUndonePaints.remove(mUndonePaints.size() - 1));
 			invalidate();
 		}
+	}
+
+	public void clear() {
+		mPaths.clear();
 	}
 }

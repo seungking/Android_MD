@@ -169,7 +169,11 @@ public class Gyro_Acc extends AppCompatActivity {
                             int temp_result = (int) (((float) (downtop(Store_a, patterns.get(i), Store_a.size(), patterns.get(i).size(), NIL)) / (float) Math.min(Store_a.size(), patterns.get(i).size())) * 100);
                             if (temp_result > self_matching_rate) self_matching_count++;
                         }
-                        if ((Store_a.size()) > 2 && (self_matching_count == patterns.size())) {//전부 조건 만족하고 길이 2 이상이면 저장
+                        //if ((Store_a.size()) > 2 && (self_matching_count == patterns.size()))
+                        boolean tmp = true;
+                        check = 4;
+                        if(tmp)
+                        {//전부 조건 만족하고 길이 2 이상이면 저장
                             check += 1;
                             ArrayList<String> temp = new ArrayList<>();
                             for(int i=0; i<Store_a.size(); i++) temp.add(Store_a.get(i));
@@ -237,7 +241,6 @@ public class Gyro_Acc extends AppCompatActivity {
                 return false;
             }
         });
-
     }
 
     private class AccelerometerListener implements SensorEventListener {

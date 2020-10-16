@@ -6,36 +6,84 @@
   android:layout_height="wrap_content"
   android:orientation="vertical">
 
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="2dp"
+      android:background="@color/colorGrey"/>
+
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
+      android:background="@color/colorWhite"
       android:gravity="center">
 
-    <ImageView
+    <LinearLayout
         android:id="@+id/detail_button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="left"
+        android:layout_weight="0.5">
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:background="#ffffff"
         android:padding="24dp"
-        android:layout_weight="0.5"
+        android:layout_weight="0.1"
         android:src="@drawable/ic_baseline_edit_24"
         tools:ignore="ContentDescription"
         app:tint="@android:color/black" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Change App"
+        android:textSize="17dp"
+        android:background="#ffffff"
+        android:gravity="center"
+        android:layout_weight="0.4"
+        android:layout_marginRight="10dp">
+    </TextView>
+    </LinearLayout>
 
-    <ImageView
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/colorGrey"/>
+
+    <LinearLayout
         android:id="@+id/detail_button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="left"
+        android:layout_weight="0.5">
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:background="#ffffff"
         android:padding="24dp"
-        android:layout_weight="0.5"
+        android:layout_weight="0.1"
         android:src="@drawable/ic_baseline_delete_24"
         tools:ignore="ContentDescription"
         app:tint="@android:color/black" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Delete Motion"
+        android:textSize="17dp"
+        android:background="#ffffff"
+        android:gravity="center"
+        android:layout_weight="0.4"
+        android:layout_marginRight="10dp">
+    </TextView>
+    </LinearLayout>
 
   </LinearLayout>
-
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="2dp"
+      android:background="@color/colorGrey"/>
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="300dp"

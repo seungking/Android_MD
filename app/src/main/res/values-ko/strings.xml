@@ -23,6 +23,10 @@
     <string name="frag_settings_feedback">피드백</string>
     <string name="frag_settings_donation">기부하기</string>
     <string name="frag_settings_instruction">사용설명 다시보기</string>
+    <string name="howto_3">리셋 버튼</string>
+    <string name="howto_1">이 버튼을 눌러 움직임을 추가</string>
+    <string name="howto_2">※ 0.5초 후에 움직여 주세요!</string>
+    <string name="drawing_title">그림으로 표현해주세요</string>
 
 </resources>
 

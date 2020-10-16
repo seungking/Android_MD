@@ -129,23 +129,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/nanumbrush"
-        android:text="0.5초초초 누르고 움직이ㅅ요"
-        android:textSize="35dp"
+        android:text="@string/howto_1"
+        android:textSize="30dp"
         android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="@+id/howto_add_motion_progress"
-        app:layout_constraintTop_toBottomOf="@+id/howto_arrow"/>
+        app:layout_constraintTop_toBottomOf="@+id/howto_arrow"
+        app:layout_constraintEnd_toEndOf="@id/howto_add_motion_progress"/>
 
     <TextView
         android:id="@+id/howto_toptext2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/nanumbrush"
-        android:text="움직이고 0,5555555"
-        android:textSize="35dp"
+        android:text="@string/howto_2"
+        android:textSize="30dp"
         android:textColor="@android:color/white"
         android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="@+id/howto_toptext1"
-        app:layout_constraintTop_toBottomOf="@+id/howto_toptext1"/>
+        app:layout_constraintTop_toBottomOf="@+id/howto_toptext1"
+        app:layout_constraintEnd_toEndOf="@id/howto_add_motion_progress"/>
 
 
     <stream.custombutton.CustomButton
@@ -184,10 +186,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="리셋버튼"
+        android:text="@string/howto_3"
         android:fontFamily="@font/nanumbrush"
         android:textColor="@android:color/white"
-        android:textSize="30dp"
+        android:textSize="40dp"
         app:layout_constraintBottom_toTopOf="@+id/howto_arrow2"
         app:layout_constraintStart_toStartOf="@+id/howto_arrow2"/>
 

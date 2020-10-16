@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +36,7 @@ public class PaintingActivity extends AppCompatActivity implements View.OnClickL
 	static ImageView mRedoImageView;
 	static ImageView back;
 	static ImageView next;
+	static TextView clear;
 
     private static int mCurrentColor;
 
@@ -51,6 +53,7 @@ public class PaintingActivity extends AppCompatActivity implements View.OnClickL
         mRedoImageView = (ImageView)findViewById(R.id.main_redo_iv);
 		back = (ImageView)findViewById(R.id.painting_back);
 		next = (ImageView)findViewById(R.id.painting_next);
+		clear = (TextView)findViewById(R.id.painting_clear);
 
         mDrawingView.setOnClickListener(this);
         mFillBackgroundImageView.setOnClickListener(this);
@@ -58,6 +61,7 @@ public class PaintingActivity extends AppCompatActivity implements View.OnClickL
         mRedoImageView.setOnClickListener(this);
         back.setOnClickListener(this);
         next.setOnClickListener(this);
+        clear.setOnClickListener(this);
     }
 
 
@@ -126,7 +130,7 @@ public class PaintingActivity extends AppCompatActivity implements View.OnClickL
 				break;
 			case R.id.main_fill_iv:
 				new ColorPickerPopup.Builder(this)
-						.initialColor(Color.RED) // Set initial color
+						.initialColor(Color.parseColor("#007DD6")) // Set initial color
 						.enableBrightness(true) // Enable brightness slider or not
 						.enableAlpha(false) // Enable alpha slider or not
 						.okTitle("Choose")
@@ -150,6 +154,8 @@ public class PaintingActivity extends AppCompatActivity implements View.OnClickL
 			case R.id.main_redo_iv:
 				mDrawingView.redo();
 				break;
+			case R.id.painting_clear:
+				mDrawingView.clear();
 			default:
 				break;
 		}

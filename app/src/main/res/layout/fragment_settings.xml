@@ -207,7 +207,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/g_medium"
-                    android:text="사용설명 다시보기"/>
+                    android:text="@string/frag_settings_instruction"/>
 
             </LinearLayout>
 

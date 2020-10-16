@@ -24,4 +24,8 @@
     <string name="frag_settings_feedback">Feedback</string>
     <string name="frag_settings_donation">Donation</string>
     <string name="frag_settings_instruction">Instructions for use</string>
+    <string name="howto_1">Press this button to add your motion</string>
+    <string name="howto_2">※ Move after 0.5 seconds!</string>
+    <string name="howto_3">Reset Button</string>
+    <string name="drawing_title">Draw your motion</string>
 </resources>
