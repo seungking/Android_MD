@@ -36,6 +36,7 @@ class SettingsFragment2: Fragment(),BillingProcessor.IBillingHandler{
         setting_lottie.loop(true)
         setting_lottie.playAnimation()
 
+
         bp = BillingProcessor(
             context,
             "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2SyesnmGZxGjGlHvgFhVgX6lF12GWNDTaTx6hWgWkN2nH7VSBz5P5YPKLUBIDRsuZ/DtXLtC/SoO2dfAyrPdzxSqgkVHV6kOZ91jt8zOSu/iZ3ehXVhzNt8uQVDTLtyRDQ+5VHlxbFIbPumq/rtZ/BWoCwb9e/Jx3mIylKcgCM80StQ6QSd9pBxRZqymBT9BJCSMFEa0f11glX8aTTDLK+O7vh0aKJeLX1mALhdSPc/jCQB4EuY45MWFl3vwXXe7p2Itfqc64j4Rs8+qmjA8oBuaQncJgoY0jy0wiDl+KGiExI6sCdg5KWQjnen5Z0EmZyY093OydYw+0HhktQhgHwIDAQAB",

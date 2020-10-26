@@ -7,6 +7,14 @@
     android:background="#eeeeee"
     tools:context="me.saket.inboxrecyclerview.sample.InboxActivity">
 
+  <com.airbnb.lottie.LottieAnimationView
+      android:id="@+id/main_lottie"
+      android:layout_weight="1"
+      android:layout_width="match_parent"
+      android:layout_height="100dp"
+      app:layout_anchor="@+id/inbox_recyclerview"
+      app:layout_anchorGravity="center" />
+
   <me.saket.inboxrecyclerview.InboxRecyclerView
       android:id="@+id/inbox_recyclerview"
       android:layout_width="match_parent"
@@ -20,6 +28,10 @@
   <me.saket.inboxrecyclerview.page.ExpandablePageLayout
       android:id="@+id/inbox_email_thread_page"
       android:layout_width="match_parent"
-      android:layout_height="match_parent" />
+      android:layout_height="match_parent"
+      app:layout_anchor="@+id/inbox_recyclerview"
+      app:layout_anchorGravity="center" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+

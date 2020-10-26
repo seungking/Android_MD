@@ -48,7 +48,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <kiman.androidmd.ui.NonSwipingViewPager
         android:id="@+id/main_pager"
         android:layout_width="match_parent"

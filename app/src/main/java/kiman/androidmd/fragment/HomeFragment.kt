@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.airbnb.lottie.LottieAnimationView
 import com.jakewharton.rxrelay2.PublishRelay
 import kiman.androidmd.model.Email
 import kiman.androidmd.MainActivity
@@ -47,6 +48,12 @@ class HomeFragment : Fragment(), MainActivity.IOnBackPressed {
         Log.d("log1", "OnCreateView in HomeFragment")
         recyclerView = view.findViewById(R.id.inbox_recyclerview)
         emailPageLayout = view.findViewById(R.id.inbox_email_thread_page)
+
+        //lottie animation view
+        val setting_lottie = view.findViewById<LottieAnimationView>(R.id.main_lottie)
+        setting_lottie.setAnimation("list_lottie.json")
+        setting_lottie.loop(true)
+        setting_lottie.playAnimation()
 
         return view
     }
